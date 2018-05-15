@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:showIn="navigation_view">
+
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/nav_crea_pedido"
+            android:title="Crear pedido" />
+        <item
+            android:id="@+id/nav_mis_pedidos"
+            android:title="Mis pedidos" />
+        <!--android:icon="@drawable/ic_menu_camera"-->
+        <item
+            android:id="@+id/nav_perfil"
+
+            android:title="Perfil" />
+        <item
+            android:id="@+id/nav_ofertas"
+
+            android:title="Ofertas" />
+        <item
+            android:id="@+id/nav_mispedidos"
+            android:title="Registro pedidos" />
+        <item
+            android:id="@+id/nav_pizzas"
+
+            android:title="Pizzas" />
+    </group>
+
+    <item android:title="Sobre nosotros">
+        <menu>
+            <item
+                android:id="@+id/nav_donde_estamos"
+                android:icon="@drawable/ic_menu_share"
+                android:title="Donde Estamos" />
+            <item
+                android:id="@+id/nav_contacto"
+                android:icon="@drawable/ic_menu_send"
+                android:title="Contacta con nosotros" />
+        </menu>
+    </item>
+
+</menu>
