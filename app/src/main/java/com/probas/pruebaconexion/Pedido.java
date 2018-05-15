@@ -33,43 +33,43 @@ public class Pedido {
         return listaPizzas;
     }
 
-    public static List<Hamburguesa> getListaHamb() {
+    public List<Hamburguesa> getListaHamb() {
         return listaHamb;
     }
 
-    public static void setListaHamb(List<Hamburguesa> listaHamb) {
+    public void setListaHamb(List<Hamburguesa> listaHamb) {
         Pedido.listaHamb = listaHamb;
     }
 
-    public static List<Lasania> getListaLas() {
+    public List<Lasania> getListaLas() {
         return listaLas;
     }
 
-    public static void setListaLas(List<Lasania> listaLas) {
+    public void setListaLas(List<Lasania> listaLas) {
         Pedido.listaLas = listaLas;
     }
 
-    public static List<Ensalada> getListaEnsa() {
+    public  List<Ensalada> getListaEnsa() {
         return listaEnsa;
     }
 
-    public static void setListaEnsa(List<Ensalada> listaEnsa) {
+    public  void setListaEnsa(List<Ensalada> listaEnsa) {
         Pedido.listaEnsa = listaEnsa;
     }
 
-    public static List<Bebida> getListaBebs() {
+    public  List<Bebida> getListaBebs() {
         return listaBebs;
     }
 
-    public static void setListaBebs(List<Bebida> listaBebs) {
+    public  void setListaBebs(List<Bebida> listaBebs) {
         Pedido.listaBebs = listaBebs;
     }
 
-    public static List<Pasta> getListaPasta() {
+    public  List<Pasta> getListaPasta() {
         return listaPasta;
     }
 
-    public static void setListaPasta(List<Pasta> listaPasta) {
+    public  void setListaPasta(List<Pasta> listaPasta) {
         Pedido.listaPasta = listaPasta;
     }
 
