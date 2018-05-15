@@ -12,11 +12,11 @@ public class Pedido {
 
     private HashMap<Integer, Pizza> listaPizzas;
 
-    private static List<Hamburguesa> listaHamb;
-    private static List<Lasania> listaLas;
-    private static List<Ensalada> listaEnsa;
-    private static List<Bebida> listaBebs;
-    private static List<Pasta> listaPasta;
+    private List<Hamburguesa> listaHamb;
+    private List<Lasania> listaLas;
+    private List<Ensalada> listaEnsa;
+    private List<Bebida> listaBebs;
+    private List<Pasta> listaPasta;
 
 
     public Pedido() {
@@ -38,7 +38,7 @@ public class Pedido {
     }
 
     public void setListaHamb(List<Hamburguesa> listaHamb) {
-        Pedido.listaHamb = listaHamb;
+        listaHamb = listaHamb;
     }
 
     public List<Lasania> getListaLas() {
@@ -46,7 +46,7 @@ public class Pedido {
     }
 
     public void setListaLas(List<Lasania> listaLas) {
-        Pedido.listaLas = listaLas;
+        listaLas = listaLas;
     }
 
     public  List<Ensalada> getListaEnsa() {
@@ -54,7 +54,7 @@ public class Pedido {
     }
 
     public  void setListaEnsa(List<Ensalada> listaEnsa) {
-        Pedido.listaEnsa = listaEnsa;
+        listaEnsa = listaEnsa;
     }
 
     public  List<Bebida> getListaBebs() {
@@ -62,7 +62,7 @@ public class Pedido {
     }
 
     public  void setListaBebs(List<Bebida> listaBebs) {
-        Pedido.listaBebs = listaBebs;
+        listaBebs = listaBebs;
     }
 
     public  List<Pasta> getListaPasta() {
@@ -70,7 +70,7 @@ public class Pedido {
     }
 
     public  void setListaPasta(List<Pasta> listaPasta) {
-        Pedido.listaPasta = listaPasta;
+        listaPasta = listaPasta;
     }
 
     public int getRefCliente() {
