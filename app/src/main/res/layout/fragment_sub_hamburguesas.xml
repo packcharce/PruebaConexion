@@ -6,7 +6,6 @@
     android:background="?attr/colorBackgroundFloating"
     tools:context=".fragments.SubFragments.Sub_Hamburguesa">
 
-    <!-- TODO: Update blank fragment layout -->
 
     <ScrollView
         android:layout_width="match_parent"

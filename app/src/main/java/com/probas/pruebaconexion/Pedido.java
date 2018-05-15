@@ -12,11 +12,11 @@ public class Pedido {
 
     private HashMap<Integer, Pizza> listaPizzas;
 
-    private static List<Hamburguesa> listaHamb;
-    private static List<Lasania> listaLas;
-    private static List<Ensalada> listaEnsa;
-    private static List<Bebida> listaBebs;
-    private static List<Pasta> listaPasta;
+    private List<Hamburguesa> listaHamb;
+    private List<Lasania> listaLas;
+    private List<Ensalada> listaEnsa;
+    private List<Bebida> listaBebs;
+    private List<Pasta> listaPasta;
 
 
     public Pedido() {
@@ -33,44 +33,44 @@ public class Pedido {
         return listaPizzas;
     }
 
-    public static List<Hamburguesa> getListaHamb() {
+    public List<Hamburguesa> getListaHamb() {
         return listaHamb;
     }
 
-    public static void setListaHamb(List<Hamburguesa> listaHamb) {
-        Pedido.listaHamb = listaHamb;
+    public void setListaHamb(List<Hamburguesa> listaHamb) {
+        listaHamb = listaHamb;
     }
 
-    public static List<Lasania> getListaLas() {
+    public List<Lasania> getListaLas() {
         return listaLas;
     }
 
-    public static void setListaLas(List<Lasania> listaLas) {
-        Pedido.listaLas = listaLas;
+    public void setListaLas(List<Lasania> listaLas) {
+        listaLas = listaLas;
     }
 
-    public static List<Ensalada> getListaEnsa() {
+    public  List<Ensalada> getListaEnsa() {
         return listaEnsa;
     }
 
-    public static void setListaEnsa(List<Ensalada> listaEnsa) {
-        Pedido.listaEnsa = listaEnsa;
+    public  void setListaEnsa(List<Ensalada> listaEnsa) {
+        listaEnsa = listaEnsa;
     }
 
-    public static List<Bebida> getListaBebs() {
+    public  List<Bebida> getListaBebs() {
         return listaBebs;
     }
 
-    public static void setListaBebs(List<Bebida> listaBebs) {
-        Pedido.listaBebs = listaBebs;
+    public  void setListaBebs(List<Bebida> listaBebs) {
+        listaBebs = listaBebs;
     }
 
-    public static List<Pasta> getListaPasta() {
+    public  List<Pasta> getListaPasta() {
         return listaPasta;
     }
 
-    public static void setListaPasta(List<Pasta> listaPasta) {
-        Pedido.listaPasta = listaPasta;
+    public  void setListaPasta(List<Pasta> listaPasta) {
+        listaPasta = listaPasta;
     }
 
     public int getRefCliente() {

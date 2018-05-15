@@ -198,6 +198,7 @@ public class Crea_pedido extends android.app.Fragment implements
                     FragmentTransaction transaction = getChildFragmentManager().beginTransaction();
                     getActivity().setTitle("Fase de pedido: " + (fasePedido+1));
                     transaction.replace(R.id.fragment2, listaFragments.get(fasePedido));
+                    transaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN);
                     transaction.commit();
                     if(fasePedido <= 0) anterior.setVisibility(View.GONE);
                 }
@@ -213,6 +214,7 @@ public class Crea_pedido extends android.app.Fragment implements
                     FragmentTransaction transaction = getChildFragmentManager().beginTransaction();
                     getActivity().setTitle("Fase de pedido: " + (fasePedido+1));
                     transaction.replace(R.id.fragment2, listaFragments.get(fasePedido));
+                    transaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN);
                     transaction.commit();
                     if(fasePedido >= listaFragments.size()-1) siguiente.setVisibility(View.GONE);
                 }
