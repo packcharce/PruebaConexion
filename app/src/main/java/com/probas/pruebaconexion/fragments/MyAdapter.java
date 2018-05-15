@@ -194,15 +194,15 @@ public class MyAdapter extends RecyclerView.Adapter {
                 return new PedidosViewHolder(v);
 
             case TIPO_INGREDIENTES:
-                v = layoutInflater.inflate(R.layout.cont_recy_crea_pedido_ingredientes, parent, false);
+                v = layoutInflater.inflate(R.layout.cont_recy_crea_pedido, parent, false);
                 return new IngredsViewHolder(v, clickListener, numPizza);
 
             case TIPO_BEBIDAS:
-                v = layoutInflater.inflate(R.layout.cont_recy_crea_pedido_ingredientes, parent, false);
+                v = layoutInflater.inflate(R.layout.cont_recy_crea_pedido, parent, false);
                 return new BebidasViewHolder(v, clickListener);
 
             case TIPO_HAMBURGUESAS:
-                v = layoutInflater.inflate(R.layout.cont_recy_crea_pedido_ingredientes, parent, false);
+                v = layoutInflater.inflate(R.layout.cont_recy_crea_pedido, parent, false);
                 return new HamburguesasViewHolder(v, clickListener);
 
                 /*
