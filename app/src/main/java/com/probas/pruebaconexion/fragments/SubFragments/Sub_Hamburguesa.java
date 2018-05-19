@@ -31,6 +31,8 @@ import java.util.ArrayList;
 public class Sub_Hamburguesa extends Fragment {
     // TODO: Rename parameter arguments, choose names that match
     private static final String ARG_PARAM1 = "hamburguesas";
+    private static final int TIPO_HAMBURGUESAS = 3;
+
     public static ArrayList<Hamburguesa> listaHamburguesas;
 
     private OnFragmentInteractionListener mListener;
@@ -76,7 +78,7 @@ public class Sub_Hamburguesa extends Fragment {
         pasaDatos.putSerializable(ARG_PARAM1, (ArrayList<Hamburguesa>) MainActivity.listaHamb);
 
 
-        RecyclerView.Adapter mAdapter = new MyAdapter(pasaDatos, 3, new ClickListener() {
+        RecyclerView.Adapter mAdapter = new MyAdapter(pasaDatos, TIPO_HAMBURGUESAS, new ClickListener() {
             @Override
             public void onPositionClicked(View v, int position) {
                 if(v.getId() == R.id.anadir) {

@@ -39,11 +39,7 @@ public class Sub_crea_pedido extends Fragment {
 
     // TODO: Rename and change types of parameters
     private static final String ARG_PARAM1 = "ingredientes";
-    private static final String ARG_PARAM2 = "bebidas";
-    private static final String ARG_PARAM3 = "ensaladas";
-    private static final String ARG_PARAM4 = "hamburguesas";
-    private static final String ARG_PARAM5 = "pasta";
-    private static final String ARG_PARAM6 = "lasania";
+    private static final int TIPO_INGREDIENTES = 1;
 
     public static ArrayList<Hamburguesa> listaHamb;
     public static ArrayList<Lasania> listaLas;
@@ -70,12 +66,6 @@ public class Sub_crea_pedido extends Fragment {
         Sub_crea_pedido fragment = new Sub_crea_pedido();
         Bundle args = new Bundle();
         args.putSerializable(ARG_PARAM1, numeroDePizza);
-        /*
-        args.putSerializable(ARG_PARAM2, bebidas);
-        args.putSerializable(ARG_PARAM3, ensaladas);
-        args.putSerializable(ARG_PARAM4, hamburguesas);
-        args.putSerializable(ARG_PARAM5, pastas);
-        args.putSerializable(ARG_PARAM6, lasanias);*/
         fragment.setArguments(args);
         return fragment;
     }
@@ -83,16 +73,10 @@ public class Sub_crea_pedido extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (getArguments() != null && numeroDePizza == -1) {/*
-            listaHamb = (ArrayList<Hamburguesa>) getArguments().getSerializable(ARG_PARAM4);
-            listaEnsa = (ArrayList<Ensalada>) getArguments().getSerializable(ARG_PARAM3);
-            listaPasta = (ArrayList<Pasta>) getArguments().getSerializable(ARG_PARAM5);
-            listaBebs = (ArrayList<Bebida>) getArguments().getSerializable(ARG_PARAM2);
-            listaLas = (ArrayList<Lasania>) getArguments().getSerializable(ARG_PARAM6);*/
+        if (getArguments() != null && numeroDePizza == -1) {
             numeroDePizza = getArguments().getInt(ARG_PARAM1);
         }
         listaIngredientes = (ArrayList<Ingrediente>) MainActivity.listaIngredientes;
-        //}
     }
 
     @Override
@@ -127,7 +111,7 @@ public class Sub_crea_pedido extends Fragment {
         mRecyclerView2.setLayoutManager(mLayoutManager2);
 
         // specify an adapter (see also next example)
-        RecyclerView.Adapter mAdapter = new MyAdapter(pasaDatos, 1, new ClickListener() {
+        RecyclerView.Adapter mAdapter = new MyAdapter(pasaDatos, TIPO_INGREDIENTES, new ClickListener() {
             @Override
             public void onPositionClicked(View v, int position) {
 
@@ -135,13 +119,10 @@ public class Sub_crea_pedido extends Fragment {
                     Ingrediente i = new Ingrediente(listaIngredientes.get(position));
 
                     RecyclerView rc = (RecyclerView) v.getParent().getParent();
-                    //if(switchMitades.isChecked()) {
                     if (rc.getId() == R.id.rec_segunda_mitad)
                         i.setMitad((byte) 2);
-                    //}
                     if (rc.getId() == R.id.rec_ingredientes_pedido)
                         i.setMitad((byte) 1);
-                    //System.out.println("Ingredientessss " + rc.getId() + " " + v.toString());
                     Crea_pedido.pedido.getListaPizzas().get(numeroDePizza).agregaIngrediente(i);
                 }else if (v.getId() == R.id.quitar && Crea_pedido.pedido.getListaPizzas().get(numeroDePizza).getListaIngredientes().size() > 0){
                     Crea_pedido.pedido.getListaPizzas().get(numeroDePizza).quitaIngrediente(listaIngredientes.get(position).getNombre());

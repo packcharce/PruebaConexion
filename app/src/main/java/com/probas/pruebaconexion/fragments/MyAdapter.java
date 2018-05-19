@@ -258,6 +258,44 @@ public class MyAdapter extends RecyclerView.Adapter {
         }
     }
 
+    public static class PastaViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
+        // each data item is just a string in this case
+        TextView nombPasta, numIngreds;
+        Button anhade, quita;
+        private WeakReference<ClickListener> listenerRef;
+
+        PastaViewHolder(View v, ClickListener clickListener) {
+            super(v);
+            listenerRef = new WeakReference<>(clickListener);
+            nombPasta = v.findViewById(R.id.nombre_comp_pedido);
+            anhade = v.findViewById(R.id.anadir);
+            numIngreds = v.findViewById(R.id.cantidad_comp_pedido);
+            quita = v.findViewById(R.id.quitar);
+            anhade.setOnClickListener(this);
+            quita.setOnClickListener(this);
+        }
+
+        @Override
+        public void onClick(View v) {
+            int numIngred = Integer.parseInt(numIngreds.getText().toString());
+            switch (v.getId()) {
+                case R.id.anadir:
+                    if(numIngred>=0) {
+                        numIngred++;
+                        numIngreds.setText(String.valueOf(numIngred));
+                    }
+                    break;
+                case R.id.quitar:
+                    if(numIngred>0) {
+                        numIngred--;
+                        numIngreds.setText(String.valueOf(numIngred));
+                    }
+                    break;
+            }
+            listenerRef.get().onPositionClicked(v, getAdapterPosition());
+        }
+    }
+
     private final ClickListener clickListener;
     private int numPizza;
 
@@ -283,6 +321,9 @@ public class MyAdapter extends RecyclerView.Adapter {
                 break;
             case TIPO_ENSALADAS:
                 listaEnsa = (ArrayList<Ensalada>) b.getSerializable(ARG_PARAM3);
+                break;
+            case TIPO_PASTA:
+                listaPasta = (ArrayList<Pasta>) b.getSerializable(ARG_PARAM5);
                 break;
         }
         this.clickListener=clickListener;
@@ -319,6 +360,9 @@ public class MyAdapter extends RecyclerView.Adapter {
             case TIPO_ENSALADAS:
                 v = layoutInflater.inflate(R.layout.cont_recy_crea_pedido, parent, false);
                 return new EnsaladaViewHolder(v, clickListener);
+            case TIPO_PASTA:
+                v = layoutInflater.inflate(R.layout.cont_recy_crea_pedido, parent, false);
+                return new PastaViewHolder(v, clickListener);
 
                 /*
             default:
@@ -350,6 +394,9 @@ public class MyAdapter extends RecyclerView.Adapter {
         else if(holder instanceof EnsaladaViewHolder){
             ((EnsaladaViewHolder) holder).nombEnsal.setText(String.valueOf(listaEnsa.get(position).getNombre()));
         }
+        else if(holder instanceof PastaViewHolder){
+            ((PastaViewHolder) holder).nombPasta.setText(String.valueOf(listaPasta.get(position).getNombre()));
+        }
     }
 
     @Override
@@ -373,6 +420,9 @@ public class MyAdapter extends RecyclerView.Adapter {
                 break;
             case TIPO_ENSALADAS:
                 res = listaEnsa.size();
+                break;
+            case TIPO_PASTA:
+                res = listaPasta.size();
                 break;
         }
         return res;

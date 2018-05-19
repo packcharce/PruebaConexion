@@ -12,6 +12,10 @@ public class Pasta implements Serializable {
         this.precio = precio;
     }
 
+    public Pasta(Pasta pasta) {
+        this(pasta.getNombre(), pasta.getIngredientes(), pasta.getPrecio());
+    }
+
     public String getNombre() {
         return nombre;
     }

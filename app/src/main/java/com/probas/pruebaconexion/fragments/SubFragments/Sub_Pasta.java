@@ -1,18 +1,18 @@
 package com.probas.pruebaconexion.fragments.SubFragments;
 
+import android.app.Fragment;
 import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
-import android.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.probas.pruebaconexion.Bebida;
-import com.probas.pruebaconexion.Ingrediente;
+import com.probas.pruebaconexion.Ensalada;
 import com.probas.pruebaconexion.MainActivity;
+import com.probas.pruebaconexion.Pasta;
 import com.probas.pruebaconexion.R;
 import com.probas.pruebaconexion.fragments.ClickListener;
 import com.probas.pruebaconexion.fragments.Crea_pedido;
@@ -23,21 +23,21 @@ import java.util.ArrayList;
 /**
  * A simple {@link Fragment} subclass.
  * Activities that contain this fragment must implement the
- * {@link Sub_bebidas.OnFragmentInteractionListener} interface
+ * {@link Sub_Pasta.OnFragmentInteractionListener} interface
  * to handle interaction events.
- * Use the {@link Sub_bebidas#newInstance} factory method to
+ * Use the {@link Sub_Pasta#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class Sub_bebidas extends Fragment {
+public class Sub_Pasta extends Fragment {
     // TODO: Rename parameter arguments, choose names that match
-    private static final String ARG_PARAM1 = "bebidas";
-    private static final int TIPO_BEBIDAS = 2;
+    private static final String ARG_PARAM1 = "pasta";
+    private static final int TIPO_PASTA = 5;
 
-    public static ArrayList<Bebida> listaBebidas;
+    public static ArrayList<Pasta> listaPasta;
 
     private OnFragmentInteractionListener mListener;
 
-    public Sub_bebidas() {
+    public Sub_Pasta() {
         // Required empty public constructor
     }
 
@@ -48,13 +48,13 @@ public class Sub_bebidas extends Fragment {
      * @return A new instance of fragment Sub_bebidas.
      */
     // TODO: Rename and change types and number of parameters
-    public static Sub_bebidas newInstance() {
-        return new Sub_bebidas();
+    public static Sub_Pasta newInstance() {
+        return new Sub_Pasta();
     }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
-        listaBebidas = (ArrayList<Bebida>) MainActivity.listaBebs;
+        listaPasta = (ArrayList<Pasta>) MainActivity.listaPasta;
         super.onCreate(savedInstanceState);
     }
 
@@ -62,10 +62,10 @@ public class Sub_bebidas extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View v = inflater.inflate(R.layout.fragment_sub_bebidas, container, false);
+        View v = inflater.inflate(R.layout.fragment_sub_pasta, container, false);
         Bundle pasaDatos = new Bundle();
 
-        final RecyclerView mRecyclerView = v.findViewById(R.id.rec_bebidas_pedido);
+        final RecyclerView mRecyclerView = v.findViewById(R.id.rec_pasta_pedido);
 
         // use this setting to improve performance if you know that changes
         // in content do not change the layout size of the RecyclerView
@@ -75,16 +75,17 @@ public class Sub_bebidas extends Fragment {
         RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(v.getContext());
         mRecyclerView.setLayoutManager(mLayoutManager);
 
-        pasaDatos.putSerializable(ARG_PARAM1, (ArrayList<Bebida>) MainActivity.listaBebs);
+        pasaDatos.putSerializable(ARG_PARAM1, (ArrayList<Pasta>) MainActivity.listaPasta);
 
 
-        RecyclerView.Adapter mAdapter = new MyAdapter(pasaDatos, TIPO_BEBIDAS, new ClickListener() {
+        RecyclerView.Adapter mAdapter = new MyAdapter(pasaDatos, TIPO_PASTA, new ClickListener() {
             @Override
             public void onPositionClicked(View v, int position) {
                 if(v.getId() == R.id.anadir) {
-                    Crea_pedido.pedido.getListaBebs().add(new Bebida(listaBebidas.get(position)));
-                }else if (v.getId() == R.id.quitar && Crea_pedido.pedido.getListaBebs().size() > 0){
-                    Crea_pedido.pedido.quitaBebida(MainActivity.listaBebs.get(position).getNombre());
+                    Crea_pedido.pedido.getListaPasta().add(new Pasta(listaPasta.get(position)));
+                }
+                else if (v.getId() == R.id.quitar && Crea_pedido.pedido.getListaPasta().size() > 0){
+                    Crea_pedido.pedido.quitaPasta(listaPasta.get(position).getNombre());
                 }
             }
         });

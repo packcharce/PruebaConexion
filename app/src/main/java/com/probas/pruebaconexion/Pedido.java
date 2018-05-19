@@ -101,6 +101,15 @@ public class Pedido {
         }
     }
 
+    public void quitaPasta(String nombre){
+        for(int i=0; i<listaPasta.size(); i++){
+            if (listaPasta.get(i).getNombre().equals(nombre)){
+                listaPasta.remove(i);
+                break;
+            }
+        }
+    }
+
     public  List<Pasta> getListaPasta() {
         return listaPasta;
     }

@@ -19,6 +19,7 @@ import com.probas.pruebaconexion.R;
 import com.probas.pruebaconexion.fragments.SubFragments.Sub_Ensalada;
 import com.probas.pruebaconexion.fragments.SubFragments.Sub_Hamburguesa;
 import com.probas.pruebaconexion.fragments.SubFragments.Sub_Lasania;
+import com.probas.pruebaconexion.fragments.SubFragments.Sub_Pasta;
 import com.probas.pruebaconexion.fragments.SubFragments.Sub_bebidas;
 import com.probas.pruebaconexion.fragments.SubFragments.Sub_crea_pedido;
 
@@ -37,16 +38,9 @@ public class Crea_pedido extends android.app.Fragment implements
         Sub_bebidas.OnFragmentInteractionListener,
         Sub_Hamburguesa.OnFragmentInteractionListener,
         Sub_Lasania.OnFragmentInteractionListener,
-        Sub_Ensalada.OnFragmentInteractionListener
+        Sub_Ensalada.OnFragmentInteractionListener,
+        Sub_Pasta.OnFragmentInteractionListener
 {
-
-    private static final int TIPO_INGREDIENTES = 1;
-    private static final int TIPO_BEBIDAS = 2;
-    private static final int TIPO_ENSALADAS = 4;
-    private static final int TIPO_HAMBURGUESAS = 3;
-    private static final int TIPO_PASTA = 5;
-    private static final int TIPO_LASANIA = 6;
-
 
     private OnFragmentInteractionListener mListener;
     public static Pedido pedido;
@@ -57,17 +51,15 @@ public class Crea_pedido extends android.app.Fragment implements
     TextView contPizzas;
 
     private int fasePedido, fasesTotales;
-    private final int numeroFasesProtegidas = 4;
+    private final int numeroFasesProtegidas = 5;
 
 
     public Crea_pedido() {
         // Required empty public constructor
     }
 
-    public static Crea_pedido newInstance(
-    ) {
-        Crea_pedido fragment = new Crea_pedido();
-        return fragment;
+    public static Crea_pedido newInstance() {
+        return new Crea_pedido();
     }
 
     @Override
@@ -83,6 +75,7 @@ public class Crea_pedido extends android.app.Fragment implements
         listaFragments.add(Sub_Hamburguesa.newInstance());
         listaFragments.add(Sub_Lasania.newInstance());
         listaFragments.add(Sub_Ensalada.newInstance());
+        listaFragments.add(Sub_Pasta.newInstance());
         fasesTotales = listaFragments.size();
     }
 

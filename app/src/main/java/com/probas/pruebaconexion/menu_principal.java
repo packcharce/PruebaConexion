@@ -22,6 +22,7 @@ import com.probas.pruebaconexion.fragments.Mis_pedidos;
 import com.probas.pruebaconexion.fragments.SubFragments.Sub_Ensalada;
 import com.probas.pruebaconexion.fragments.SubFragments.Sub_Hamburguesa;
 import com.probas.pruebaconexion.fragments.SubFragments.Sub_Lasania;
+import com.probas.pruebaconexion.fragments.SubFragments.Sub_Pasta;
 import com.probas.pruebaconexion.fragments.SubFragments.Sub_bebidas;
 import com.probas.pruebaconexion.fragments.SubFragments.Sub_crea_pedido;
 
@@ -43,7 +44,8 @@ public class menu_principal extends AppCompatActivity
         Sub_bebidas.OnFragmentInteractionListener,
         Sub_Hamburguesa.OnFragmentInteractionListener,
         Sub_Lasania.OnFragmentInteractionListener,
-        Sub_Ensalada.OnFragmentInteractionListener
+        Sub_Ensalada.OnFragmentInteractionListener,
+        Sub_Pasta.OnFragmentInteractionListener
 {
 
     static Context context;
