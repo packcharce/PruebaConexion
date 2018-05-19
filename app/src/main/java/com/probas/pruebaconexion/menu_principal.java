@@ -19,7 +19,9 @@ import android.widget.TextView;
 import com.probas.pruebaconexion.fragments.Crea_pedido;
 import com.probas.pruebaconexion.fragments.Datos_cliente;
 import com.probas.pruebaconexion.fragments.Mis_pedidos;
+import com.probas.pruebaconexion.fragments.SubFragments.Sub_Ensalada;
 import com.probas.pruebaconexion.fragments.SubFragments.Sub_Hamburguesa;
+import com.probas.pruebaconexion.fragments.SubFragments.Sub_Lasania;
 import com.probas.pruebaconexion.fragments.SubFragments.Sub_bebidas;
 import com.probas.pruebaconexion.fragments.SubFragments.Sub_crea_pedido;
 
@@ -39,7 +41,9 @@ public class menu_principal extends AppCompatActivity
         Crea_pedido.OnFragmentInteractionListener,
         Sub_crea_pedido.OnFragmentInteractionListener,
         Sub_bebidas.OnFragmentInteractionListener,
-        Sub_Hamburguesa.OnFragmentInteractionListener
+        Sub_Hamburguesa.OnFragmentInteractionListener,
+        Sub_Lasania.OnFragmentInteractionListener,
+        Sub_Ensalada.OnFragmentInteractionListener
 {
 
     static Context context;
@@ -131,15 +135,7 @@ public class menu_principal extends AppCompatActivity
 
         } else if (id == R.id.nav_crea_pedido){
             setTitle("Nuevo Pedido");
-            newFragment = Crea_pedido.newInstance(/*
-                    (ArrayList<Ingrediente>)MainActivity.listaIngredientes,
-                    (ArrayList<Bebida>)MainActivity.listaBebs,
-                    (ArrayList<Ensalada>)MainActivity.listaEnsa,
-                    (ArrayList<Hamburguesa>)MainActivity.listaHamb,
-                    (ArrayList<Pasta>)MainActivity.listaPasta,
-                    (ArrayList<Lasania>)MainActivity.listaLas
-                    */
-            );
+            newFragment = Crea_pedido.newInstance();
             transaction.replace(R.id.fragment, newFragment);
             transaction.commit();
         }

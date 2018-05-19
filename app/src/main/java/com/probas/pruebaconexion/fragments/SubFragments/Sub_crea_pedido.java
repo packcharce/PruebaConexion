@@ -14,7 +14,6 @@ import android.widget.Space;
 import android.widget.Switch;
 import android.widget.TextView;
 
-import com.probas.pruebaconexion.Bebida;
 import com.probas.pruebaconexion.Ensalada;
 import com.probas.pruebaconexion.Hamburguesa;
 import com.probas.pruebaconexion.Ingrediente;

@@ -2,7 +2,6 @@ package com.probas.pruebaconexion;
 
 import android.content.Intent;
 import android.os.AsyncTask;
-import android.view.View;
 import android.widget.Toast;
 
 import com.probas.pruebaconexion.fragments.Mis_pedidos;

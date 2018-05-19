@@ -12,6 +12,9 @@ public class Lasania implements Serializable {
         this.precio = precio;
     }
 
+    public Lasania(Lasania lasania) {
+        this(lasania.getNombre(), lasania.getIngredientes(), lasania.getPrecio());
+    }
 
     public String getNombre() {
         return nombre;

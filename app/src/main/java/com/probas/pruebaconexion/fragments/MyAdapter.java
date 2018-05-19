@@ -14,7 +14,6 @@ import com.probas.pruebaconexion.Ensalada;
 import com.probas.pruebaconexion.Hamburguesa;
 import com.probas.pruebaconexion.Ingrediente;
 import com.probas.pruebaconexion.Lasania;
-import com.probas.pruebaconexion.MainActivity;
 import com.probas.pruebaconexion.Pasta;
 import com.probas.pruebaconexion.R;
 
@@ -138,7 +137,6 @@ public class MyAdapter extends RecyclerView.Adapter {
                     if(numIngred>0) {
                         numIngred--;
                         numIngreds.setText(String.valueOf(numIngred));
-                        //Crea_pedido.pedido.getListaBebs().remove(MainActivity.listaBebs.get(getAdapterPosition()));
                     }
                     break;
             }
@@ -146,15 +144,117 @@ public class MyAdapter extends RecyclerView.Adapter {
         }
     }
 
-    public static class HamburguesasViewHolder extends RecyclerView.ViewHolder {
+    public static class HamburguesasViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         // each data item is just a string in this case
-        TextView nombHamb;
+        TextView nombHamb, numIngreds;
+        Button anhade, quita;
         private WeakReference<ClickListener> listenerRef;
 
         HamburguesasViewHolder(View v, ClickListener clickListener) {
             super(v);
             listenerRef = new WeakReference<>(clickListener);
             nombHamb = v.findViewById(R.id.nombre_comp_pedido);
+            anhade = v.findViewById(R.id.anadir);
+            numIngreds = v.findViewById(R.id.cantidad_comp_pedido);
+            quita = v.findViewById(R.id.quitar);
+            anhade.setOnClickListener(this);
+            quita.setOnClickListener(this);
+        }
+
+        @Override
+        public void onClick(View v) {
+            int numIngred = Integer.parseInt(numIngreds.getText().toString());
+            switch (v.getId()) {
+                case R.id.anadir:
+                    if(numIngred>=0) {
+                        numIngred++;
+                        numIngreds.setText(String.valueOf(numIngred));
+                    }
+                    break;
+                case R.id.quitar:
+                    if(numIngred>0) {
+                        numIngred--;
+                        numIngreds.setText(String.valueOf(numIngred));
+                    }
+                    break;
+            }
+            listenerRef.get().onPositionClicked(v, getAdapterPosition());
+        }
+    }
+
+    public static class LasaniaViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
+        // each data item is just a string in this case
+        TextView nombLas, numIngreds;
+        Button anhade, quita;
+        private WeakReference<ClickListener> listenerRef;
+
+        LasaniaViewHolder(View v, ClickListener clickListener) {
+            super(v);
+            listenerRef = new WeakReference<>(clickListener);
+            nombLas = v.findViewById(R.id.nombre_comp_pedido);
+            anhade = v.findViewById(R.id.anadir);
+            numIngreds = v.findViewById(R.id.cantidad_comp_pedido);
+            quita = v.findViewById(R.id.quitar);
+            anhade.setOnClickListener(this);
+            quita.setOnClickListener(this);
+        }
+
+        @Override
+        public void onClick(View v) {
+            int numIngred = Integer.parseInt(numIngreds.getText().toString());
+            switch (v.getId()) {
+                case R.id.anadir:
+                    if(numIngred>=0) {
+                        numIngred++;
+                        numIngreds.setText(String.valueOf(numIngred));
+                    }
+                    break;
+                case R.id.quitar:
+                    if(numIngred>0) {
+                        numIngred--;
+                        numIngreds.setText(String.valueOf(numIngred));
+                    }
+                    break;
+            }
+            listenerRef.get().onPositionClicked(v, getAdapterPosition());
+        }
+    }
+
+    public static class EnsaladaViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
+        // each data item is just a string in this case
+        TextView nombEnsal, numIngreds;
+        Button anhade, quita;
+        private WeakReference<ClickListener> listenerRef;
+
+        EnsaladaViewHolder(View v, ClickListener clickListener) {
+            super(v);
+            listenerRef = new WeakReference<>(clickListener);
+            nombEnsal = v.findViewById(R.id.nombre_comp_pedido);
+            anhade = v.findViewById(R.id.anadir);
+            numIngreds = v.findViewById(R.id.cantidad_comp_pedido);
+            quita = v.findViewById(R.id.quitar);
+            anhade.setOnClickListener(this);
+            quita.setOnClickListener(this);
+        }
+
+        @Override
+        public void onClick(View v) {
+            int numIngred = Integer.parseInt(numIngreds.getText().toString());
+            switch (v.getId()) {
+                case R.id.anadir:
+                    if(numIngred>=0) {
+                        numIngred++;
+                        numIngreds.setText(String.valueOf(numIngred));
+                    }
+                    break;
+                case R.id.quitar:
+                    if(numIngred>0) {
+                        numIngred--;
+                        numIngreds.setText(String.valueOf(numIngred));
+                    }
+                    break;
+            }
+            listenerRef.get().onPositionClicked(v, getAdapterPosition());
         }
     }
 
@@ -177,6 +277,12 @@ public class MyAdapter extends RecyclerView.Adapter {
                 break;
             case TIPO_HAMBURGUESAS:
                 listaHamb = (ArrayList<Hamburguesa>) b.getSerializable(ARG_PARAM4);
+                break;
+            case TIPO_LASANIA:
+                listaLas = (ArrayList<Lasania>) b.getSerializable(ARG_PARAM6);
+                break;
+            case TIPO_ENSALADAS:
+                listaEnsa = (ArrayList<Ensalada>) b.getSerializable(ARG_PARAM3);
                 break;
         }
         this.clickListener=clickListener;
@@ -206,6 +312,14 @@ public class MyAdapter extends RecyclerView.Adapter {
                 v = layoutInflater.inflate(R.layout.cont_recy_crea_pedido, parent, false);
                 return new HamburguesasViewHolder(v, clickListener);
 
+            case TIPO_LASANIA:
+                v = layoutInflater.inflate(R.layout.cont_recy_crea_pedido, parent, false);
+                return new LasaniaViewHolder(v, clickListener);
+
+            case TIPO_ENSALADAS:
+                v = layoutInflater.inflate(R.layout.cont_recy_crea_pedido, parent, false);
+                return new EnsaladaViewHolder(v, clickListener);
+
                 /*
             default:
                 v=null;
@@ -230,6 +344,12 @@ public class MyAdapter extends RecyclerView.Adapter {
         else if(holder instanceof HamburguesasViewHolder){
             ((HamburguesasViewHolder) holder).nombHamb.setText(String.valueOf(listaHamb.get(position).getNombre()));
         }
+        else if(holder instanceof LasaniaViewHolder){
+            ((LasaniaViewHolder) holder).nombLas.setText(String.valueOf(listaLas.get(position).getNombre()));
+        }
+        else if(holder instanceof EnsaladaViewHolder){
+            ((EnsaladaViewHolder) holder).nombEnsal.setText(String.valueOf(listaEnsa.get(position).getNombre()));
+        }
     }
 
     @Override
@@ -247,6 +367,12 @@ public class MyAdapter extends RecyclerView.Adapter {
                 break;
             case TIPO_HAMBURGUESAS:
                 res = listaHamb.size();
+                break;
+            case TIPO_LASANIA:
+                res = listaLas.size();
+                break;
+            case TIPO_ENSALADAS:
+                res = listaEnsa.size();
                 break;
         }
         return res;
