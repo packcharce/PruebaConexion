@@ -64,8 +64,7 @@ public class Sub_Lasania extends Fragment {
 
         final RecyclerView mRecyclerView = v.findViewById(R.id.rec_lasania_pedido);
 
-        // use this setting to improve performance if you know that changes
-        // in content do not change the layout size of the RecyclerView
+
         mRecyclerView.setHasFixedSize(true);
 
         // use a linear layout manager
