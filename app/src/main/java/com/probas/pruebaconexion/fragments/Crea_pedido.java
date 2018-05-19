@@ -143,9 +143,7 @@ public class Crea_pedido extends android.app.Fragment implements
         );
         */
 
-        FragmentTransaction transaction = getChildFragmentManager().beginTransaction();
-        transaction.replace(R.id.fragment2, listaFragments.get(0));
-        transaction.commit();
+        getChildFragmentManager().beginTransaction().replace(R.id.fragment2, listaFragments.get(0)).commit();
 
 
         final Button siguiente = v.findViewById(R.id.btnSig);
@@ -164,7 +162,7 @@ public class Crea_pedido extends android.app.Fragment implements
                         String.valueOf(Integer.parseInt(contPizzas.getText().toString()) + 1));
 
                 // TODO cambiar el 1 por // fasesTotales-5 // 5 fases fijas y pizzas
-                listaFragments.add(fasesTotales-1, Sub_crea_pedido.newInstance(numeroDePizza));
+                listaFragments.add(fasesTotales-2, Sub_crea_pedido.newInstance(numeroDePizza));
 
                 fasesTotales++;
             }
@@ -175,15 +173,21 @@ public class Crea_pedido extends android.app.Fragment implements
             public void onClick(View v) {
                 if(pedido.getListaPizzas().size() > 1) {
                     //pedido.getListaPizzas().remove(pedido.getListaPizzas().size() - 1);
-                    if(fasePedido < fasesTotales) {
+                    if(fasePedido < fasesTotales-2) {
                         pedido.getListaPizzas().remove(fasePedido);
 
                         contPizzas.setText(
                                 String.valueOf(Integer.parseInt(contPizzas.getText().toString()) - 1));
 
                         listaFragments.remove(fasePedido);
+                        //getChildFragmentManager().beginTransaction().replace(R.id.fragment2, listaFragments.get(fasePedido-1)).commit();
+                        //getActivity().setTitle("Fase de pedido: " + (fasePedido));
+                        //fasePedido--;
+                        anterior.performClick();
 
                         fasesTotales--;
+                    }else {
+                        Toast.makeText(getActivity(), "Solo puedes borrar pizzas", Toast.LENGTH_LONG).show();
                     }
                 }
             }
@@ -194,9 +198,9 @@ public class Crea_pedido extends android.app.Fragment implements
             @Override
             public void onClick(View v) {
                 if(fasePedido>0) {
+                    getActivity().setTitle("Fase de pedido: " + (fasePedido));
                     fasePedido--;
                     FragmentTransaction transaction = getChildFragmentManager().beginTransaction();
-                    getActivity().setTitle("Fase de pedido: " + (fasePedido+1));
                     transaction.replace(R.id.fragment2, listaFragments.get(fasePedido));
                     transaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN);
                     transaction.commit();

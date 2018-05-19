@@ -79,7 +79,11 @@ public class Sub_bebidas extends Fragment {
         RecyclerView.Adapter mAdapter = new MyAdapter(pasaDatos, 2, new ClickListener() {
             @Override
             public void onPositionClicked(View v, int position) {
-                Crea_pedido.pedido.getListaBebs().add(new Bebida(listaBebidas.get(position)));
+                if(v.getId() == R.id.anadir) {
+                    Crea_pedido.pedido.getListaBebs().add(new Bebida(listaBebidas.get(position)));
+                }else if (v.getId() == R.id.quitar && Crea_pedido.pedido.getListaBebs().size() > 0){
+                    Crea_pedido.pedido.quitaBebida(MainActivity.listaBebs.get(position).getNombre());
+                }
             }
         });
         mRecyclerView.setAdapter(mAdapter);

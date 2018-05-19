@@ -132,18 +132,21 @@ public class Sub_crea_pedido extends Fragment {
             @Override
             public void onPositionClicked(View v, int position) {
 
-                Ingrediente i = new Ingrediente(listaIngredientes.get(position));
+                if(v.getId() == R.id.anadir) {
+                    Ingrediente i = new Ingrediente(listaIngredientes.get(position));
 
-                RecyclerView rc = (RecyclerView) v.getParent().getParent();
-                //if(switchMitades.isChecked()) {
+                    RecyclerView rc = (RecyclerView) v.getParent().getParent();
+                    //if(switchMitades.isChecked()) {
                     if (rc.getId() == R.id.rec_segunda_mitad)
                         i.setMitad((byte) 2);
-                //}
-                if (rc.getId() == R.id.rec_ingredientes_pedido)
-                    i.setMitad((byte) 1);
-                //System.out.println("Ingredientessss " + rc.getId() + " " + v.toString());
-                // TODO adaptar el numero de la pizza, cambiando el 0 por la pizza que sea
-                Crea_pedido.pedido.getListaPizzas().get(numeroDePizza).agregaIngrediente(i);
+                    //}
+                    if (rc.getId() == R.id.rec_ingredientes_pedido)
+                        i.setMitad((byte) 1);
+                    //System.out.println("Ingredientessss " + rc.getId() + " " + v.toString());
+                    Crea_pedido.pedido.getListaPizzas().get(numeroDePizza).agregaIngrediente(i);
+                }else if (v.getId() == R.id.quitar && Crea_pedido.pedido.getListaPizzas().get(numeroDePizza).getListaIngredientes().size() > 0){
+                    Crea_pedido.pedido.getListaPizzas().get(numeroDePizza).quitaIngrediente(listaIngredientes.get(position).getNombre());
+                }
             }
         });
 

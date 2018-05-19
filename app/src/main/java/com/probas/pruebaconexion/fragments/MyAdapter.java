@@ -14,6 +14,7 @@ import com.probas.pruebaconexion.Ensalada;
 import com.probas.pruebaconexion.Hamburguesa;
 import com.probas.pruebaconexion.Ingrediente;
 import com.probas.pruebaconexion.Lasania;
+import com.probas.pruebaconexion.MainActivity;
 import com.probas.pruebaconexion.Pasta;
 import com.probas.pruebaconexion.R;
 
@@ -97,7 +98,7 @@ public class MyAdapter extends RecyclerView.Adapter {
                     if(numIngred>0) {
                         numIngred--;
                         numIngreds.setText(String.valueOf(numIngred));
-                        Crea_pedido.pedido.getListaPizzas().get(numeroDePizza).quitaIngrediente(listaIngredientes.get(getAdapterPosition()).getNombre());
+                        //Crea_pedido.pedido.getListaPizzas().get(numeroDePizza).quitaIngrediente(listaIngredientes.get(getAdapterPosition()).getNombre());
                     }
                     break;
             }
@@ -137,7 +138,7 @@ public class MyAdapter extends RecyclerView.Adapter {
                     if(numIngred>0) {
                         numIngred--;
                         numIngreds.setText(String.valueOf(numIngred));
-                        Crea_pedido.pedido.getListaBebs().remove(Crea_pedido.pedido.getListaHamb().size()-1);
+                        //Crea_pedido.pedido.getListaBebs().remove(MainActivity.listaBebs.get(getAdapterPosition()));
                     }
                     break;
             }

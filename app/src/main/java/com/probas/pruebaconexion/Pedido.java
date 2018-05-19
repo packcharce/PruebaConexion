@@ -65,6 +65,15 @@ public class Pedido {
         listaBebs = listaBebs;
     }
 
+    public void quitaBebida(String nombre){
+        for(int i=0; i<listaBebs.size(); i++){
+            if (listaBebs.get(i).getNombre().equals(nombre)){
+                listaBebs.remove(i);
+                break;
+            }
+        }
+    }
+
     public  List<Pasta> getListaPasta() {
         return listaPasta;
     }
