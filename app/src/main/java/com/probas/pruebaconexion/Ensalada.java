@@ -12,6 +12,10 @@ public class Ensalada implements Serializable {
         this.precio = precio;
     }
 
+    public Ensalada(Ensalada ensalada) {
+        this(ensalada.getNombre(), ensalada.getIngredientes(), ensalada.getPrecio());
+    }
+
     public String getNombre() {
         return nombre;
     }

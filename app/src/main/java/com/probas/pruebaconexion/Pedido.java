@@ -74,6 +74,33 @@ public class Pedido {
         }
     }
 
+    public void quitaHamb(String nombre){
+        for(int i=0; i<listaHamb.size(); i++){
+            if (listaHamb.get(i).getNombre().equals(nombre)){
+                listaHamb.remove(i);
+                break;
+            }
+        }
+    }
+
+    public void quitaLas(String nombre){
+        for(int i=0; i<listaLas.size(); i++){
+            if (listaLas.get(i).getNombre().equals(nombre)){
+                listaLas.remove(i);
+                break;
+            }
+        }
+    }
+
+    public void quitaEnsa(String nombre){
+        for(int i=0; i<listaEnsa.size(); i++){
+            if (getListaEnsa().get(i).getNombre().equals(nombre)){
+                listaEnsa.remove(i);
+                break;
+            }
+        }
+    }
+
     public  List<Pasta> getListaPasta() {
         return listaPasta;
     }

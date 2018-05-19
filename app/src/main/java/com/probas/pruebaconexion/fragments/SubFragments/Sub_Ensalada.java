@@ -10,8 +10,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.probas.pruebaconexion.Bebida;
-import com.probas.pruebaconexion.Hamburguesa;
+import com.probas.pruebaconexion.Ensalada;
+import com.probas.pruebaconexion.Lasania;
 import com.probas.pruebaconexion.MainActivity;
 import com.probas.pruebaconexion.R;
 import com.probas.pruebaconexion.fragments.ClickListener;
@@ -23,19 +23,19 @@ import java.util.ArrayList;
 /**
  * A simple {@link Fragment} subclass.
  * Activities that contain this fragment must implement the
- * {@link Sub_Hamburguesa.OnFragmentInteractionListener} interface
+ * {@link Sub_Ensalada.OnFragmentInteractionListener} interface
  * to handle interaction events.
- * Use the {@link Sub_Hamburguesa#newInstance} factory method to
+ * Use the {@link Sub_Ensalada#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class Sub_Hamburguesa extends Fragment {
+public class Sub_Ensalada extends Fragment {
     // TODO: Rename parameter arguments, choose names that match
-    private static final String ARG_PARAM1 = "hamburguesas";
-    public static ArrayList<Hamburguesa> listaHamburguesas;
+    private static final String ARG_PARAM1 = "ensaladas";
+    public static ArrayList<Ensalada> listaEnsaladas;
 
     private OnFragmentInteractionListener mListener;
 
-    public Sub_Hamburguesa() {
+    public Sub_Ensalada() {
         // Required empty public constructor
     }
 
@@ -46,13 +46,13 @@ public class Sub_Hamburguesa extends Fragment {
      * @return A new instance of fragment Sub_bebidas.
      */
     // TODO: Rename and change types and number of parameters
-    public static Sub_Hamburguesa newInstance() {
-        return new Sub_Hamburguesa();
+    public static Sub_Ensalada newInstance() {
+        return new Sub_Ensalada();
     }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
-        listaHamburguesas = (ArrayList<Hamburguesa>) MainActivity.listaHamb;
+        listaEnsaladas = (ArrayList<Ensalada>) MainActivity.listaEnsa;
         super.onCreate(savedInstanceState);
     }
 
@@ -60,10 +60,10 @@ public class Sub_Hamburguesa extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View v = inflater.inflate(R.layout.fragment_sub_hamburguesas, container, false);
+        View v = inflater.inflate(R.layout.fragment_sub_ensalada, container, false);
         Bundle pasaDatos = new Bundle();
 
-        final RecyclerView mRecyclerView = v.findViewById(R.id.rec_hamburguesas_pedido);
+        final RecyclerView mRecyclerView = v.findViewById(R.id.rec_ensalada_pedido);
 
         // use this setting to improve performance if you know that changes
         // in content do not change the layout size of the RecyclerView
@@ -73,16 +73,17 @@ public class Sub_Hamburguesa extends Fragment {
         RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(v.getContext());
         mRecyclerView.setLayoutManager(mLayoutManager);
 
-        pasaDatos.putSerializable(ARG_PARAM1, (ArrayList<Hamburguesa>) MainActivity.listaHamb);
+        pasaDatos.putSerializable(ARG_PARAM1, (ArrayList<Ensalada>) MainActivity.listaEnsa);
 
 
-        RecyclerView.Adapter mAdapter = new MyAdapter(pasaDatos, 3, new ClickListener() {
+        RecyclerView.Adapter mAdapter = new MyAdapter(pasaDatos, 4, new ClickListener() {
             @Override
             public void onPositionClicked(View v, int position) {
                 if(v.getId() == R.id.anadir) {
-                    Crea_pedido.pedido.getListaHamb().add(new Hamburguesa(listaHamburguesas.get(position)));
-                }else if (v.getId() == R.id.quitar && Crea_pedido.pedido.getListaHamb().size() > 0){
-                    Crea_pedido.pedido.quitaHamb(listaHamburguesas.get(position).getNombre());
+                    Crea_pedido.pedido.getListaEnsa().add(new Ensalada(listaEnsaladas.get(position)));
+                }
+                else if (v.getId() == R.id.quitar && Crea_pedido.pedido.getListaEnsa().size() > 0){
+                    Crea_pedido.pedido.quitaEnsa(listaEnsaladas.get(position).getNombre());
                 }
             }
         });
