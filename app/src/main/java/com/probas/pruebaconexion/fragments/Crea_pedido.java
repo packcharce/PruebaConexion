@@ -1,5 +1,6 @@
 package com.probas.pruebaconexion.fragments;
 
+import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.content.Context;
 import android.net.Uri;
@@ -93,7 +94,7 @@ public class Crea_pedido extends android.app.Fragment implements
         getChildFragmentManager().beginTransaction().replace(R.id.fragment2, listaFragments.get(0)).commit();
 
         final Button siguiente = v.findViewById(R.id.btnSig);
-        final Button anterior = v.findViewById(R.id.btnAnterior);
+        //final Button anterior = v.findViewById(R.id.btnAnterior);
         Button anhadePizza = v.findViewById(R.id.btn_anhade_pizza);
         Button quitaPizza = v.findViewById(R.id.btn_quita_pizza);
         contPizzas = v.findViewById(R.id.tv_muestra_cant_pizzas);
@@ -126,7 +127,8 @@ public class Crea_pedido extends android.app.Fragment implements
                                 String.valueOf(Integer.parseInt(contPizzas.getText().toString()) - 1));
 
                         listaFragments.remove(fasePedido);
-                        anterior.performClick();
+                        //anterior.performClick();
+                        siguiente.performClick();
 
                         fasesTotales--;
                     }else {
@@ -136,6 +138,7 @@ public class Crea_pedido extends android.app.Fragment implements
             }
         });
 
+/*
         anterior.setVisibility(View.GONE);
         anterior.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -143,16 +146,33 @@ public class Crea_pedido extends android.app.Fragment implements
                 if(fasePedido>0) {
                     getActivity().setTitle("Fase de pedido: " + (fasePedido));
                     fasePedido--;
+
+
                     FragmentTransaction transaction = getChildFragmentManager().beginTransaction();
                     transaction.replace(R.id.fragment2, listaFragments.get(fasePedido));
                     transaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN);
                     transaction.commit();
+
+                    /*
+                    FragmentManager fragmentManager = getChildFragmentManager();
+                    Fragment f = fragmentManager.findFragmentById(listaFragments.get(fasePedido).getId());
+                    if(f == null){
+                        throw new RuntimeException();
+                    }else{
+                        fragmentManager.beginTransaction()
+                                .replace(R.id.fragment2, f)
+                                .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)
+                                .addToBackStack(null)
+                                .commit();
+                    }
+
+
                     if(fasePedido <= 0) anterior.setVisibility(View.GONE);
                 }
                 siguiente.setVisibility(View.VISIBLE);
             }
         });
-
+*/
         siguiente.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -165,7 +185,7 @@ public class Crea_pedido extends android.app.Fragment implements
                     transaction.commit();
                     if(fasePedido >= listaFragments.size()-1) siguiente.setVisibility(View.GONE);
                 }
-                anterior.setVisibility(View.VISIBLE);
+                //anterior.setVisibility(View.VISIBLE);
             }
         });
 

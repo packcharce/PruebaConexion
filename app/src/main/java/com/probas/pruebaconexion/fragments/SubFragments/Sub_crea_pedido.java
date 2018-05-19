@@ -4,6 +4,7 @@ import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
 import android.app.Fragment;
+import android.os.Parcelable;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -41,11 +42,6 @@ public class Sub_crea_pedido extends Fragment {
     private static final String ARG_PARAM1 = "ingredientes";
     private static final int TIPO_INGREDIENTES = 1;
 
-    public static ArrayList<Hamburguesa> listaHamb;
-    public static ArrayList<Lasania> listaLas;
-    public static ArrayList<Ensalada> listaEnsa;
-
-    public static ArrayList<Pasta> listaPasta;
     public static ArrayList<Ingrediente> listaIngredientes;
 
     private OnFragmentInteractionListener mListener;
@@ -79,23 +75,27 @@ public class Sub_crea_pedido extends Fragment {
         listaIngredientes = (ArrayList<Ingrediente>) MainActivity.listaIngredientes;
     }
 
+    RecyclerView mRecyclerView;
+    RecyclerView.LayoutManager mLayoutManager;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
-
         View v = inflater.inflate(R.layout.fragment_sub_crea_pedido, container, false);
+
         Bundle pasaDatos = new Bundle();
 
-        final RecyclerView mRecyclerView = v.findViewById(R.id.rec_ingredientes_pedido);
+
+        mRecyclerView = v.findViewById(R.id.rec_ingredientes_pedido);
 
         // use this setting to improve performance if you know that changes
         // in content do not change the layout size of the RecyclerView
         mRecyclerView.setHasFixedSize(true);
 
         // use a linear layout manager
-        RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(v.getContext());
+        mLayoutManager = new LinearLayoutManager(v.getContext());
         mRecyclerView.setLayoutManager(mLayoutManager);
+
 
         pasaDatos.putSerializable(ARG_PARAM1, listaIngredientes);
 
@@ -109,6 +109,7 @@ public class Sub_crea_pedido extends Fragment {
         // use a linear layout manager
         RecyclerView.LayoutManager mLayoutManager2 = new LinearLayoutManager(v.getContext());
         mRecyclerView2.setLayoutManager(mLayoutManager2);
+
 
         // specify an adapter (see also next example)
         RecyclerView.Adapter mAdapter = new MyAdapter(pasaDatos, TIPO_INGREDIENTES, new ClickListener() {
