@@ -113,6 +113,7 @@ public class Sub_Lasania extends Fragment {
     public void onDetach() {
         super.onDetach();
         mListener = null;
+        Crea_pedido.pedido.getListaLas().clear();
     }
 
     /**

@@ -114,6 +114,7 @@ public class Sub_bebidas extends Fragment {
     public void onDetach() {
         super.onDetach();
         mListener = null;
+        Crea_pedido.pedido.getListaBebs().clear();
     }
 
     /**

@@ -184,6 +184,8 @@ public class Sub_crea_pedido extends Fragment {
     public void onDetach() {
         super.onDetach();
         mListener = null;
+        Crea_pedido.pedido.getListaPizzas().get(numeroDePizza).getListaIngredientes().clear();
+        Crea_pedido.pedido.getListaPizzas().get(numeroDePizza).quitaPrecio();
     }
 
     /**

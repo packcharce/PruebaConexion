@@ -6,7 +6,7 @@ import java.util.List;
 
 public class Pedido {
     private int refCliente;
-    private int numPedido;
+    private static int numPedido;
     private float extra_domicilio, extra_local, extra_recoger;
     private float subtotal, impuesto, total;
 
@@ -21,6 +21,7 @@ public class Pedido {
 
     public Pedido() {
         this.refCliente = MainActivity.clienteActivo.getId();
+        numPedido++;
         listaPizzas = new HashMap<>();
         listaHamb = new ArrayList<>();
         listaEnsa = new ArrayList<>();
@@ -162,7 +163,7 @@ public class Pedido {
         this.subtotal = subtotal;
     }
 
-    private float getImpuesto() {
+    public float getImpuesto() {
         return impuesto;
     }
 

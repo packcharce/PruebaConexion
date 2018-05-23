@@ -40,6 +40,10 @@ public class Pizza {
         this.precio = aux;
     }
 
+    public void quitaPrecio(){
+        precio=0;
+    }
+
     public void agregaIngrediente(Ingrediente i){
         listaIngredientes.add(i);
         setPrecio();
@@ -49,5 +53,6 @@ public class Pizza {
             if(listaIngredientes.get(i).getNombre().equals(nombre))
                 listaIngredientes.remove(i);
         }
+        setPrecio();
     }
 }

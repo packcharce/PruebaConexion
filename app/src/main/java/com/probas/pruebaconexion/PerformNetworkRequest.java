@@ -62,8 +62,8 @@ public class PerformNetworkRequest extends AsyncTask<Void, Void, String> {
                 if(Mis_pedidos.PEDIDOS)
                     if(object.getJSONArray("datos").length() != 0) {
                         Mis_pedidos.PEDIDOS = false;
-                        misPedidos(object.getJSONArray("datos"));
-
+                        //misPedidos(object.getJSONArray("datos"));
+                        Menu_principal.cargaDatos(object.getJSONArray("datos"));
                     }
 
             }else{
@@ -172,11 +172,11 @@ public class PerformNetworkRequest extends AsyncTask<Void, Void, String> {
         );
         Toast.makeText(MainActivity.context, "Login Correcto", Toast.LENGTH_SHORT).show();
         Login.LOGIN = false;
-        Intent i = new Intent(Login.context, menu_principal.class);
+        Intent i = new Intent(Login.context, Menu_principal.class);
         Login.context.startActivity(i);
     }
 
     private void misPedidos(JSONArray datos) throws JSONException{
-        menu_principal.cargaDatos(datos);
+        Menu_principal.cargaDatos(datos);
     }
 }

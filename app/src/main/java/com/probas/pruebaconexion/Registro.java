@@ -154,7 +154,6 @@ public class Registro extends AppCompatActivity {
         params.put("codigoPostal", codPostal);
 
 
-        //Calling the create hero API
         PerformNetworkRequest request = new PerformNetworkRequest(Api.URL_CREATE_CLIENTE, params, MainActivity.CODE_POST_REQUEST, 'a');
         request.execute();
     }

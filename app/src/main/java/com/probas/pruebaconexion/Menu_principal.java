@@ -1,5 +1,6 @@
 package com.probas.pruebaconexion;
 
+import android.app.DialogFragment;
 import android.app.Fragment;
 import android.app.FragmentTransaction;
 import android.content.Context;
@@ -16,6 +17,8 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.TextView;
 
+import com.google.gson.Gson;
+import com.probas.pruebaconexion.fragments.ConfirmacionPedido;
 import com.probas.pruebaconexion.fragments.Crea_pedido;
 import com.probas.pruebaconexion.fragments.Datos_cliente;
 import com.probas.pruebaconexion.fragments.Mis_pedidos;
@@ -31,11 +34,12 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 
 import static com.probas.pruebaconexion.MainActivity.CODE_POST_REQUEST;
 
-public class menu_principal extends AppCompatActivity
+public class Menu_principal extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener,
         Datos_cliente.OnFragmentInteractionListener,
         Mis_pedidos.OnFragmentInteractionListener,
@@ -45,7 +49,8 @@ public class menu_principal extends AppCompatActivity
         Sub_Hamburguesa.OnFragmentInteractionListener,
         Sub_Lasania.OnFragmentInteractionListener,
         Sub_Ensalada.OnFragmentInteractionListener,
-        Sub_Pasta.OnFragmentInteractionListener
+        Sub_Pasta.OnFragmentInteractionListener,
+        ConfirmacionPedido.NoticeDialogListener
 {
 
     static Context context;
@@ -76,7 +81,7 @@ public class menu_principal extends AppCompatActivity
     }
 
     public static Context getContext() {
-        return menu_principal.context;
+        return Menu_principal.context;
     }
 
     @Override
@@ -179,5 +184,36 @@ public class menu_principal extends AppCompatActivity
             total.add(String.valueOf(obj.getDouble("total")));
         }
         Mis_pedidos.CARGA_COMPLETA_PEDIDOS=true;
+    }
+
+    @Override
+    public void onDialogPositiveClick(DialogFragment dialog) {
+        Pedido p = Crea_pedido.pedido;
+        p.calculaTotal();
+        HashMap<String, String> params = new HashMap<>();
+        params.put("numPedido", String.valueOf(p.getNumPedido()));
+        params.put("extra_recoger", String.valueOf(p.getExtra_domicilio()));
+        params.put("extra_local", String.valueOf(p.getExtra_local()));
+        params.put("subtotal", String.valueOf(p.getSubtotal()));
+        params.put("impuesto", String.valueOf(p.getImpuesto()));
+        params.put("total", String.valueOf(p.getTotal()));
+
+
+
+        params.put("listaPizzas", new Gson().toJson(p.getListaPizzas()));
+        params.put("listaLasania", new Gson().toJson(p.getListaLas()));
+        params.put("listaEnsaladas", new Gson().toJson(p.getListaEnsa()));
+        params.put("listaBebs", new Gson().toJson(p.getListaBebs()));
+        params.put("listaPasta", new Gson().toJson(p.getListaPasta()));
+        params.put("listaHamburguesas", new Gson().toJson(p.getListaHamb()));
+
+
+        /*PerformNetworkRequest request = new PerformNetworkRequest(Api.URL_CREATE_PEDIDO, params, MainActivity.CODE_POST_REQUEST, 'a');
+        request.execute();*/
+    }
+
+    @Override
+    public void onDialogNegativeClick(DialogFragment dialog) {
+        dialog.dismiss();
     }
 }

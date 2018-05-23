@@ -115,6 +115,7 @@ public class Sub_Ensalada extends Fragment {
     public void onDetach() {
         super.onDetach();
         mListener = null;
+        Crea_pedido.pedido.getListaEnsa().clear();
     }
 
     /**
