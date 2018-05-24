@@ -3,17 +3,22 @@ package com.probas.pruebaconexion;
 import java.io.Serializable;
 
 public class Pasta implements Serializable {
+    private int id;
     private String nombre, ingredientes;
     private double precio;
 
-    public Pasta(String nombre, String ingredientes, double precio) {
+    public Pasta(int id, String nombre, String ingredientes, double precio) {
+        this.id=id;
         this.nombre = nombre;
         this.ingredientes = ingredientes;
         this.precio = precio;
     }
 
     public Pasta(Pasta pasta) {
-        this(pasta.getNombre(), pasta.getIngredientes(), pasta.getPrecio());
+        this(pasta.getId(), pasta.getNombre(), pasta.getIngredientes(), pasta.getPrecio());
+    }
+    public int getId() {
+        return id;
     }
 
     public String getNombre() {

@@ -191,7 +191,9 @@ public class Menu_principal extends AppCompatActivity
         Pedido p = Crea_pedido.pedido;
         p.calculaTotal();
         HashMap<String, String> params = new HashMap<>();
+        params.put("refCliente", String.valueOf(MainActivity.clienteActivo.getId()));
         params.put("numPedido", String.valueOf(p.getNumPedido()));
+        params.put("extra_domicilio", String.valueOf(p.getExtra_domicilio()));
         params.put("extra_recoger", String.valueOf(p.getExtra_domicilio()));
         params.put("extra_local", String.valueOf(p.getExtra_local()));
         params.put("subtotal", String.valueOf(p.getSubtotal()));
@@ -208,8 +210,8 @@ public class Menu_principal extends AppCompatActivity
         params.put("listaHamburguesas", new Gson().toJson(p.getListaHamb()));
 
 
-        /*PerformNetworkRequest request = new PerformNetworkRequest(Api.URL_CREATE_PEDIDO, params, MainActivity.CODE_POST_REQUEST, 'a');
-        request.execute();*/
+        PerformNetworkRequest request = new PerformNetworkRequest(Api.URL_CREATE_PEDIDO, params, MainActivity.CODE_POST_REQUEST, 'a');
+        request.execute();
     }
 
     @Override

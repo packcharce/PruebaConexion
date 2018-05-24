@@ -8,7 +8,7 @@ public class Pizza {
     private List<Ingrediente> listaIngredientes;
     private float precio;
 
-    public Pizza(String nombre) {
+    public Pizza( String nombre) {
         this.nombre = nombre;
         listaIngredientes = new ArrayList<>();
     }

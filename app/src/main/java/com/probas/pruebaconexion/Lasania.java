@@ -3,17 +3,22 @@ package com.probas.pruebaconexion;
 import java.io.Serializable;
 
 public class Lasania implements Serializable {
+    private int id;
     private String nombre, ingredientes;
     private double precio;
 
-    public Lasania(String nombre, String ingredientes, double precio) {
+    public Lasania(int id, String nombre, String ingredientes, double precio) {
+        this.id=id;
         this.nombre = nombre;
         this.ingredientes = ingredientes;
         this.precio = precio;
     }
 
     public Lasania(Lasania lasania) {
-        this(lasania.getNombre(), lasania.getIngredientes(), lasania.getPrecio());
+        this(lasania.getId(), lasania.getNombre(), lasania.getIngredientes(), lasania.getPrecio());
+    }
+    public int getId() {
+        return id;
     }
 
     public String getNombre() {

@@ -102,6 +102,7 @@ public class PerformNetworkRequest extends AsyncTask<Void, Void, String> {
             switch (tipoDato){
                 case 'h':
                     MainActivity.listaHamb.add(new Hamburguesa(
+                            obj.getInt("id"),
                             obj.getString("nombre"),
                             obj.getString("ingredientes"),
                             obj.getDouble("precio")
@@ -109,6 +110,7 @@ public class PerformNetworkRequest extends AsyncTask<Void, Void, String> {
                 break;
                 case 'e':
                     MainActivity.listaEnsa.add(new Ensalada(
+                            obj.getInt("id"),
                             obj.getString("nombre"),
                             obj.getString("ingredientes"),
                             obj.getDouble("precio")
@@ -116,6 +118,7 @@ public class PerformNetworkRequest extends AsyncTask<Void, Void, String> {
                 break;
                 case 'l':
                     MainActivity.listaLas.add(new Lasania(
+                            obj.getInt("id"),
                             obj.getString("nombre"),
                             obj.getString("ingredientes"),
                             obj.getDouble("precio")
@@ -123,6 +126,7 @@ public class PerformNetworkRequest extends AsyncTask<Void, Void, String> {
                     break;
                 case 'b':
                     MainActivity.listaBebs.add(new Bebida(
+                            obj.getInt("id"),
                             obj.getString("nombre"),
                             obj.getString("ingredientes"),
                             obj.getDouble("precio")
@@ -130,6 +134,7 @@ public class PerformNetworkRequest extends AsyncTask<Void, Void, String> {
                     break;
                 case 'p':
                     MainActivity.listaPasta.add(new Pasta(
+                            obj.getInt("id"),
                             obj.getString("nombre"),
                             obj.getString("ingredientes"),
                             obj.getDouble("precio")
@@ -137,6 +142,7 @@ public class PerformNetworkRequest extends AsyncTask<Void, Void, String> {
                     break;
                 case 'i':
                     MainActivity.listaIngredientes.add(new Ingrediente(
+                            obj.getInt("id"),
                             obj.getString("tipo"),
                             obj.getString("nombre"),
                             obj.getInt("stock"),
@@ -176,7 +182,4 @@ public class PerformNetworkRequest extends AsyncTask<Void, Void, String> {
         Login.context.startActivity(i);
     }
 
-    private void misPedidos(JSONArray datos) throws JSONException{
-        Menu_principal.cargaDatos(datos);
-    }
 }

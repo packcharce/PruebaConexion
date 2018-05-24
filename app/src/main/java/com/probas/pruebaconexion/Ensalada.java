@@ -3,17 +3,19 @@ package com.probas.pruebaconexion;
 import java.io.Serializable;
 
 public class Ensalada implements Serializable {
+    private int id;
     private String nombre, ingredientes;
     private double precio;
 
-    public Ensalada(String nombre, String ingredientes, double precio) {
+    public Ensalada(int id, String nombre, String ingredientes, double precio) {
+        this.id=id;
         this.nombre = nombre;
         this.ingredientes = ingredientes;
         this.precio = precio;
     }
 
     public Ensalada(Ensalada ensalada) {
-        this(ensalada.getNombre(), ensalada.getIngredientes(), ensalada.getPrecio());
+        this(ensalada.getId(), ensalada.getNombre(), ensalada.getIngredientes(), ensalada.getPrecio());
     }
 
     public String getNombre() {
@@ -34,5 +36,9 @@ public class Ensalada implements Serializable {
 
     public double getPrecio() {
         return precio;
+    }
+
+    public int getId() {
+        return id;
     }
 }
