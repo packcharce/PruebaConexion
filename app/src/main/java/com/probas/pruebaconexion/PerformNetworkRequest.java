@@ -46,30 +46,31 @@ public class PerformNetworkRequest extends AsyncTask<Void, Void, String> {
         super.onPostExecute(s);
         try {
             JSONObject object = new JSONObject(s);
-            if (!object.getBoolean("error")) {
-                //Toast.makeText(MainActivity.context, object.getString("message"), Toast.LENGTH_SHORT).show();
+            if (object.length() != 0) {
+                if (!object.getBoolean("error")) {
+                    //Toast.makeText(MainActivity.context, object.getString("message"), Toast.LENGTH_SHORT).show();
 
-                if(MainActivity.CARGADATOS)
-                    cargaData(object.getJSONArray("datos"), tipoDato);
-                if(Login.LOGIN)
-                    if(object.getJSONArray("datos").length() != 0)
-                        login(object.getJSONArray("datos"));
-                    else
-                    {
-                        Login.LOGIN=false;
-                        Toast.makeText(MainActivity.context, "Error de login", Toast.LENGTH_SHORT).show();
-                    }
-                if(Mis_pedidos.PEDIDOS)
-                    if(object.getJSONArray("datos").length() != 0) {
-                        Mis_pedidos.PEDIDOS = false;
-                        //misPedidos(object.getJSONArray("datos"));
-                        Menu_principal.cargaDatos(object.getJSONArray("datos"));
-                    }
+                    if (MainActivity.CARGADATOS)
+                        cargaData(object.getJSONArray("datos"), tipoDato);
+                    if (Login.LOGIN)
+                        if (object.getJSONArray("datos").length() != 0)
+                            login(object.getJSONArray("datos"));
+                        else {
+                            Login.LOGIN = false;
+                            Toast.makeText(MainActivity.context, "Error de login", Toast.LENGTH_SHORT).show();
+                        }
+                    if (Mis_pedidos.PEDIDOS)
+                        if (object.getJSONArray("datos").length() != 0) {
+                            Mis_pedidos.PEDIDOS = false;
+                            //misPedidos(object.getJSONArray("datos"));
+                            Menu_principal.cargaDatos(object.getJSONArray("datos"));
+                        }
 
-            }else{
-                if(Integer.parseInt(object.getString("numError")) == 1062)
-                    Toast.makeText(MainActivity.context, "El nombre de usuario ya existe", Toast.LENGTH_SHORT).show();
-                //Toast.makeText(getApplicationContext(), object.getString("numError"), Toast.LENGTH_SHORT).show();
+                } else {
+                    if (Integer.parseInt(object.getString("numError")) == 1062)
+                        Toast.makeText(MainActivity.context, "El nombre de usuario ya existe", Toast.LENGTH_SHORT).show();
+                    //Toast.makeText(getApplicationContext(), object.getString("numError"), Toast.LENGTH_SHORT).show();
+                }
             }
         } catch (JSONException e) {
             e.printStackTrace();
@@ -99,7 +100,7 @@ public class PerformNetworkRequest extends AsyncTask<Void, Void, String> {
 
             JSONObject obj = datos.getJSONObject(i);
 
-            switch (tipoDato){
+            switch (tipoDato) {
                 case 'h':
                     MainActivity.listaHamb.add(new Hamburguesa(
                             obj.getInt("id"),
@@ -107,7 +108,7 @@ public class PerformNetworkRequest extends AsyncTask<Void, Void, String> {
                             obj.getString("ingredientes"),
                             obj.getDouble("precio")
                     ));
-                break;
+                    break;
                 case 'e':
                     MainActivity.listaEnsa.add(new Ensalada(
                             obj.getInt("id"),
@@ -115,7 +116,7 @@ public class PerformNetworkRequest extends AsyncTask<Void, Void, String> {
                             obj.getString("ingredientes"),
                             obj.getDouble("precio")
                     ));
-                break;
+                    break;
                 case 'l':
                     MainActivity.listaLas.add(new Lasania(
                             obj.getInt("id"),
@@ -152,11 +153,11 @@ public class PerformNetworkRequest extends AsyncTask<Void, Void, String> {
             }
         }
         MainActivity.haAcabadoCargaDatos++;
-        if(MainActivity.haAcabadoCargaDatos >= 6) {
+        if (MainActivity.haAcabadoCargaDatos >= 6) {
             Toast.makeText(MainActivity.context, "Datos Cargados" + MainActivity.haAcabadoCargaDatos, Toast.LENGTH_SHORT).show();
             Intent i = new Intent(MainActivity.context, MenuLoginReg.class);
             MainActivity.context.startActivity(i);
-            MainActivity.CARGADATOS=false;
+            MainActivity.CARGADATOS = false;
 
         }
     }

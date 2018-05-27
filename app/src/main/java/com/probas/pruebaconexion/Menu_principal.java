@@ -189,7 +189,7 @@ public class Menu_principal extends AppCompatActivity
     @Override
     public void onDialogPositiveClick(DialogFragment dialog) {
         Pedido p = Crea_pedido.pedido;
-        p.calculaTotal();
+
         HashMap<String, String> params = new HashMap<>();
         params.put("refCliente", String.valueOf(MainActivity.clienteActivo.getId()));
         params.put("numPedido", String.valueOf(p.getNumPedido()));

@@ -36,7 +36,8 @@ public class ConfirmacionPedido extends DialogFragment {
     public Dialog onCreateDialog(Bundle savedInstanceState) {
         // Use the Builder class for convenient dialog construction
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-        builder.setMessage("El pedido se creará, ¿esta seguro?")
+        Crea_pedido.pedido.calculaTotal();
+        builder.setMessage("El pedido se creará, ¿esta seguro? Asciende a: "+ Crea_pedido.pedido.getTotal() + "€")
                 .setPositiveButton("Tiiii!!!", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
                         mListener.onDialogPositiveClick(ConfirmacionPedido.this);
