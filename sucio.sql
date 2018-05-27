@@ -35,21 +35,13 @@ WHERE
 insert into cliente 
 		(nombre, apellido1, apellido2, tlfno, calle, portal, piso, puerta, urbanizacion, usuario, contrasenia, codigoPostal)
 	values 
-    ("Luis", "Sanchez", "ap2", "942745557", "Vargas", "54", 2, "B", "urb",  "lsancffdsasdh", "1234", 39532);
+    ("Luis", "Sanchez", "ap2", "942745557", "Vargas", "54", 2, "B", "urb",  "a", SHA2('1234', 384), 39532);
     
-insert into cliente (nombre, apellido1, apellido2, tlfno, calle, portal, piso, puerta,
-	urbanizacion, usuario, contrasenia, codigoPostal, pedidoActual, 
-    fechaAlta, fechaBaja) values 
-    ("Pepe", "Saiz", "Gomez", "942565857", "Castilla", "93", 4, "B", null, "psaiz", "1234",
-     39568, null, '2018-04-04 09:08:07', null);
-    
-insert into pedido(numPedido, fechaPedido, extra_domicilio, extra_local, extra_recoger,
-subtotal, impuesto, total)
- values(0, '2018-04-04 09:08:07', 0.0, 0.0, 0.0, 30.2, 1.1, 31.3);
+SHOW CREATE TABLE listaIngredientes;
  
- insert into pedido(numPedido, fechaPedido, extra_domicilio, extra_local, extra_recoger,
+ insert into pedido(refCliente, numPedido, fechaPedido, extra_domicilio, extra_local, extra_recoger,
 subtotal, impuesto, total)
- values(0, "MOV-0", '2018-04-06 09:08:07', 0.0, 0.0, 0.0, 34.2, 1.1, 35.3);
+ values(1, "MOV-0", '2018-04-06 09:08:07', 0.0, 0.0, 0.0, 34.2, 1.1, 35.3);
  
 insert into pedido(numPedido, fechaPedido, extra_domicilio, extra_local, extra_recoger,
 subtotal, impuesto, total)
@@ -154,6 +146,56 @@ END
 DELIMITER ;
 
 
+SELECT 
+    *
+FROM
+    pedido;
+ SELECT 
+    *
+FROM
+    lista_bebida;  
+ SELECT 
+    *
+FROM
+    listaIngredientes;
+ SELECT 
+    *
+FROM
+    lista_pasta;
+SELECT 
+    *
+FROM
+    lista_hamb;
+    
+SELECT 
+    *
+FROM
+    listaPizzas;
+ SELECT 
+    *
+FROM
+    lista_ensal;  
+    
+ SELECT 
+    *
+FROM
+    pizza; 
+    
+SELECT 
+    *
+FROM
+    lista_lasania;
+    
+    
+    
+    
 call crea_pedido_cliente(1, 5, 0, 0, 0,0,0,0);
 call crea_pedido_cliente(2, 1);
 call anhade_pizza_pedido(1, "custom");
+
+call crea_pedido(1, "1", 2.0, 1.0, 1.0, 10.0, 2.0, 12.0);
+
+insert into pedido 
+			(refCliente, numPedido, extra_domicilio, extra_local, extra_recoger, subtotal, impuesto, total)
+		values 
+		(1, "1", 2.2, 1.0, 1.4, 10.5, 2.0, 12.0);

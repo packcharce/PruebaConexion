@@ -31,7 +31,7 @@ CREATE TABLE pedido (
     id INT NOT NULL AUTO_INCREMENT,
     refCliente INT NOT NULL,
     numPedido VARCHAR(30) NOT NULL,
-    fechaPedido DATETIME NOT NULL,
+    fechaPedido DATETIME NOT NULL default now(),
     extra_domicilio FLOAT DEFAULT 0,
     extra_local FLOAT DEFAULT 0,
     extra_recoger FLOAT DEFAULT 0,
@@ -42,21 +42,26 @@ CREATE TABLE pedido (
 );
 
 CREATE TABLE listaPizzas (
+	id INT NOT NULL AUTO_INCREMENT,
     refPedido INT NOT NULL,
-    refPizza INT NOT NULL
+    refPizza INT NOT NULL,
+    PRIMARY KEY (id)
+
 );
 
 CREATE TABLE pizza (
     id INT NOT NULL AUTO_INCREMENT,
     nombre VARCHAR(50),
+    precio float default 0,
     PRIMARY KEY (id)
 );
 
 CREATE TABLE listaIngredientes (
+	id int not null auto_increment,
     refPizza INT NOT NULL,
     refIngrediente INT NOT NULL,
-    mitad BIT DEFAULT 0,
-    extra BIT DEFAULT 0
+    mitad varchar(1) DEFAULT 0,
+    primary key (id)
 );
 
 CREATE TABLE ingrediente (
@@ -78,8 +83,10 @@ CREATE TABLE hamburguesa (
 );
 
 CREATE TABLE lista_hamb (
+	id int not null auto_increment,
     refPedido INT NOT NULL,
-    refHamb INT NOT NULL
+    refHamb INT NOT NULL,
+    PRIMARY KEY (id)
 );
 
 CREATE TABLE ensalada (
@@ -91,8 +98,10 @@ CREATE TABLE ensalada (
 );
 
 CREATE TABLE lista_ensal (
+	id int not null auto_increment,
     refPedido INT NOT NULL,
-    refEnsal INT NOT NULL
+    refEnsal INT NOT NULL,
+    PRIMARY KEY (id)
 );
 
 CREATE TABLE pasta (
@@ -104,8 +113,10 @@ CREATE TABLE pasta (
 );
 
 CREATE TABLE lista_pasta (
+	id int not null auto_increment,
     refPedido INT NOT NULL,
-    refPasta INT NOT NULL
+    refPasta INT NOT NULL,
+    PRIMARY KEY (id)
 );
 
 CREATE TABLE lasania (
@@ -117,8 +128,10 @@ CREATE TABLE lasania (
 );
 
 CREATE TABLE lista_lasania (
+	id int not null auto_increment,
     refPedido INT NOT NULL,
-    refLasania INT NOT NULL
+    refLasania INT NOT NULL,
+    PRIMARY KEY (id)
 );
 
 CREATE TABLE bebida (
@@ -130,8 +143,10 @@ CREATE TABLE bebida (
 );
 
 CREATE TABLE lista_bebida (
+	id int not null auto_increment,
     refPedido INT NOT NULL,
-    refBebida INT NOT NULL
+    refBebida INT NOT NULL,
+    PRIMARY KEY (id)
 );
 
 -- ----------------------------------------------------------------------------------------------------------------
@@ -139,56 +154,50 @@ CREATE TABLE lista_bebida (
 -- ----------------------------------------------------------------------------------------------------------------
 
 alter table lista_bebida
-	add constraint pk_listaBebida primary key(refPedido, refBebida),
+	-- add constraint pk_listaBebida primary key(refPedido, refBebida),
     add constraint fk_pedido_listaBebida foreign key(refPedido) references pedido(id),
     add constraint fk_listaBebida_bebida foreign key(refBebida) references bebida(id)
 ;
 
 alter table lista_lasania
-	add constraint pk_listaLasania primary key(refPedido, refLasania),
+	-- add constraint pk_listaLasania primary key(refPedido, refLasania),
     add constraint fk_pedido_listaLasania foreign key(refPedido) references pedido(id),
     add constraint fk_listaLasania_lasania foreign key(refLasania) references lasania(id)
 ;
 
 alter table lista_pasta
-	add constraint pk_listaPasta primary key(refPedido, refPasta),
+	-- add constraint pk_listaPasta primary key(refPedido, refPasta),
     add constraint fk_pedido_listaPasta foreign key(refPedido) references pedido(id),
     add constraint fk_listaPasta_pasta foreign key(refPasta) references pasta(id)
 ;
 
 alter table lista_ensal
-	add constraint pk_listaEnsal primary key(refPedido, refEnsal),
+	-- add constraint pk_listaEnsal primary key(refPedido, refEnsal),
     add constraint fk_pedido_listaEnsal foreign key(refPedido) references pedido(id),
     add constraint fk_listaEnsal_ensal foreign key(refEnsal) references ensalada(id)
 ;
 
 alter table lista_hamb
-	add constraint pk_listaHamb primary key(refPedido, refHamb),
+	-- add constraint pk_listaHamb primary key(refPedido, refHamb),
     add constraint fk_pedido_listaHamb foreign key(refPedido) references pedido(id),
     add constraint fk_listaHamb_hamb foreign key(refHamb) references hamburguesa(id)
 ;
 
 alter table listaIngredientes
-	add constraint pk_listaIngredientes primary key(refPizza, refIngrediente),
+	-- add constraint pk_listaIngredientes primary key(id),
     add constraint fk_pizza_listaIngredientes foreign key(refPizza) references pizza(id),
     add constraint fk_listaIngredientes_ingrediente foreign key(refIngrediente) references ingrediente(id)
 ;
 
 alter table listaPizzas
-	add constraint pk_listaPizzas primary key(refPedido, refPizza),
+	-- add constraint pk_listaPizzas primary key(refPedido, refPizza),
     add constraint fk_pedido_listaPizzas foreign key(refPedido) references pedido(id),
     add constraint fk_listaPizzas_pizza foreign key(refPizza) references pizza(id)
 ;
 
 alter table pedido	
-    --  add constraint fk_pedido_listaPizzas foreign key(lista_pizza) references listaPizzas(idPedido),
-    -- 	add constraint fk_pedido_listaHamb foreign key(lista_hamb) references listaHamb(idPedido),
-    -- 	add constraint fk_pedido_listaEnsal foreign key(lista_ensal) references listaEnsal(idPedido),
-    -- add constraint fk_pedido_listaPastas foreign key(lista_pastas) references listaPasta(idPedido),
-    -- add constraint fk_pedido_listaBebida foreign key(lista_bebidas) references listaHamb(idPedido)
     add constraint fk_pedido_cliente foreign key(refCliente) references cliente(id)
-;    
-    
+;        
 
 alter table historico	
     add constraint fk_historico_pedido foreign key(idPedido) references pedido(id),
@@ -232,17 +241,17 @@ insert into ingrediente (tipo, nombre, stock, precio) values ('Carne', 'Bacon', 
 insert into ingrediente (tipo, nombre, stock, precio) values ('Carne', 'Salami', 185, 0.5);
 insert into ingrediente (tipo, nombre, stock, precio) values ('Vegetal', 'Pimiento', 175, 0.5);
 insert into ingrediente (tipo, nombre, stock, precio) values ('Vegetal', 'Tomate', 275, 0.5);
-insert into ingrediente (tipo, nombre, stock, precio) values ('Vegetal', 'Tomate', 158, 0.5);
+insert into ingrediente (tipo, nombre, stock, precio) values ('Vegetal', 'Tomate Cherry', 158, 0.5);
 
-insert into pizza (id, nombre) values (1, "Barbacoa");
-insert into pizza (id, nombre) values (2, "Carbonara");
-insert into pizza (id, nombre) values (3, "4 Quesos");
-
-insert into listaIngredientes(refPizza, refIngrediente, mitad, extra) values (1, 3, 0, 0);
-insert into listaIngredientes(refPizza, refIngrediente, mitad, extra) values (1, 4, 0, 0);
-insert into listaIngredientes(refPizza, refIngrediente, mitad, extra) values (1, 6, 0, 0);
-insert into listaIngredientes(refPizza, refIngrediente, mitad, extra) values (2, 1, 0, 0);
-insert into listaIngredientes(refPizza, refIngrediente, mitad, extra) values (3, 2, 0, 0);
+-- insert into pizza (id, nombre) values (1, "Barbacoa");
+-- insert into pizza (id, nombre) values (2, "Carbonara");
+-- insert into pizza (id, nombre) values (3, "4 Quesos");
+-- 
+-- insert into listaIngredientes(refPizza, refIngrediente, mitad, extra) values (1, 3, 0, 0);
+-- insert into listaIngredientes(refPizza, refIngrediente, mitad, extra) values (1, 4, 0, 0);
+-- insert into listaIngredientes(refPizza, refIngrediente, mitad, extra) values (1, 6, 0, 0);
+-- insert into listaIngredientes(refPizza, refIngrediente, mitad, extra) values (2, 1, 0, 0);
+-- insert into listaIngredientes(refPizza, refIngrediente, mitad, extra) values (3, 2, 0, 0);
 
 
 -- ----------------------------------------------------------------------------------------------------------------
@@ -280,7 +289,39 @@ end
 //
 DELIMITER ;
 
+drop procedure if exists crea_pedido;
+DELIMITER //
+CREATE PROCEDURE crea_pedido(
+	in refClienteA int, in numPedidoA varchar(30), in extra_domicilioA float, 
+    in extra_recogerA float, in extra_localA float, in subtotalA float, in impuestoA float, in totalA float 
+)
+	begin
+	DECLARE exit handler for sqlexception
+	  BEGIN
+		-- ERROR
+		signal sqlstate '45000' SET MESSAGE_TEXT = 'Error: Pedido Duplicado', MYSQL_ERRNO = 1062;
+	  ROLLBACK;
+	END;
+
+	DECLARE exit handler for sqlwarning
+	 BEGIN
+		-- WARNING
+		signal sqlstate '45000' SET MESSAGE_TEXT = 'Warning', MYSQL_ERRNO = 1062;
+	 ROLLBACK;
+	END;
+	START TRANSACTION;
+		insert into pedido 
+			(refCliente, numPedido, extra_domicilio, extra_local, extra_recoger, subtotal, impuesto, total)
+		values 
+		(refClienteA, numPedidoA, extra_domicilioA, extra_localA, extra_recogerA, subtotalA, impuestoA, totalA);
+	commit;
+end
+//
+DELIMITER ;
 
 
-
-
+-- Test
+insert into cliente 
+		(nombre, apellido1, apellido2, tlfno, calle, portal, piso, puerta, urbanizacion, usuario, contrasenia, codigoPostal)
+	values 
+    ("Luis", "Sanchez", "ap2", "942745557", "Vargas", "54", 2, "B", "urb",  "a", SHA2('1234', 384), 39532);
