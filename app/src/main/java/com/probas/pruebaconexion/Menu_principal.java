@@ -191,6 +191,8 @@ public class Menu_principal extends AppCompatActivity
         Pedido p = Crea_pedido.pedido;
 
         HashMap<String, String> params = new HashMap<>();
+
+        //TODO quitar todo este tocho y pasar el objeto Pedido p directamente
         params.put("refCliente", String.valueOf(MainActivity.clienteActivo.getId()));
         params.put("numPedido", String.valueOf(p.getNumPedido()));
         params.put("extra_domicilio", String.valueOf(p.getExtra_domicilio()));
@@ -199,8 +201,6 @@ public class Menu_principal extends AppCompatActivity
         params.put("subtotal", String.valueOf(p.getSubtotal()));
         params.put("impuesto", String.valueOf(p.getImpuesto()));
         params.put("total", String.valueOf(p.getTotal()));
-
-
 
         params.put("listaPizzas", new Gson().toJson(p.getListaPizzas()));
         params.put("listaLasania", new Gson().toJson(p.getListaLas()));
