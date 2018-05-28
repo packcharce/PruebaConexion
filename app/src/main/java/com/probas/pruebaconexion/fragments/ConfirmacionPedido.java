@@ -7,7 +7,8 @@ import android.app.DialogFragment;
 import android.content.DialogInterface;
 import android.os.Bundle;
 
-import com.probas.pruebaconexion.R;
+import com.probas.pruebaconexion.CreaPedido2;
+
 
 public class ConfirmacionPedido extends DialogFragment {
 
@@ -36,8 +37,8 @@ public class ConfirmacionPedido extends DialogFragment {
     public Dialog onCreateDialog(Bundle savedInstanceState) {
         // Use the Builder class for convenient dialog construction
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-        Crea_pedido.pedido.calculaTotal();
-        builder.setMessage("El pedido se creará, ¿esta seguro? Asciende a: "+ Crea_pedido.pedido.getTotal() + "€")
+        CreaPedido2.pedido.calculaTotal();
+        builder.setMessage("El pedido se creará, ¿esta seguro? Asciende a: "+ CreaPedido2.pedido.getTotal() + "€")
                 .setPositiveButton("Tiiii!!!", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
                         mListener.onDialogPositiveClick(ConfirmacionPedido.this);

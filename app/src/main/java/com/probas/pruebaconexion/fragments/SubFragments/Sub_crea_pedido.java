@@ -14,7 +14,9 @@ import android.widget.CompoundButton;
 import android.widget.Space;
 import android.widget.Switch;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.probas.pruebaconexion.CreaPedido2;
 import com.probas.pruebaconexion.Ensalada;
 import com.probas.pruebaconexion.Hamburguesa;
 import com.probas.pruebaconexion.Ingrediente;
@@ -23,7 +25,7 @@ import com.probas.pruebaconexion.MainActivity;
 import com.probas.pruebaconexion.Pasta;
 import com.probas.pruebaconexion.R;
 import com.probas.pruebaconexion.fragments.ClickListener;
-import com.probas.pruebaconexion.fragments.Crea_pedido;
+
 import com.probas.pruebaconexion.fragments.MyAdapter;
 
 import java.util.ArrayList;
@@ -75,8 +77,9 @@ public class Sub_crea_pedido extends Fragment {
         listaIngredientes = (ArrayList<Ingrediente>) MainActivity.listaIngredientes;
     }
 
-    RecyclerView mRecyclerView;
+    RecyclerView mRecyclerView, mRecyclerView2;
     RecyclerView.LayoutManager mLayoutManager;
+    Switch switchMitades;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -100,7 +103,7 @@ public class Sub_crea_pedido extends Fragment {
         pasaDatos.putSerializable(ARG_PARAM1, listaIngredientes);
 
 
-        final RecyclerView mRecyclerView2 = v.findViewById(R.id.rec_segunda_mitad);
+        mRecyclerView2 = v.findViewById(R.id.rec_segunda_mitad);
 
         // use this setting to improve performance if you know that changes
         // in content do not change the layout size of the RecyclerView
@@ -109,6 +112,7 @@ public class Sub_crea_pedido extends Fragment {
         // use a linear layout manager
         RecyclerView.LayoutManager mLayoutManager2 = new LinearLayoutManager(v.getContext());
         mRecyclerView2.setLayoutManager(mLayoutManager2);
+        mRecyclerView2.setVisibility(View.GONE);
 
 
         // specify an adapter (see also next example)
@@ -116,18 +120,18 @@ public class Sub_crea_pedido extends Fragment {
             @Override
             public void onPositionClicked(View v, int position) {
 
-                if(v.getId() == R.id.anadir) {
-                    Ingrediente i = new Ingrediente(listaIngredientes.get(position));
+            if(v.getId() == R.id.anadir) {
+                Ingrediente i = new Ingrediente(listaIngredientes.get(position));
 
-                    RecyclerView rc = (RecyclerView) v.getParent().getParent();
-                    if (rc.getId() == R.id.rec_segunda_mitad)
-                        i.setMitad((byte) 2);
-                    if (rc.getId() == R.id.rec_ingredientes_pedido)
-                        i.setMitad((byte) 1);
-                    Crea_pedido.pedido.getListaPizzas().get(numeroDePizza).agregaIngrediente(i);
-                }else if (v.getId() == R.id.quitar && Crea_pedido.pedido.getListaPizzas().get(numeroDePizza).getListaIngredientes().size() > 0){
-                    Crea_pedido.pedido.getListaPizzas().get(numeroDePizza).quitaIngrediente(listaIngredientes.get(position).getNombre());
-                }
+                RecyclerView rc = (RecyclerView) v.getParent().getParent();
+                if (rc.getId() == R.id.rec_segunda_mitad)
+                    i.setMitad((byte) 2);
+                if (rc.getId() == R.id.rec_ingredientes_pedido)
+                    i.setMitad((byte) 1);
+                CreaPedido2.pedido.getListaPizzas().get(numeroDePizza).agregaIngrediente(i);
+            }else if (v.getId() == R.id.quitar && CreaPedido2.pedido.getListaPizzas().get(numeroDePizza).getListaIngredientes().size() > 0){
+                CreaPedido2.pedido.getListaPizzas().get(numeroDePizza).quitaIngrediente(listaIngredientes.get(position).getNombre());
+            }
             }
         });
 
@@ -138,24 +142,27 @@ public class Sub_crea_pedido extends Fragment {
 
         final TextView tituloPrimeraMitad = v.findViewById(R.id.titulo_primera_mitad);
         final TextView tituloSegundaMitad = v.findViewById(R.id.titulo_segunda_mitad);
-        Switch switchMitades = v.findViewById(R.id.switchMitades);
+        switchMitades = v.findViewById(R.id.switchMitades);
+        switchMitades.setChecked(false);
+
         final Space space = v.findViewById(R.id.space_bot_crea_pedido);
+        space.setVisibility(View.GONE);
         switchMitades.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                if(!isChecked) {
-                    tituloPrimeraMitad.setText("Ingredientes Pizza Completa");
-                    tituloSegundaMitad.setVisibility(View.GONE);
-                    mRecyclerView2.setVisibility(View.GONE);
-                    space.setVisibility(View.GONE);
-                }
-                else {
-                    //TODO quitar valores de contadores de segunda mitad
-                    tituloPrimeraMitad.setText("Ingredientes Primera Mitad");
-                    tituloSegundaMitad.setVisibility(View.VISIBLE);
-                    mRecyclerView2.setVisibility(View.VISIBLE);
-                    space.setVisibility(View.VISIBLE);
-                }
+            if(!isChecked) {
+                tituloPrimeraMitad.setText("Ingredientes Pizza Completa");
+                tituloSegundaMitad.setVisibility(View.GONE);
+                mRecyclerView2.setVisibility(View.GONE);
+                space.setVisibility(View.GONE);
+            }
+            else {
+                //TODO quitar valores de contadores de segunda mitad
+                tituloPrimeraMitad.setText("Ingredientes Primera Mitad");
+                tituloSegundaMitad.setVisibility(View.VISIBLE);
+                mRecyclerView2.setVisibility(View.VISIBLE);
+                space.setVisibility(View.VISIBLE);
+            }
             }
         });
 
@@ -184,8 +191,6 @@ public class Sub_crea_pedido extends Fragment {
     public void onDetach() {
         super.onDetach();
         mListener = null;
-        Crea_pedido.pedido.getListaPizzas().get(numeroDePizza).getListaIngredientes().clear();
-        Crea_pedido.pedido.getListaPizzas().get(numeroDePizza).quitaPrecio();
     }
 
     /**
@@ -201,5 +206,12 @@ public class Sub_crea_pedido extends Fragment {
     public interface OnFragmentInteractionListener {
         // TODO: Update argument type and name
         void onFragmentInteraction(Uri uri);
+    }
+
+    @Override
+    public void onPause(){
+        super.onPause();
+        mRecyclerView2.setVisibility(View.GONE);
+        switchMitades.setChecked(false);
     }
 }

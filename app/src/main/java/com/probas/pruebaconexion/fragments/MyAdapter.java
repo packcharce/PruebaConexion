@@ -14,6 +14,7 @@ import com.probas.pruebaconexion.Ensalada;
 import com.probas.pruebaconexion.Hamburguesa;
 import com.probas.pruebaconexion.Ingrediente;
 import com.probas.pruebaconexion.Lasania;
+import com.probas.pruebaconexion.MainActivity;
 import com.probas.pruebaconexion.Pasta;
 import com.probas.pruebaconexion.R;
 
@@ -43,11 +44,11 @@ public class MyAdapter extends RecyclerView.Adapter {
     private ArrayList<String> fecha;
     private ArrayList<String> total;
 
-    public ArrayList<Hamburguesa> listaHamb;
-    public  ArrayList<Lasania> listaLas;
-    public  ArrayList<Ensalada> listaEnsa;
-    public  ArrayList<Bebida> listaBebs;
-    public  ArrayList<Pasta> listaPasta;
+    private ArrayList<Hamburguesa> listaHamb;
+    private  ArrayList<Lasania> listaLas;
+    private  ArrayList<Ensalada> listaEnsa;
+    private  ArrayList<Bebida> listaBebs;
+    private  ArrayList<Pasta> listaPasta;
     private static ArrayList<Ingrediente> listaIngredientes;
 
     private int tipoObjeto;
@@ -308,22 +309,22 @@ public class MyAdapter extends RecyclerView.Adapter {
                 break;
             case TIPO_INGREDIENTES:
                 numPizza = b.getInt("numeroDePizza");
-                listaIngredientes = (ArrayList<Ingrediente>) b.getSerializable(ARG_PARAM1);
+                listaIngredientes = (ArrayList<Ingrediente>) MainActivity.listaIngredientes;
                 break;
             case TIPO_BEBIDAS:
-                listaBebs = (ArrayList<Bebida>) b.getSerializable(ARG_PARAM2);
+                listaBebs = (ArrayList<Bebida>) MainActivity.listaBebs;
                 break;
             case TIPO_HAMBURGUESAS:
-                listaHamb = (ArrayList<Hamburguesa>) b.getSerializable(ARG_PARAM4);
+                listaHamb = (ArrayList<Hamburguesa>) MainActivity.listaHamb;
                 break;
             case TIPO_LASANIA:
-                listaLas = (ArrayList<Lasania>) b.getSerializable(ARG_PARAM6);
+                listaLas = (ArrayList<Lasania>) MainActivity.listaLas;
                 break;
             case TIPO_ENSALADAS:
-                listaEnsa = (ArrayList<Ensalada>) b.getSerializable(ARG_PARAM3);
+                listaEnsa = (ArrayList<Ensalada>) MainActivity.listaEnsa;
                 break;
             case TIPO_PASTA:
-                listaPasta = (ArrayList<Pasta>) b.getSerializable(ARG_PARAM5);
+                listaPasta = (ArrayList<Pasta>) MainActivity.listaPasta;
                 break;
         }
         this.clickListener=clickListener;

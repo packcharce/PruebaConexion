@@ -10,12 +10,13 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.probas.pruebaconexion.CreaPedido2;
 import com.probas.pruebaconexion.Ensalada;
 import com.probas.pruebaconexion.Lasania;
 import com.probas.pruebaconexion.MainActivity;
 import com.probas.pruebaconexion.R;
 import com.probas.pruebaconexion.fragments.ClickListener;
-import com.probas.pruebaconexion.fragments.Crea_pedido;
+
 import com.probas.pruebaconexion.fragments.MyAdapter;
 
 import java.util.ArrayList;
@@ -82,10 +83,10 @@ public class Sub_Ensalada extends Fragment {
             @Override
             public void onPositionClicked(View v, int position) {
                 if(v.getId() == R.id.anadir) {
-                    Crea_pedido.pedido.getListaEnsa().add(new Ensalada(listaEnsaladas.get(position)));
+                    CreaPedido2.pedido.getListaEnsa().add(new Ensalada(listaEnsaladas.get(position)));
                 }
-                else if (v.getId() == R.id.quitar && Crea_pedido.pedido.getListaEnsa().size() > 0){
-                    Crea_pedido.pedido.quitaEnsa(listaEnsaladas.get(position).getNombre());
+                else if (v.getId() == R.id.quitar && CreaPedido2.pedido.getListaEnsa().size() > 0){
+                    CreaPedido2.pedido.quitaEnsa(listaEnsaladas.get(position).getNombre());
                 }
             }
         });
@@ -115,7 +116,7 @@ public class Sub_Ensalada extends Fragment {
     public void onDetach() {
         super.onDetach();
         mListener = null;
-        Crea_pedido.pedido.getListaEnsa().clear();
+        CreaPedido2.pedido.getListaEnsa().clear();
     }
 
     /**

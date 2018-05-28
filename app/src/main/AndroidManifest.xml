@@ -28,8 +28,9 @@
             android:name=".Menu_principal"
             android:label="@string/title_activity_menu_principal"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="stateHidden"
-            android:theme="@style/AppTheme.NoActionBar" />
+            android:theme="@style/AppTheme.NoActionBar"
+            android:windowSoftInputMode="stateHidden" />
+        <activity android:name=".CreaPedido2"></activity>
     </application>
 
 </manifest>

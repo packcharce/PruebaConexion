@@ -8,15 +8,4 @@
     tools:context=".Menu_principal"
     tools:showIn="@layout/app_bar_menu_principal">
 
-    <fragment
-        android:id="@+id/fragment"
-        android:name="com.probas.pruebaconexion.fragments.Crea_pedido"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:layout="@layout/fragment_crea_pedido" />
-
 </android.support.constraint.ConstraintLayout>
