@@ -93,12 +93,12 @@ public class PerformNetworkRequest extends AsyncTask<Void, Void, String> {
     }
 
     private void cargaData(JSONArray datos, char tipoDato) throws JSONException {
-
+        JSONObject obj;
         //traversing through all the items in the json array
         //the json we got from the response
         for (int i = 0; i < datos.length(); i++) {
 
-            JSONObject obj = datos.getJSONObject(i);
+            obj = datos.getJSONObject(i);
 
             switch (tipoDato) {
                 case 'h':
@@ -177,10 +177,9 @@ public class PerformNetworkRequest extends AsyncTask<Void, Void, String> {
                 obj.getString("urbanizacion"),
                 obj.getString("codigoPostal")
         );
-        Toast.makeText(MainActivity.context, "Login Correcto", Toast.LENGTH_SHORT).show();
+        Toast.makeText(Login.context, "Login Correcto", Toast.LENGTH_SHORT).show();
         Login.LOGIN = false;
         Intent i = new Intent(Login.context, Menu_principal.class);
         Login.context.startActivity(i);
     }
-
 }

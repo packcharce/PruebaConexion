@@ -44,7 +44,7 @@ public class Login extends AppCompatActivity {
                 login();
                 if (!LOGIN) {
                     try {
-                        finalize();
+                        this.finalize();
                     } catch (Throwable throwable) {
                         throwable.printStackTrace();
                     }

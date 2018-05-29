@@ -1,10 +1,9 @@
 package com.probas.pruebaconexion.fragments.SubFragments;
 
+import android.app.Fragment;
 import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
-import android.app.Fragment;
-import android.os.Parcelable;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -14,18 +13,12 @@ import android.widget.CompoundButton;
 import android.widget.Space;
 import android.widget.Switch;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.probas.pruebaconexion.CreaPedido2;
-import com.probas.pruebaconexion.Ensalada;
-import com.probas.pruebaconexion.Hamburguesa;
 import com.probas.pruebaconexion.Ingrediente;
-import com.probas.pruebaconexion.Lasania;
 import com.probas.pruebaconexion.MainActivity;
-import com.probas.pruebaconexion.Pasta;
 import com.probas.pruebaconexion.R;
 import com.probas.pruebaconexion.fragments.ClickListener;
-
 import com.probas.pruebaconexion.fragments.MyAdapter;
 
 import java.util.ArrayList;
@@ -44,11 +37,11 @@ public class Sub_crea_pedido extends Fragment {
     private static final String ARG_PARAM1 = "ingredientes";
     private static final int TIPO_INGREDIENTES = 1;
 
-    public static ArrayList<Ingrediente> listaIngredientes;
+    private static ArrayList<Ingrediente> listaIngredientes;
 
     private OnFragmentInteractionListener mListener;
 
-    private int numeroDePizza=-1;
+    private int numeroDePizza = -1;
 
     public Sub_crea_pedido() {
         // Required empty public constructor
@@ -57,6 +50,7 @@ public class Sub_crea_pedido extends Fragment {
     /**
      * Use this factory method to create a new instance of
      * this fragment using the provided parameters.
+     *
      * @return A new instance of fragment Sub_crea_pedido.
      */
     // TODO: Rename and change types and number of parameters
@@ -80,14 +74,12 @@ public class Sub_crea_pedido extends Fragment {
     RecyclerView mRecyclerView, mRecyclerView2;
     RecyclerView.LayoutManager mLayoutManager;
     Switch switchMitades;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
-        View v = inflater.inflate(R.layout.fragment_sub_crea_pedido, container, false);
-
-        Bundle pasaDatos = new Bundle();
-
+        final View v = inflater.inflate(R.layout.fragment_sub_crea_pedido, container, false);
 
         mRecyclerView = v.findViewById(R.id.rec_ingredientes_pedido);
 
@@ -98,10 +90,6 @@ public class Sub_crea_pedido extends Fragment {
         // use a linear layout manager
         mLayoutManager = new LinearLayoutManager(v.getContext());
         mRecyclerView.setLayoutManager(mLayoutManager);
-
-
-        pasaDatos.putSerializable(ARG_PARAM1, listaIngredientes);
-
 
         mRecyclerView2 = v.findViewById(R.id.rec_segunda_mitad);
 
@@ -114,57 +102,73 @@ public class Sub_crea_pedido extends Fragment {
         mRecyclerView2.setLayoutManager(mLayoutManager2);
         mRecyclerView2.setVisibility(View.GONE);
 
-
-        // specify an adapter (see also next example)
-        RecyclerView.Adapter mAdapter = new MyAdapter(pasaDatos, TIPO_INGREDIENTES, new ClickListener() {
+        Thread t1 = new Thread(new Runnable() {
             @Override
-            public void onPositionClicked(View v, int position) {
+            public void run() {
+                Bundle pasaDatos = new Bundle();
 
-            if(v.getId() == R.id.anadir) {
-                Ingrediente i = new Ingrediente(listaIngredientes.get(position));
+                pasaDatos.putSerializable(ARG_PARAM1, listaIngredientes);
 
-                RecyclerView rc = (RecyclerView) v.getParent().getParent();
-                if (rc.getId() == R.id.rec_segunda_mitad)
-                    i.setMitad((byte) 2);
-                if (rc.getId() == R.id.rec_ingredientes_pedido)
-                    i.setMitad((byte) 1);
-                CreaPedido2.pedido.getListaPizzas().get(numeroDePizza).agregaIngrediente(i);
-            }else if (v.getId() == R.id.quitar && CreaPedido2.pedido.getListaPizzas().get(numeroDePizza).getListaIngredientes().size() > 0){
-                CreaPedido2.pedido.getListaPizzas().get(numeroDePizza).quitaIngrediente(listaIngredientes.get(position).getNombre());
-            }
-            }
-        });
+                // specify an adapter (see also next example)
+                final RecyclerView.Adapter mAdapter = new MyAdapter(pasaDatos, TIPO_INGREDIENTES, new ClickListener() {
+                    @Override
+                    public void onPositionClicked(View v, int position) {
 
-        mRecyclerView.setAdapter(mAdapter);
-        mRecyclerView2.setAdapter(mAdapter);
+                        if (v.getId() == R.id.anadir) {
+                            Ingrediente i = new Ingrediente(listaIngredientes.get(position));
+
+                            RecyclerView rc = (RecyclerView) v.getParent().getParent();
+                            if (rc.getId() == R.id.rec_segunda_mitad)
+                                i.setMitad((byte) 2);
+                            if (rc.getId() == R.id.rec_ingredientes_pedido)
+                                i.setMitad((byte) 1);
+                            CreaPedido2.pedido.getListaPizzas().get(numeroDePizza).agregaIngrediente(i);
+                        } else if (v.getId() == R.id.quitar && CreaPedido2.pedido.getListaPizzas().get(numeroDePizza).getListaIngredientes().size() > 0) {
+                            CreaPedido2.pedido.getListaPizzas().get(numeroDePizza).quitaIngrediente(listaIngredientes.get(position).getNombre());
+                        }
+                    }
+                });
+
+                mRecyclerView.setAdapter(mAdapter);
+                mRecyclerView2.setAdapter(mAdapter);
 
 
+                final TextView tituloPrimeraMitad = v.findViewById(R.id.titulo_primera_mitad);
+                final TextView tituloSegundaMitad = v.findViewById(R.id.titulo_segunda_mitad);
+                switchMitades = v.findViewById(R.id.switchMitades);
+                switchMitades.setChecked(false);
 
-        final TextView tituloPrimeraMitad = v.findViewById(R.id.titulo_primera_mitad);
-        final TextView tituloSegundaMitad = v.findViewById(R.id.titulo_segunda_mitad);
-        switchMitades = v.findViewById(R.id.switchMitades);
-        switchMitades.setChecked(false);
-
-        final Space space = v.findViewById(R.id.space_bot_crea_pedido);
-        space.setVisibility(View.GONE);
-        switchMitades.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-            if(!isChecked) {
-                tituloPrimeraMitad.setText("Ingredientes Pizza Completa");
-                tituloSegundaMitad.setVisibility(View.GONE);
-                mRecyclerView2.setVisibility(View.GONE);
+                final Space space = v.findViewById(R.id.space_bot_crea_pedido);
                 space.setVisibility(View.GONE);
-            }
-            else {
-                //TODO quitar valores de contadores de segunda mitad
-                tituloPrimeraMitad.setText("Ingredientes Primera Mitad");
-                tituloSegundaMitad.setVisibility(View.VISIBLE);
-                mRecyclerView2.setVisibility(View.VISIBLE);
-                space.setVisibility(View.VISIBLE);
-            }
+                switchMitades.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+                    @Override
+                    public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                        if (!isChecked) {
+                            tituloPrimeraMitad.setText("Ingredientes Pizza Completa");
+                            tituloSegundaMitad.setVisibility(View.GONE);
+                            mRecyclerView2.setVisibility(View.GONE);
+                            space.setVisibility(View.GONE);
+                            for (int i = CreaPedido2.pedido.getListaPizzas().get(numeroDePizza).getListaIngredientes().size() - 1; i >= 0; i--) {
+                                if (CreaPedido2.pedido.getListaPizzas().get(numeroDePizza).getListaIngredientes().get(i).getMitad() != 1) {
+                                    CreaPedido2.pedido.getListaPizzas().get(numeroDePizza).getListaIngredientes().remove(i);
+                                }
+                            }
+                            mRecyclerView2.setAdapter(null);
+                        } else {
+                            //TODO quitar valores de contadores de segunda mitad
+                            tituloPrimeraMitad.setText("Ingredientes Primera Mitad");
+                            tituloSegundaMitad.setVisibility(View.VISIBLE);
+                            mRecyclerView2.setAdapter(mAdapter);
+                            mRecyclerView2.setVisibility(View.VISIBLE);
+                            space.setVisibility(View.VISIBLE);
+
+                        }
+                    }
+                });
             }
         });
+        t1.setName("Carga Sub_creaPedido");
+        t1.start();
 
         return v;
     }
@@ -209,7 +213,7 @@ public class Sub_crea_pedido extends Fragment {
     }
 
     @Override
-    public void onPause(){
+    public void onPause() {
         super.onPause();
         mRecyclerView2.setVisibility(View.GONE);
         switchMitades.setChecked(false);

@@ -43,15 +43,6 @@ import static com.probas.pruebaconexion.MainActivity.CODE_POST_REQUEST;
 
 public class Menu_principal extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener,
-        Datos_cliente.OnFragmentInteractionListener,
-        Mis_pedidos.OnFragmentInteractionListener,
-        //.OnFragmentInteractionListener,
-        Sub_crea_pedido.OnFragmentInteractionListener,
-        Sub_bebidas.OnFragmentInteractionListener,
-        Sub_Hamburguesa.OnFragmentInteractionListener,
-        Sub_Lasania.OnFragmentInteractionListener,
-        Sub_Ensalada.OnFragmentInteractionListener,
-        Sub_Pasta.OnFragmentInteractionListener,
         ConfirmacionPedido.NoticeDialogListener
 {
 
@@ -67,7 +58,7 @@ public class Menu_principal extends AppCompatActivity
 
         pidePedidosCliente();
 
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        DrawerLayout drawer = findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.addDrawerListener(toggle);
@@ -127,8 +118,9 @@ public class Menu_principal extends AppCompatActivity
         //FragmentTransaction transaction = getFragmentManager().beginTransaction();
         //item.setChecked(false);
         item.setCheckable(false);
-
-        if (id == R.id.nav_mispedidos) {
+        Intent i=null;
+        try {
+            if (id == R.id.nav_mispedidos) {
 /*
             newFragment = Mis_pedidos.newInstance(numeroPedido, fecha, total);
             transaction.replace(R.id.fragment, newFragment);
@@ -138,17 +130,17 @@ public class Menu_principal extends AppCompatActivity
             transaction.replace(R.id.fragment, newFragment);
             transaction.commit();
 */
-        } else if (id == R.id.nav_ofertas) {
+            } else if (id == R.id.nav_ofertas) {
 
-        } else if (id == R.id.nav_pizzas) {
+            } else if (id == R.id.nav_pizzas) {
 
-        } else if (id == R.id.nav_donde_estamos) {
+            } else if (id == R.id.nav_donde_estamos) {
 
-        } else if (id == R.id.nav_contacto) {
+            } else if (id == R.id.nav_contacto) {
 
-        } else if (id == R.id.nav_crea_pedido){
-            Intent i = new Intent(this, CreaPedido2.class);
-            startActivity(i);
+            } else if (id == R.id.nav_crea_pedido) {
+                i = new Intent(this, CreaPedido2.class);
+
 
             /*
             setTitle("Nuevo Pedido");
@@ -156,19 +148,19 @@ public class Menu_principal extends AppCompatActivity
             transaction.replace(R.id.fragment, newFragment);
             transaction.commit();
             */
-        }
+            }
 
-        DrawerLayout drawer = findViewById(R.id.drawer_layout);
-        drawer.closeDrawer(GravityCompat.START);
+            DrawerLayout drawer = findViewById(R.id.drawer_layout);
+            drawer.closeDrawer(GravityCompat.START);
+            startActivity(i);
+        }catch (NullPointerException ne){
+            this.finish();
+        }
         return true;
     }
 
-    @Override
-    public void onFragmentInteraction(Uri uri){
-        //you can leave it empty
-    }
 
-    private synchronized void pidePedidosCliente(){
+    private void pidePedidosCliente(){
         Mis_pedidos.PEDIDOS=true;
         HashMap<String, String> params = new HashMap<>();
         params.put("nombrePar", "refCliente");
