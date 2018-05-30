@@ -80,14 +80,15 @@ public class PerformNetworkRequest extends AsyncTask<Void, Void, String> {
     //the network operation will be performed in background
     @Override
     protected String doInBackground(Void... voids) {
-        RequestHandler requestHandler = new RequestHandler();
 
-        if (requestCode == MainActivity.CODE_POST_REQUEST)
-            return requestHandler.sendPostRequest(url, params);
+            RequestHandler requestHandler = new RequestHandler();
+
+            if (requestCode == MainActivity.CODE_POST_REQUEST)
+                return requestHandler.sendPostRequest(url, params);
 
 
-        if (requestCode == MainActivity.CODE_GET_REQUEST)
-            return requestHandler.sendGetRequest(url);
+            if (requestCode == MainActivity.CODE_GET_REQUEST)
+                return requestHandler.sendGetRequest(url);
 
         return null;
     }

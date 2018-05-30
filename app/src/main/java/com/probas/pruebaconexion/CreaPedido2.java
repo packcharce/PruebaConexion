@@ -2,6 +2,7 @@ package com.probas.pruebaconexion;
 
 import android.app.DialogFragment;
 import android.app.Fragment;
+import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.net.Uri;
 import android.os.Bundle;
@@ -49,112 +50,108 @@ public class CreaPedido2 extends AppCompatActivity implements
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_crea_pedido2);
 
-        Thread t1 = new Thread(new Runnable() {
+        pedido = new Pedido();
+        pedido.getListaPizzas().put(numeroDePizza, new Pizza("none"));
+
+        listaFragments = new ArrayList<>();
+        fasePedido = 0;
+        numeroDePizza = 0;
+
+        cargaFragments();
+
+
+        siguiente = findViewById(R.id.btnSig);
+        anterior = findViewById(R.id.btnAnterior);
+        Button anhadePizza = findViewById(R.id.btn_anhade_pizza);
+        Button quitaPizza = findViewById(R.id.btn_quita_pizza);
+        contPizzas = findViewById(R.id.tv_muestra_cant_pizzas);
+
+        anhadePizza.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void run() {
-                listaFragments = new ArrayList<>();
-                fasePedido = 0;
-                numeroDePizza = 0;
-
-                pedido = new Pedido();
-
+            public void onClick(View v) {
+                numeroDePizza++;
                 pedido.getListaPizzas().put(numeroDePizza, new Pizza("Custom"));
 
+                contPizzas.setText(
+                        String.valueOf(Integer.parseInt(contPizzas.getText().toString()) + 1));
 
-                cargaFragments();
-                getFragmentManager().beginTransaction().replace(R.id.fragment2, listaFragments.get(0)).commit();
+                listaFragments.add(fasesTotales - numeroFasesProtegidas, Sub_crea_pedido.newInstance(numeroDePizza));
 
-
-                siguiente = findViewById(R.id.btnSig);
-                anterior = findViewById(R.id.btnAnterior);
-                Button anhadePizza = findViewById(R.id.btn_anhade_pizza);
-                Button quitaPizza = findViewById(R.id.btn_quita_pizza);
-                contPizzas = findViewById(R.id.tv_muestra_cant_pizzas);
-
-                anhadePizza.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        numeroDePizza++;
-                        pedido.getListaPizzas().put(numeroDePizza, new Pizza("Custom"));
-
-                        contPizzas.setText(
-                                String.valueOf(Integer.parseInt(contPizzas.getText().toString()) + 1));
-
-                        listaFragments.add(fasesTotales - numeroFasesProtegidas, Sub_crea_pedido.newInstance(numeroDePizza));
-
-                        fasesTotales++;
-                    }
-                });
-
-                quitaPizza.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        if (pedido.getListaPizzas().size() > 1) {
-                            if (fasePedido < fasesTotales - numeroFasesProtegidas) {
-                                Object[] aux = pedido.getListaPizzas().keySet().toArray();
-                                pedido.getListaPizzas().remove(aux[fasePedido]);
-
-                                contPizzas.setText(
-                                        String.valueOf(Integer.parseInt(contPizzas.getText().toString()) - 1));
-
-                                listaFragments.remove(fasePedido);
-                                if (fasePedido == 0)
-                                    getFragmentManager().beginTransaction()
-                                            .replace(R.id.fragment2, listaFragments.get(fasePedido))
-                                            .commit();
-                                else
-                                    anterior.performClick();
-
-
-                                fasesTotales--;
-                            } else {
-                                Toast.makeText(getApplicationContext(), "Solo puedes borrar pizzas", Toast.LENGTH_LONG).show();
-                            }
-                        }
-                    }
-                });
-
-
-                anterior.setVisibility(View.GONE);
-                anterior.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        if (fasePedido > 0) {
-                            fasePedido--;
-                            getFragmentManager().popBackStack();
-                            if (fasePedido <= 0) anterior.setVisibility(View.GONE);
-                        }
-                        siguiente.setVisibility(View.VISIBLE);
-                    }
-                });
-
-                siguiente.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        if (fasePedido < listaFragments.size() - 1) {
-                            fasePedido++;
-                            //this.setTitle("Fase de pedido: " + (fasePedido+1));
-
-                            getFragmentManager().beginTransaction()
-                                    .add(R.id.fragment2, listaFragments.get(fasePedido))
-                                    .hide(listaFragments.get(fasePedido - 1))
-                                    .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)
-                                    .addToBackStack(null)
-                                    .commit();
-
-                        } else {
-                            DialogFragment dialog = new ConfirmacionPedido();
-                            dialog.show(getFragmentManager(), "NoticeDialogFragment");
-                        }
-                        anterior.setVisibility(View.VISIBLE);
-                    }
-                });
-
+                fasesTotales++;
             }
         });
-        t1.setName("Carga CreaPedido2");
-        t1.start();
+
+        quitaPizza.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (pedido.getListaPizzas().size() > 1) {
+                    if (fasePedido < fasesTotales - numeroFasesProtegidas) {
+                        Object[] aux = pedido.getListaPizzas().keySet().toArray();
+                        pedido.getListaPizzas().remove(aux[fasePedido]);
+
+                        contPizzas.setText(
+                                String.valueOf(Integer.parseInt(contPizzas.getText().toString()) - 1));
+
+                        listaFragments.remove(fasePedido);
+                        if (fasePedido == 0)
+                            getFragmentManager().beginTransaction()
+                                    .replace(R.id.fragment2, listaFragments.get(fasePedido))
+                                    .commit();
+                        else
+                            anterior.performClick();
+
+
+                        fasesTotales--;
+                    } else {
+                        Toast.makeText(getApplicationContext(), "Solo puedes borrar pizzas", Toast.LENGTH_LONG).show();
+                    }
+                }
+            }
+        });
+
+
+        anterior.setVisibility(View.GONE);
+        anterior.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (fasePedido > 0) {
+                    fasePedido--;
+
+                    getFragmentManager().popBackStack();
+
+
+                    if (fasePedido <= 0) anterior.setVisibility(View.GONE);
+                }
+                siguiente.setVisibility(View.VISIBLE);
+            }
+        });
+
+        siguiente.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (fasePedido < listaFragments.size() - 1) {
+                    fasePedido++;
+
+                    getFragmentManager().beginTransaction()
+                            .add(R.id.fragment2, listaFragments.get(fasePedido))
+                            .hide(listaFragments.get(fasePedido - 1))
+                            .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)
+                            .addToBackStack(null)
+                            .commit();
+
+
+                } else {
+                    DialogFragment dialog = new ConfirmacionPedido();
+                    dialog.show(getFragmentManager(), "NoticeDialogFragment");
+                }
+                anterior.setVisibility(View.VISIBLE);
+            }
+        });
+
+
     }
+
+    FragmentManager fm = getFragmentManager();
 
     @Override
     public void onDialogPositiveClick(DialogFragment dialog) {
@@ -203,6 +200,7 @@ public class CreaPedido2 extends AppCompatActivity implements
         listaFragments.add(Sub_Lasania.newInstance());
         listaFragments.add(Sub_Ensalada.newInstance());
         listaFragments.add(Sub_Pasta.newInstance());
+        fm.beginTransaction().replace(R.id.fragment2, listaFragments.get(0)).commit();
         fasesTotales = listaFragments.size();
     }
 
@@ -220,5 +218,4 @@ public class CreaPedido2 extends AppCompatActivity implements
             anterior.performClick();
         }
     }
-
 }

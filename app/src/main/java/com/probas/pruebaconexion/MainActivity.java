@@ -1,9 +1,8 @@
 package com.probas.pruebaconexion;
 
 import android.content.Context;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.widget.ProgressBar;
+import android.support.v7.app.AppCompatActivity;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -36,19 +35,10 @@ public class MainActivity extends AppCompatActivity {
     public static List<Ingrediente> listaIngredientes;
 
     // --------------------------------------------------
-    // BOTONES-------------------------------------------
-    // --------------------------------------------------
-
-
-    // --------------------------------------------------
     // CLIENTE ACTIVO------------------------------------
     // --------------------------------------------------
     public static Cliente clienteActivo;
 
-
-    public static ProgressBar progressBar;
-
-    List<Cliente> listaClientes;
 
     //as the same button is used for create and update
     //we need to track whether it is an update or create operation
@@ -61,9 +51,6 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         context=getApplicationContext();
 
-        progressBar =findViewById(R.id.progressBar);
-
-        listaClientes = new ArrayList<>();
         listaHamb = new ArrayList<>();
         listaEnsa = new ArrayList<>();
         listaPasta = new ArrayList<>();

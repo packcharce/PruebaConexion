@@ -10,4 +10,12 @@
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <array name="listaPizzasSpinner">
+        <item>Elija una pizza</item>
+        <item>Barbacoa</item>
+        <item>Margarita</item>
+        <item>4 Quesos</item>
+        <item>Custom</item>
+    </array>
 </resources>

@@ -5,6 +5,7 @@ import java.util.List;
 
 public class Pizza {
     private String nombre;
+    private final float precioFijo = 5.0f;
     private List<Ingrediente> listaIngredientes;
     private float precio;
 
@@ -37,7 +38,7 @@ public class Pizza {
         float aux=0;
         for (int i=0; i<listaIngredientes.size(); i++)
             aux += listaIngredientes.get(i).getPrecio();
-        this.precio = aux;
+        this.precio = aux+precioFijo;
     }
 
     public void quitaPrecio(){

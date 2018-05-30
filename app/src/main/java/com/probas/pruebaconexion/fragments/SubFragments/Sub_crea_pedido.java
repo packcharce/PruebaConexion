@@ -9,8 +9,11 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.CompoundButton;
 import android.widget.Space;
+import android.widget.Spinner;
 import android.widget.Switch;
 import android.widget.TextView;
 
@@ -22,6 +25,8 @@ import com.probas.pruebaconexion.fragments.ClickListener;
 import com.probas.pruebaconexion.fragments.MyAdapter;
 
 import java.util.ArrayList;
+import java.util.LinkedList;
+import java.util.List;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -31,7 +36,7 @@ import java.util.ArrayList;
  * Use the {@link Sub_crea_pedido#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class Sub_crea_pedido extends Fragment {
+public class Sub_crea_pedido extends Fragment implements AdapterView.OnItemSelectedListener {
 
     // TODO: Rename and change types of parameters
     private static final String ARG_PARAM1 = "ingredientes";
@@ -69,18 +74,54 @@ public class Sub_crea_pedido extends Fragment {
             numeroDePizza = getArguments().getInt(ARG_PARAM1);
         }
         listaIngredientes = (ArrayList<Ingrediente>) MainActivity.listaIngredientes;
+
+        creaPizzaPref();
     }
 
     RecyclerView mRecyclerView, mRecyclerView2;
     RecyclerView.LayoutManager mLayoutManager;
     Switch switchMitades;
+    Spinner spinner;
+    View v;
+    TextView dividir, tituloGeneral, tituloSegMitad;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
-        final View v = inflater.inflate(R.layout.fragment_sub_crea_pedido, container, false);
+        v = inflater.inflate(R.layout.fragment_sub_crea_pedido, container, false);
 
+        spinner = v.findViewById(R.id.spinner_pizzas);
+        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(getActivity().getApplicationContext(), R.array.listaPizzasSpinner, android.R.layout.simple_spinner_dropdown_item);
+        spinner.setAdapter(adapter);
+        spinner.setOnItemSelectedListener(this);
+
+        dividir = v.findViewById(R.id.dividir);
+        tituloGeneral = v.findViewById(R.id.titulo_primera_mitad);
+        tituloSegMitad = v.findViewById(R.id.titulo_segunda_mitad);
+        dividir.setVisibility(View.GONE);
+        tituloGeneral.setVisibility(View.GONE);
+
+        switchMitades = v.findViewById(R.id.switchMitades);
+        switchMitades.setVisibility(View.GONE);
+
+        return v;
+    }
+
+    // TODO: Rename method, update argument and hook method into UI event
+    public void onButtonPressed(Uri uri) {
+        if (mListener != null) {
+            mListener.onFragmentInteraction(uri);
+        }
+    }
+
+    RecyclerView.Adapter mAdapter;
+
+    private void cargaRecyclers() {
+
+        switchMitades.setVisibility(View.VISIBLE);
+        dividir.setVisibility(View.VISIBLE);
+        tituloGeneral.setVisibility(View.VISIBLE);
         mRecyclerView = v.findViewById(R.id.rec_ingredientes_pedido);
 
         // use this setting to improve performance if you know that changes
@@ -102,83 +143,79 @@ public class Sub_crea_pedido extends Fragment {
         mRecyclerView2.setLayoutManager(mLayoutManager2);
         mRecyclerView2.setVisibility(View.GONE);
 
-        Thread t1 = new Thread(new Runnable() {
+
+        Bundle pasaDatos = new Bundle();
+
+        pasaDatos.putSerializable(ARG_PARAM1, listaIngredientes);
+
+        // specify an adapter (see also next example)
+        mAdapter = new MyAdapter(pasaDatos, TIPO_INGREDIENTES, new ClickListener() {
             @Override
-            public void run() {
-                Bundle pasaDatos = new Bundle();
+            public void onPositionClicked(View v, int position) {
 
-                pasaDatos.putSerializable(ARG_PARAM1, listaIngredientes);
+                if (v.getId() == R.id.anadir) {
+                    Ingrediente i = new Ingrediente(listaIngredientes.get(position));
 
-                // specify an adapter (see also next example)
-                final RecyclerView.Adapter mAdapter = new MyAdapter(pasaDatos, TIPO_INGREDIENTES, new ClickListener() {
-                    @Override
-                    public void onPositionClicked(View v, int position) {
-
-                        if (v.getId() == R.id.anadir) {
-                            Ingrediente i = new Ingrediente(listaIngredientes.get(position));
-
-                            RecyclerView rc = (RecyclerView) v.getParent().getParent();
-                            if (rc.getId() == R.id.rec_segunda_mitad)
-                                i.setMitad((byte) 2);
-                            if (rc.getId() == R.id.rec_ingredientes_pedido)
-                                i.setMitad((byte) 1);
-                            CreaPedido2.pedido.getListaPizzas().get(numeroDePizza).agregaIngrediente(i);
-                        } else if (v.getId() == R.id.quitar && CreaPedido2.pedido.getListaPizzas().get(numeroDePizza).getListaIngredientes().size() > 0) {
-                            CreaPedido2.pedido.getListaPizzas().get(numeroDePizza).quitaIngrediente(listaIngredientes.get(position).getNombre());
-                        }
-                    }
-                });
-
-                mRecyclerView.setAdapter(mAdapter);
-                mRecyclerView2.setAdapter(mAdapter);
-
-
-                final TextView tituloPrimeraMitad = v.findViewById(R.id.titulo_primera_mitad);
-                final TextView tituloSegundaMitad = v.findViewById(R.id.titulo_segunda_mitad);
-                switchMitades = v.findViewById(R.id.switchMitades);
-                switchMitades.setChecked(false);
-
-                final Space space = v.findViewById(R.id.space_bot_crea_pedido);
-                space.setVisibility(View.GONE);
-                switchMitades.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-                    @Override
-                    public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                        if (!isChecked) {
-                            tituloPrimeraMitad.setText("Ingredientes Pizza Completa");
-                            tituloSegundaMitad.setVisibility(View.GONE);
-                            mRecyclerView2.setVisibility(View.GONE);
-                            space.setVisibility(View.GONE);
-                            for (int i = CreaPedido2.pedido.getListaPizzas().get(numeroDePizza).getListaIngredientes().size() - 1; i >= 0; i--) {
-                                if (CreaPedido2.pedido.getListaPizzas().get(numeroDePizza).getListaIngredientes().get(i).getMitad() != 1) {
-                                    CreaPedido2.pedido.getListaPizzas().get(numeroDePizza).getListaIngredientes().remove(i);
-                                }
-                            }
-                            mRecyclerView2.setAdapter(null);
-                        } else {
-                            //TODO quitar valores de contadores de segunda mitad
-                            tituloPrimeraMitad.setText("Ingredientes Primera Mitad");
-                            tituloSegundaMitad.setVisibility(View.VISIBLE);
-                            mRecyclerView2.setAdapter(mAdapter);
-                            mRecyclerView2.setVisibility(View.VISIBLE);
-                            space.setVisibility(View.VISIBLE);
-
-                        }
-                    }
-                });
+                    RecyclerView rc = (RecyclerView) v.getParent().getParent();
+                    if (rc.getId() == R.id.rec_segunda_mitad)
+                        i.setMitad((byte) 2);
+                    if (rc.getId() == R.id.rec_ingredientes_pedido)
+                        i.setMitad((byte) 1);
+                    CreaPedido2.pedido.getListaPizzas().get(numeroDePizza).agregaIngrediente(i);
+                } else if (v.getId() == R.id.quitar && CreaPedido2.pedido.getListaPizzas().get(numeroDePizza).getListaIngredientes().size() > 0) {
+                    CreaPedido2.pedido.getListaPizzas().get(numeroDePizza).quitaIngrediente(listaIngredientes.get(position).getNombre());
+                }
             }
         });
-        t1.setName("Carga Sub_creaPedido");
-        t1.start();
 
-        return v;
+        mRecyclerView.setAdapter(mAdapter);
+        mRecyclerView2.setAdapter(mAdapter);
+
+
+        //final TextView tituloPrimeraMitad = v.findViewById(R.id.titulo_primera_mitad);
+        //final TextView tituloSegundaMitad = v.findViewById(R.id.titulo_segunda_mitad);
+        switchMitades.setChecked(false);
+        final Space space = v.findViewById(R.id.space_bot_crea_pedido);
+        space.setVisibility(View.GONE);
+        switchMitades.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if (!isChecked) {
+                    tituloGeneral.setText("Ingredientes Pizza Completa");
+                    tituloSegMitad.setVisibility(View.GONE);
+                    mRecyclerView2.setVisibility(View.GONE);
+                    space.setVisibility(View.GONE);
+                    for (int i = CreaPedido2.pedido.getListaPizzas().get(numeroDePizza).getListaIngredientes().size() - 1; i >= 0; i--) {
+                        if (CreaPedido2.pedido.getListaPizzas().get(numeroDePizza).getListaIngredientes().get(i).getMitad() != 1) {
+                            CreaPedido2.pedido.getListaPizzas().get(numeroDePizza).getListaIngredientes().remove(i);
+                        }
+                    }
+                    mRecyclerView2.setAdapter(null);
+                } else {
+                    tituloGeneral.setText("Ingredientes Primera Mitad");
+                    tituloSegMitad.setVisibility(View.VISIBLE);
+                    mRecyclerView2.setAdapter(mAdapter);
+                    mRecyclerView2.setVisibility(View.VISIBLE);
+                    space.setVisibility(View.VISIBLE);
+
+                }
+            }
+        });
+
     }
 
-    // TODO: Rename method, update argument and hook method into UI event
-    public void onButtonPressed(Uri uri) {
-        if (mListener != null) {
-            mListener.onFragmentInteraction(uri);
+    private void quitaRecyclers() {
+        if (mRecyclerView2 != null && mRecyclerView != null) {
+            dividir.setVisibility(View.GONE);
+            tituloGeneral.setVisibility(View.GONE);
+            tituloSegMitad.setVisibility(View.GONE);
+            mRecyclerView.setAdapter(null);
+            mRecyclerView2.setAdapter(null);
+            switchMitades.setVisibility(View.GONE);
+            CreaPedido2.pedido.getListaPizzas().get(numeroDePizza).getListaIngredientes().clear();
         }
     }
+
 
     @Override
     public void onAttach(Context context) {
@@ -197,6 +234,108 @@ public class Sub_crea_pedido extends Fragment {
         mListener = null;
     }
 
+    byte pizzaActual = -1;
+
+    @Override
+    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+        switch (position) {
+            case 0:
+                quitaIngrPizzaPref();
+                pizzaActual = -1;
+                break;
+            case 1:
+                quitaIngrPizzaPref();
+                pizzaActual = 1;
+                quitaRecyclers();
+                cargaIngrPref(pizzaBarbacoa);
+                CreaPedido2.pedido.getListaPizzas().get(numeroDePizza).setNombre(getResources().getStringArray(R.array.listaPizzasSpinner)[position]);
+                break;
+            case 2:
+                quitaIngrPizzaPref();
+                pizzaActual = 2;
+                quitaRecyclers();
+                cargaIngrPref(pizzaMargarita);
+                CreaPedido2.pedido.getListaPizzas().get(numeroDePizza).setNombre(getResources().getStringArray(R.array.listaPizzasSpinner)[position]);
+                break;
+            case 3:
+                quitaIngrPizzaPref();
+                pizzaActual = 3;
+                quitaRecyclers();
+                cargaIngrPref(cQuesos);
+                CreaPedido2.pedido.getListaPizzas().get(numeroDePizza).setNombre(getResources().getStringArray(R.array.listaPizzasSpinner)[position]);
+                break;
+            case 4:
+                quitaIngrPizzaPref();
+                cargaRecyclers();
+                CreaPedido2.pedido.getListaPizzas().get(numeroDePizza).setNombre(getResources().getStringArray(R.array.listaPizzasSpinner)[position]);
+                break;
+        }
+
+
+    }
+
+    private void cargaIngrPref(List<Ingrediente> listaIngreds) {
+        for (Ingrediente i : listaIngreds
+                ) {
+            CreaPedido2.pedido.getListaPizzas().get(numeroDePizza).agregaIngrediente(i);
+        }
+    }
+
+    List<Ingrediente> pizzaBarbacoa, pizzaMargarita, cQuesos;
+
+    private void creaPizzaPref() {
+        pizzaBarbacoa = new LinkedList<>();
+        pizzaMargarita = new LinkedList<>();
+        cQuesos = new LinkedList<>();
+
+        for (Ingrediente i : listaIngredientes) {
+            switch (i.getNombre()) {
+                case "Queso mozzarela":
+                    pizzaBarbacoa.add(i);
+                    cQuesos.add(i);
+                    break;
+                case "4 Quesos":
+                    cQuesos.add(i);
+                    break;
+                case "Carne Picada":
+                    pizzaBarbacoa.add(i);
+                    break;
+                case "Bacon":
+                    pizzaBarbacoa.add(i);
+                    break;
+                case "Tomate":
+                    pizzaMargarita.add(i);
+                    break;
+            }
+        }
+    }
+
+    private void quitaIngrPizzaPref() {
+        switch (pizzaActual){
+            case 1:
+                for (Ingrediente i : pizzaBarbacoa) {
+                    CreaPedido2.pedido.getListaPizzas().get(numeroDePizza).quitaIngrediente(i.getNombre());
+                }
+                break;
+            case 2:
+                for (Ingrediente i : pizzaMargarita) {
+                    CreaPedido2.pedido.getListaPizzas().get(numeroDePizza).quitaIngrediente(i.getNombre());
+                }
+                break;
+            case 3:
+                for (Ingrediente i : cQuesos) {
+                    CreaPedido2.pedido.getListaPizzas().get(numeroDePizza).quitaIngrediente(i.getNombre());
+                }
+                break;
+        }
+    }
+
+    @Override
+    public void onNothingSelected(AdapterView<?> parent) {
+
+    }
+
+
     /**
      * This interface must be implemented by activities that contain this
      * fragment to allow an interaction in this fragment to be communicated
@@ -210,12 +349,15 @@ public class Sub_crea_pedido extends Fragment {
     public interface OnFragmentInteractionListener {
         // TODO: Update argument type and name
         void onFragmentInteraction(Uri uri);
+
     }
 
     @Override
     public void onPause() {
         super.onPause();
-        mRecyclerView2.setVisibility(View.GONE);
-        switchMitades.setChecked(false);
+        if (mRecyclerView2 != null && switchMitades != null) {
+            mRecyclerView2.setVisibility(View.GONE);
+            switchMitades.setChecked(false);
+        }
     }
 }

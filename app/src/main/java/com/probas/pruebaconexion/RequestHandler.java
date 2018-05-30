@@ -2,12 +2,12 @@ package com.probas.pruebaconexion;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
-import java.io.Console;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.io.OutputStreamWriter;
 import java.io.UnsupportedEncodingException;
 import java.net.HttpURLConnection;
+import java.net.SocketTimeoutException;
 import java.net.URL;
 import java.net.URLEncoder;
 import java.util.HashMap;
@@ -66,6 +66,8 @@ public class RequestHandler {
                     sb.append(response);
                 }
             }
+        }catch (SocketTimeoutException ste){
+            throw new RuntimeException();
 
         } catch (Exception e) {
             e.printStackTrace();
