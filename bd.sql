@@ -11,7 +11,7 @@ CREATE TABLE cliente (
     calle VARCHAR(50),
     portal VARCHAR(10),
     piso VARCHAR(3) DEFAULT NULL,
-    puerta VARCHAR(3) DEFAULT NULL,
+    puerta VARCHAR(20) DEFAULT NULL,
     urbanizacion VARCHAR(100) DEFAULT NULL,
     usuario VARCHAR(30),
     contrasenia CHAR(96),

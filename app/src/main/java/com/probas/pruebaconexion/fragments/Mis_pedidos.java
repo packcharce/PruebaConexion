@@ -239,7 +239,7 @@ public class Mis_pedidos extends Fragment {
                 }
                 sw.setRefreshing(false);
             }catch (JSONException js){
-
+                js.printStackTrace();
             }
         }
     }

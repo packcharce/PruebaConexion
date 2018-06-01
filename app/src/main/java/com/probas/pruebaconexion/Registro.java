@@ -1,11 +1,17 @@
 package com.probas.pruebaconexion;
 
-import android.support.v7.app.AppCompatActivity;
+import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.HashMap;
 
@@ -56,6 +62,7 @@ public class Registro extends AppCompatActivity {
         });
     }
 
+    String user, pass;
     private void crearCliente() {
         String nombre = editTextNombre.getText().toString();
         String ap1 = editTextApellido1.getText().toString();
@@ -66,8 +73,8 @@ public class Registro extends AppCompatActivity {
         String piso = editTextPiso.getText().toString();
         String puerta = editTextPuerta.getText().toString();
         String urba = editTextUrbanizacion.getText().toString();
-        String user = editTextUsuario.getText().toString();
-        String pass = editTextContrasenia.getText().toString();
+        user = editTextUsuario.getText().toString();
+        pass = editTextContrasenia.getText().toString();
         String codPostal = editTextCodPostal.getText().toString();
 
 
@@ -154,7 +161,65 @@ public class Registro extends AppCompatActivity {
         params.put("codigoPostal", codPostal);
 
 
-        PerformNetworkRequest request = new PerformNetworkRequest(Api.URL_CREATE_CLIENTE, params, MainActivity.CODE_POST_REQUEST, 'a');
+        Registradora request = new Registradora(Api.URL_CREATE_CLIENTE, params, MainActivity.CODE_POST_REQUEST, 'a');
         request.execute();
+    }
+
+    private class Registradora extends AsyncTask<Void, Void, String> {
+
+        String url;
+
+        //the parameters
+        HashMap<String, String> params;
+
+        //the request code to define whether it is a GET or POST
+        int requestCode;
+
+        char tipoDato;
+
+        private Registradora(String url, HashMap<String, String> params, int requestCode, char tipoDato) {
+            this.url = url;
+            this.params = params;
+            this.requestCode = requestCode;
+            this.tipoDato = tipoDato;
+        }
+
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+        }
+        @Override
+        protected String doInBackground(Void... voids) {
+            RequestHandler requestHandler = new RequestHandler();
+
+            if (requestCode == MainActivity.CODE_POST_REQUEST)
+                return requestHandler.sendPostRequest(url, params);
+            return null;
+
+        }
+
+        @Override
+        protected void onPostExecute(String s) {
+            super.onPostExecute(s);
+
+            try {
+                JSONObject object = new JSONObject(s);
+                if (object.length() != 0) {
+                    if (!object.getBoolean("error")) {
+                        if (object.getString("message").length() != 0) {
+                            Toast.makeText(getApplicationContext(), "Registrado Correctamente, haga login", Toast.LENGTH_SHORT).show();
+                            Intent i= new Intent(getApplicationContext(), Login.class);
+                            startActivity(i);
+                            finishAffinity();
+                        }
+                    }else{
+                        Toast.makeText(getApplicationContext(), object.getString("descError"), Toast.LENGTH_LONG).show();
+                    }
+                }
+
+            }catch (JSONException js){
+                js.printStackTrace();
+            }
+        }
     }
 }
