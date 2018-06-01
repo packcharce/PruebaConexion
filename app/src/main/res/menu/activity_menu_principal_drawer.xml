@@ -20,9 +20,6 @@
 
             android:title="Ofertas" />
         <item
-            android:id="@+id/nav_mispedidos"
-            android:title="Registro pedidos" />
-        <item
             android:id="@+id/nav_pizzas"
 
             android:title="Pizzas" />

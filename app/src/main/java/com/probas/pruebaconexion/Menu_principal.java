@@ -7,7 +7,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
-import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
@@ -16,12 +15,13 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.gson.Gson;
 import com.probas.pruebaconexion.fragments.ConfirmacionPedido;
-//import com.probas.pruebaconexion.fragments.Crea_pedido;
+import com.probas.pruebaconexion.fragments.Crea_pedido;
 import com.probas.pruebaconexion.fragments.Datos_cliente;
 import com.probas.pruebaconexion.fragments.Mis_pedidos;
 import com.probas.pruebaconexion.fragments.SubFragments.Sub_Ensalada;
@@ -36,15 +36,24 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.HashMap;
 
 import static com.probas.pruebaconexion.MainActivity.CODE_POST_REQUEST;
 
+//import com.probas.pruebaconexion.fragments.Crea_pedido;
+
 public class Menu_principal extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener,
-        ConfirmacionPedido.NoticeDialogListener
-{
+        Mis_pedidos.OnFragmentInteractionListener,
+        Sub_crea_pedido.OnFragmentInteractionListener,
+        Sub_bebidas.OnFragmentInteractionListener,
+        Sub_Hamburguesa.OnFragmentInteractionListener,
+        Sub_Lasania.OnFragmentInteractionListener,
+        Sub_Ensalada.OnFragmentInteractionListener,
+        Sub_Pasta.OnFragmentInteractionListener,
+        Crea_pedido.OnFragmentInteractionListener,
+        Datos_cliente.OnFragmentInteractionListener,
+        ConfirmacionPedido.NoticeDialogListener {
 
     static Context context;
 
@@ -64,9 +73,9 @@ public class Menu_principal extends AppCompatActivity
         drawer.addDrawerListener(toggle);
         toggle.syncState();
 
-        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
+        NavigationView navigationView = findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
-        View hView =  navigationView.getHeaderView(0);
+        View hView = navigationView.getHeaderView(0);
         TextView nav_user = hView.findViewById(R.id.nombreUsuarioHeader);
         nav_user.setText(MainActivity.clienteActivo.getNombre());
         nav_user = hView.findViewById(R.id.apellido_header);
@@ -114,22 +123,21 @@ public class Menu_principal extends AppCompatActivity
     public boolean onNavigationItemSelected(MenuItem item) {
         // Handle navigation view item clicks here.
         int id = item.getItemId();
-        //Fragment newFragment;
-        //FragmentTransaction transaction = getFragmentManager().beginTransaction();
+        Fragment newFragment;
+        FragmentTransaction transaction = getFragmentManager().beginTransaction();
         //item.setChecked(false);
-        item.setCheckable(false);
-        Intent i=null;
+        //item.setCheckable(false);
+        Intent i;
         try {
-            if (id == R.id.nav_mispedidos) {
-/*
-            newFragment = Mis_pedidos.newInstance(numeroPedido, fecha, total);
-            transaction.replace(R.id.fragment, newFragment);
-            transaction.commit();
-        } else if (id == R.id.nav_perfil) {
-            newFragment = Datos_cliente.newInstance();
-            transaction.replace(R.id.fragment, newFragment);
-            transaction.commit();
-*/
+            if (id == R.id.nav_mis_pedidos) {
+                newFragment = Mis_pedidos.newInstance(numeroPedido, fecha, total);
+                transaction.replace(R.id.fragment, newFragment);
+                transaction.commit();
+            } else if (id == R.id.nav_perfil) {
+                newFragment = Datos_cliente.newInstance();
+                transaction.replace(R.id.fragment, newFragment);
+                transaction.commit();
+
             } else if (id == R.id.nav_ofertas) {
 
             } else if (id == R.id.nav_pizzas) {
@@ -140,28 +148,20 @@ public class Menu_principal extends AppCompatActivity
 
             } else if (id == R.id.nav_crea_pedido) {
                 i = new Intent(this, CreaPedido2.class);
-
-
-            /*
-            setTitle("Nuevo Pedido");
-            newFragment = Crea_pedido.newInstance();
-            transaction.replace(R.id.fragment, newFragment);
-            transaction.commit();
-            */
+                startActivity(i);
             }
 
             DrawerLayout drawer = findViewById(R.id.drawer_layout);
             drawer.closeDrawer(GravityCompat.START);
-            startActivity(i);
-        }catch (NullPointerException ne){
+        } catch (NullPointerException ne) {
             this.finish();
         }
         return true;
     }
 
 
-    private void pidePedidosCliente(){
-        Mis_pedidos.PEDIDOS=true;
+    private void pidePedidosCliente() {
+        Mis_pedidos.PEDIDOS = true;
         HashMap<String, String> params = new HashMap<>();
         params.put("nombrePar", "refCliente");
         params.put("valorPar", String.valueOf(MainActivity.clienteActivo.getId()));
@@ -186,16 +186,51 @@ public class Menu_principal extends AppCompatActivity
             fecha.add(obj.getString("fechaPedido"));
             total.add(String.valueOf(obj.getDouble("total")));
         }
-        Mis_pedidos.CARGA_COMPLETA_PEDIDOS=true;
+        Mis_pedidos.CARGA_COMPLETA_PEDIDOS = true;
     }
 
     @Override
     public void onDialogPositiveClick(DialogFragment dialog) {
+        // User touched the dialog's positive button
+        Pedido p = CreaPedido2.pedido;
+        if (p.getTotal() != 0.0) {
 
+            HashMap<String, String> params = new HashMap<>();
+
+            //TODO quitar todo este tocho y pasar el objeto Pedido p directamente
+            params.put("refCliente", String.valueOf(MainActivity.clienteActivo.getId()));
+            params.put("numPedido", String.valueOf(p.getNumPedido()));
+            params.put("extra_domicilio", String.valueOf(p.getExtra_domicilio()));
+            params.put("extra_recoger", String.valueOf(p.getExtra_domicilio()));
+            params.put("extra_local", String.valueOf(p.getExtra_local()));
+            params.put("subtotal", String.valueOf(p.getSubtotal()));
+            params.put("impuesto", String.valueOf(p.getImpuesto()));
+            params.put("total", String.valueOf(p.getTotal()));
+
+            params.put("listaPizzas", new Gson().toJson(p.getListaPizzas()));
+            params.put("listaLasania", new Gson().toJson(p.getListaLas()));
+            params.put("listaEnsaladas", new Gson().toJson(p.getListaEnsa()));
+            params.put("listaBebs", new Gson().toJson(p.getListaBebs()));
+            params.put("listaPasta", new Gson().toJson(p.getListaPasta()));
+            params.put("listaHamburguesas", new Gson().toJson(p.getListaHamb()));
+
+
+            PerformNetworkRequest request = new PerformNetworkRequest(Api.URL_CREATE_PEDIDO, params, MainActivity.CODE_POST_REQUEST, 'a');
+            request.execute();
+            this.finish();
+        } else {
+            dialog.dismiss();
+            Toast.makeText(getApplicationContext(), "Error, pedido vacio", Toast.LENGTH_LONG).show();
+        }
     }
 
     @Override
     public void onDialogNegativeClick(DialogFragment dialog) {
+        dialog.dismiss();
+    }
+
+    @Override
+    public void onFragmentInteraction(Uri uri) {
 
     }
 }

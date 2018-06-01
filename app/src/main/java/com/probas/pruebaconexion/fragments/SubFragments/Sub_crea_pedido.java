@@ -46,7 +46,7 @@ public class Sub_crea_pedido extends Fragment implements AdapterView.OnItemSelec
 
     private OnFragmentInteractionListener mListener;
 
-    private int numeroDePizza = -1;
+    private int numeroDePizza = 0;
 
     public Sub_crea_pedido() {
         // Required empty public constructor

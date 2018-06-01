@@ -15,7 +15,6 @@ import com.probas.pruebaconexion.Lasania;
 import com.probas.pruebaconexion.MainActivity;
 import com.probas.pruebaconexion.R;
 import com.probas.pruebaconexion.fragments.ClickListener;
-
 import com.probas.pruebaconexion.fragments.MyAdapter;
 
 import java.util.ArrayList;

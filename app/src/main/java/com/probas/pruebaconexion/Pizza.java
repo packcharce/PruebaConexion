@@ -34,7 +34,7 @@ public class Pizza {
         return precio;
     }
 
-    public void setPrecio() {
+    private void setPrecio() {
         float aux=0;
         for (int i=0; i<listaIngredientes.size(); i++)
             aux += listaIngredientes.get(i).getPrecio();

@@ -3,16 +3,28 @@ package com.probas.pruebaconexion.fragments;
 import android.app.Fragment;
 import android.content.Context;
 import android.net.Uri;
+import android.os.AsyncTask;
 import android.os.Bundle;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.probas.pruebaconexion.Api;
+import com.probas.pruebaconexion.MainActivity;
 import com.probas.pruebaconexion.R;
+import com.probas.pruebaconexion.RequestHandler;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+
+import static com.probas.pruebaconexion.MainActivity.CODE_POST_REQUEST;
 
 
 /**
@@ -72,7 +84,7 @@ public class Mis_pedidos extends Fragment {
         View v = inflater.inflate(R.layout.fragment_mis_pedidos, container, false);
 
 
-        RecyclerView mRecyclerView = v.findViewById(R.id.rec_view_misPedidos);
+        mRecyclerView = v.findViewById(R.id.rec_view_misPedidos);
 
         // use this setting to improve performance if you know that changes
         // in content do not change the layout size of the RecyclerView
@@ -87,7 +99,7 @@ public class Mis_pedidos extends Fragment {
         b.putStringArrayList("fecha", fecha);
         b.putStringArrayList("total", total);
         // specify an adapter (see also next example)
-        RecyclerView.Adapter mAdapter = new MyAdapter(b, 0, new ClickListener() {
+        mAdapter = new MyAdapter(b, 0, new ClickListener() {
             @Override
             public void onPositionClicked(View v, int position) {
                 System.out.println(position + " Mis Pedidos");
@@ -96,9 +108,20 @@ public class Mis_pedidos extends Fragment {
         mRecyclerView.setAdapter(mAdapter);
 
         getActivity().setTitle("Historial de Pedidos");
+
+        sw = v.findViewById(R.id.swiperefresh);
+        sw.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                pideDatos();
+            }
+        });
+
         return v;
     }
-
+    SwipeRefreshLayout sw;
+    RecyclerView mRecyclerView;
+    RecyclerView.Adapter mAdapter;
 
     public void onButtonPressed(Uri uri) {
         if (mListener != null) {
@@ -123,6 +146,15 @@ public class Mis_pedidos extends Fragment {
         mListener = null;
     }
 
+
+    private void pideDatos(){
+        HashMap<String, String> params = new HashMap<>();
+        params.put("nombrePar", "refCliente");
+        params.put("valorPar", String.valueOf(MainActivity.clienteActivo.getId()));
+        Refrescadora request = new Refrescadora(Api.URL_GET_PEDIDO, params, CODE_POST_REQUEST, '0');
+        request.execute();
+    }
+
     /**
      * This interface must be implemented by activities that contain this
      * fragment to allow an interaction in this fragment to be communicated
@@ -136,6 +168,80 @@ public class Mis_pedidos extends Fragment {
     public interface OnFragmentInteractionListener {
         // TODO: Update argument type and name
         void onFragmentInteraction(Uri uri);
+    }
+
+    private class Refrescadora extends AsyncTask<Void, Void, String> {
+
+        String url;
+
+        //the parameters
+        HashMap<String, String> params;
+
+        //the request code to define whether it is a GET or POST
+        int requestCode;
+
+        char tipoDato;
+
+        private Refrescadora(String url, HashMap<String, String> params, int requestCode, char tipoDato) {
+            this.url = url;
+            this.params = params;
+            this.requestCode = requestCode;
+            this.tipoDato = tipoDato;
+        }
+
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+        }
+        @Override
+        protected String doInBackground(Void... voids) {
+            RequestHandler requestHandler = new RequestHandler();
+
+            if (requestCode == MainActivity.CODE_POST_REQUEST)
+                return requestHandler.sendPostRequest(url, params);
+            return null;
+
+        }
+
+        @Override
+        protected void onPostExecute(String s) {
+            super.onPostExecute(s);
+
+            try {
+                JSONObject object = new JSONObject(s);
+                if (object.length() != 0) {
+                    if (!object.getBoolean("error")) {
+                        if (object.getJSONArray("datos").length() != 0) {
+                            //Mis_pedidos.PEDIDOS = false;
+                            //misPedidos(object.getJSONArray("datos"));
+                            //Menu_principal.cargaDatos(object.getJSONArray("datos"));
+                            numeroPedido.clear();
+                            fecha.clear();
+                            total.clear();
+                            numeroPedido.add("Referencia\npedido");
+                            fecha.add("Fecha\nPedido");
+                            total.add("Precio\npedido");
+                            JSONArray datos = object.getJSONArray("datos");
+                            for (int i = 0; i < datos.length(); i++) {
+                                JSONObject obj = datos.getJSONObject(i);
+                                numeroPedido.add(obj.getString("numPedido"));
+                                fecha.add(obj.getString("fechaPedido"));
+                                total.add(String.valueOf(obj.getDouble("total")));
+                            }
+                            Bundle b= new Bundle();
+                            b.putStringArrayList("numeroPedido", numeroPedido);
+                            b.putStringArrayList("fecha", fecha);
+                            b.putStringArrayList("total", total);
+                            mAdapter = new MyAdapter(b, 0, null);
+                            mRecyclerView.setAdapter(mAdapter);
+                        }
+                    }
+                }
+                sw.setRefreshing(false);
+            }catch (JSONException js){
+
+            }
+        }
     }
 
 }

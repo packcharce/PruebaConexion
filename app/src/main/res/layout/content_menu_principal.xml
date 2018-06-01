@@ -8,4 +8,13 @@
     tools:context=".Menu_principal"
     tools:showIn="@layout/app_bar_menu_principal">
 
+    <fragment
+        android:id="@+id/fragment"
+        android:name="com.probas.pruebaconexion.fragments.Datos_cliente"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 </android.support.constraint.ConstraintLayout>

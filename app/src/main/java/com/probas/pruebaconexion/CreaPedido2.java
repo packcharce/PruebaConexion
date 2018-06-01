@@ -50,12 +50,12 @@ public class CreaPedido2 extends AppCompatActivity implements
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_crea_pedido2);
 
-        pedido = new Pedido();
-        pedido.getListaPizzas().put(numeroDePizza, new Pizza("none"));
-
         listaFragments = new ArrayList<>();
         fasePedido = 0;
         numeroDePizza = 0;
+
+        pedido = new Pedido();
+        pedido.getListaPizzas().put(numeroDePizza, new Pizza("none"));
 
         cargaFragments();
 

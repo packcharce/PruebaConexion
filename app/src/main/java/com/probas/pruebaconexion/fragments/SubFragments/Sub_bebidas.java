@@ -1,9 +1,9 @@
 package com.probas.pruebaconexion.fragments.SubFragments;
 
+import android.app.Fragment;
 import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
-import android.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -12,11 +12,9 @@ import android.view.ViewGroup;
 
 import com.probas.pruebaconexion.Bebida;
 import com.probas.pruebaconexion.CreaPedido2;
-import com.probas.pruebaconexion.Ingrediente;
 import com.probas.pruebaconexion.MainActivity;
 import com.probas.pruebaconexion.R;
 import com.probas.pruebaconexion.fragments.ClickListener;
-import com.probas.pruebaconexion.fragments.Crea_pedido;
 import com.probas.pruebaconexion.fragments.MyAdapter;
 
 import java.util.ArrayList;

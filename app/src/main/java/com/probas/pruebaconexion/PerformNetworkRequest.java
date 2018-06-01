@@ -15,15 +15,15 @@ import java.util.HashMap;
 public class PerformNetworkRequest extends AsyncTask<Void, Void, String> {
 
     //the url where we need to send the request
-    String url;
+    private String url;
 
     //the parameters
-    HashMap<String, String> params;
+    private HashMap<String, String> params;
 
     //the request code to define whether it is a GET or POST
-    int requestCode;
+    private int requestCode;
 
-    char tipoDato;
+    private char tipoDato;
 
     //constructor to initialize values
     public PerformNetworkRequest(String url, HashMap<String, String> params, int requestCode, char tipoDato) {
