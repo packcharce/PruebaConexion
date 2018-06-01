@@ -6,7 +6,6 @@ CREATE TABLE cliente (
     id INT NOT NULL AUTO_INCREMENT,
     nombre VARCHAR(30) NOT NULL,
     apellido1 VARCHAR(30) NOT NULL,
-    apellido2 VARCHAR(30) DEFAULT NULL,
     tlfno VARCHAR(9) NOT NULL,
     calle VARCHAR(50),
     portal VARCHAR(10),

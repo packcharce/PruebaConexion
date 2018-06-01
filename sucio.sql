@@ -186,7 +186,10 @@ SELECT
 FROM
     lista_lasania;
     
-    
+SELECT 
+    *
+FROM
+    cliente;
     
     
 call crea_pedido_cliente(1, 5, 0, 0, 0,0,0,0);

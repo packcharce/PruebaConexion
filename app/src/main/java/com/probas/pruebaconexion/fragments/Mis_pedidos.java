@@ -212,9 +212,6 @@ public class Mis_pedidos extends Fragment {
                 if (object.length() != 0) {
                     if (!object.getBoolean("error")) {
                         if (object.getJSONArray("datos").length() != 0) {
-                            //Mis_pedidos.PEDIDOS = false;
-                            //misPedidos(object.getJSONArray("datos"));
-                            //Menu_principal.cargaDatos(object.getJSONArray("datos"));
                             numeroPedido.clear();
                             fecha.clear();
                             total.clear();

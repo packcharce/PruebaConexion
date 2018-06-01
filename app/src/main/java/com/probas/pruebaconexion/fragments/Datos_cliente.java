@@ -1,17 +1,27 @@
 package com.probas.pruebaconexion.fragments;
 
+import android.app.Fragment;
 import android.content.Context;
 import android.net.Uri;
+import android.os.AsyncTask;
 import android.os.Bundle;
-import android.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 
+import com.probas.pruebaconexion.Api;
 import com.probas.pruebaconexion.MainActivity;
 import com.probas.pruebaconexion.R;
+import com.probas.pruebaconexion.RequestHandler;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.util.HashMap;
+
+import static com.probas.pruebaconexion.MainActivity.CODE_POST_REQUEST;
 
 
 /**
@@ -51,10 +61,7 @@ public class Datos_cliente extends Fragment {
      */
     // TODO: Rename and change types and number of parameters
     public static Datos_cliente newInstance() {
-        Datos_cliente fragment = new Datos_cliente();
-        //Bundle args = new Bundle();
-        //fragment.setArguments(args);
-        return fragment;
+        return new Datos_cliente();
     }
 
     @Override
@@ -93,8 +100,7 @@ public class Datos_cliente extends Fragment {
             @Override
             public void onClick(View view) {
                 //TODO poner metodo update
-                //crearCliente();
-                System.out.println("Actualizado");
+                actualizaCliente();
             }
         });
         getActivity().setTitle("Mi Perfil");
@@ -139,5 +145,72 @@ public class Datos_cliente extends Fragment {
     public interface OnFragmentInteractionListener {
         // TODO: Update argument type and name
         void onFragmentInteraction(Uri uri);
+    }
+
+    private void actualizaCliente(){
+        HashMap<String, String> params = new HashMap<>();
+        params.put("id", String.valueOf(MainActivity.clienteActivo.getId()));
+        params.put("nombre", editTextNombre.getText().toString());
+        params.put("apellido1", editTextApellido1.getText().toString());
+        params.put("tlfno", editTextTlfno.getText().toString());
+        params.put("calle", editTextCalle.getText().toString());
+        params.put("portal", editTextPortal.getText().toString());
+        params.put("piso", editTextPiso.getText().toString());
+        params.put("puerta", editTextPuerta.getText().toString());
+        params.put("urbanizacion", editTextUrbanizacion.getText().toString());
+        params.put("codigoPostal", editTextCodPostal.getText().toString());
+
+        Actualizadora ac = new Actualizadora(Api.URL_UPDATE_CLIENTE, params, CODE_POST_REQUEST);
+        ac.execute();
+    }
+
+    private class Actualizadora extends AsyncTask<Void, Void, String> {
+
+        String url;
+
+        //the parameters
+        HashMap<String, String> params;
+
+        //the request code to define whether it is a GET or POST
+        int requestCode;
+
+        char tipoDato;
+
+        private Actualizadora(String url, HashMap<String, String> params, int requestCode) {
+            this.url = url;
+            this.params = params;
+            this.requestCode = requestCode;
+        }
+
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+        }
+        @Override
+        protected String doInBackground(Void... voids) {
+            RequestHandler requestHandler = new RequestHandler();
+
+            if (requestCode == MainActivity.CODE_POST_REQUEST)
+                return requestHandler.sendPostRequest(url, params);
+            return null;
+
+        }
+
+        @Override
+        protected void onPostExecute(String s) {
+            super.onPostExecute(s);
+            try {
+                JSONObject object = new JSONObject(s);
+                if (object.length() != 0) {
+                    if (!object.getBoolean("error")) {
+                        System.out.println("Actualizado");
+                    }else{
+                        System.out.println(object.getString("message"));
+                    }
+                }
+            }catch (JSONException js){
+                js.printStackTrace();
+            }
+        }
     }
 }

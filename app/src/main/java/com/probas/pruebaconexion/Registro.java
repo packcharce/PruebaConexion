@@ -20,7 +20,6 @@ public class Registro extends AppCompatActivity {
     EditText
             editTextNombre,
             editTextApellido1,
-            editTextApellido2,
             editTextTlfno,
             editTextCalle,
             editTextPortal,
@@ -39,7 +38,6 @@ public class Registro extends AppCompatActivity {
 
         editTextNombre = findViewById(R.id.editTextNombre);
         editTextApellido1 = findViewById(R.id.editTextApellido1);
-        editTextApellido2 = findViewById(R.id.editTextApellido2);
         editTextTlfno = findViewById(R.id.editTextTlfno);
         editTextCalle = findViewById(R.id.editTextCalle);
         editTextPortal = findViewById(R.id.editTextPortal);
@@ -66,7 +64,6 @@ public class Registro extends AppCompatActivity {
     private void crearCliente() {
         String nombre = editTextNombre.getText().toString();
         String ap1 = editTextApellido1.getText().toString();
-        String ap2 = editTextApellido2.getText().toString();
         String tlfno = editTextTlfno.getText().toString();
         String calle = editTextCalle.getText().toString();
         String portal = editTextPortal.getText().toString();
@@ -90,13 +87,6 @@ public class Registro extends AppCompatActivity {
             editTextApellido1.requestFocus();
             return;
         }
-        /*
-        if (TextUtils.isEmpty(ap2)) {
-            editTextApellido2.setError("Please enter ap2");
-            editTextApellido2.requestFocus();
-            return;
-        }
-        */
         if (TextUtils.isEmpty(tlfno)) {
             editTextTlfno.setError("Please enter tlfn");
             editTextTlfno.requestFocus();
@@ -149,7 +139,6 @@ public class Registro extends AppCompatActivity {
         HashMap<String, String> params = new HashMap<>();
         params.put("nombre", nombre);
         params.put("apellido1", ap1);
-        params.put("apellido2", ap2);
         params.put("tlfno", tlfno);
         params.put("calle", calle);
         params.put("portal", portal);
