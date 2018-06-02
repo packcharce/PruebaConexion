@@ -260,7 +260,7 @@ insert into ingrediente (tipo, nombre, stock, precio) values ('Vegetal', 'Tomate
 drop procedure if exists crea_cliente;
 DELIMITER //
 CREATE PROCEDURE crea_cliente(
-	in nombreArg varchar(30), in apellido1Arg varchar(30), in apellido2Arg varchar(30), 
+	in nombreArg varchar(30), in apellido1Arg varchar(30), 
     in tlfnoArg varchar(9), in calleArg varchar(50), in portalArg varchar(10), in pisoArg varchar(3), in puertaArg varchar(3) , in urbanizacionArg varchar(100),
     in usuarioArg varchar(30), in contraseniaArg varchar(50), in codigoPostalArg varchar(5)
 )
@@ -280,9 +280,9 @@ CREATE PROCEDURE crea_cliente(
 	END;
 	START TRANSACTION;
 		insert into cliente 
-			(nombre, apellido1, apellido2, tlfno, calle, portal, piso, puerta, urbanizacion, usuario, contrasenia, codigoPostal)
+			(nombre, apellido1, tlfno, calle, portal, piso, puerta, urbanizacion, usuario, contrasenia, codigoPostal)
 		values 
-		(nombreArg, apellido1Arg, apellido2Arg, tlfnoArg, calleArg, portalArg, pisoArg, puertaArg, urbanizacionArg, usuarioArg, SHA2(contraseniaArg, 384), codigoPostalArg);
+		(nombreArg, apellido1Arg, tlfnoArg, calleArg, portalArg, pisoArg, puertaArg, urbanizacionArg, usuarioArg, SHA2(contraseniaArg, 384), codigoPostalArg);
 	commit;
 end
 //
@@ -321,6 +321,6 @@ DELIMITER ;
 
 -- Test
 insert into cliente 
-		(nombre, apellido1, apellido2, tlfno, calle, portal, piso, puerta, urbanizacion, usuario, contrasenia, codigoPostal)
+		(nombre, apellido1, tlfno, calle, portal, piso, puerta, urbanizacion, usuario, contrasenia, codigoPostal)
 	values 
-    ("Luis", "Sanchez", "ap2", "942745557", "Vargas", "54", 2, "B", "urb",  "a", SHA2('1234', 384), 39532);
+    ("Luis", "Sanchez", "942745557", "Vargas", "54", 2, "B", "urb",  "a", SHA2('1234', 384), 39532);

@@ -14,6 +14,7 @@ import android.widget.Toast;
 
 import com.google.gson.Gson;
 import com.probas.pruebaconexion.fragments.ConfirmacionPedido;
+import com.probas.pruebaconexion.fragments.SubFragments.Opciones_Pago;
 import com.probas.pruebaconexion.fragments.SubFragments.Sub_Ensalada;
 import com.probas.pruebaconexion.fragments.SubFragments.Sub_Hamburguesa;
 import com.probas.pruebaconexion.fragments.SubFragments.Sub_Lasania;
@@ -31,6 +32,7 @@ public class CreaPedido2 extends AppCompatActivity implements
         Sub_Lasania.OnFragmentInteractionListener,
         Sub_Ensalada.OnFragmentInteractionListener,
         Sub_Pasta.OnFragmentInteractionListener,
+        Opciones_Pago.OnFragmentInteractionListener,
         ConfirmacionPedido.NoticeDialogListener {
 
     public static Pedido pedido;
@@ -42,8 +44,9 @@ public class CreaPedido2 extends AppCompatActivity implements
     Button siguiente;
     Button anterior;
 
+
     private int fasePedido, fasesTotales;
-    private final int numeroFasesProtegidas = 5;
+    private final int numeroFasesProtegidas = 6;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -65,6 +68,7 @@ public class CreaPedido2 extends AppCompatActivity implements
         Button anhadePizza = findViewById(R.id.btn_anhade_pizza);
         Button quitaPizza = findViewById(R.id.btn_quita_pizza);
         contPizzas = findViewById(R.id.tv_muestra_cant_pizzas);
+
 
         anhadePizza.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -139,7 +143,6 @@ public class CreaPedido2 extends AppCompatActivity implements
                             .addToBackStack(null)
                             .commit();
 
-
                 } else {
                     DialogFragment dialog = new ConfirmacionPedido();
                     dialog.show(getFragmentManager(), "NoticeDialogFragment");
@@ -200,6 +203,7 @@ public class CreaPedido2 extends AppCompatActivity implements
         listaFragments.add(Sub_Lasania.newInstance());
         listaFragments.add(Sub_Ensalada.newInstance());
         listaFragments.add(Sub_Pasta.newInstance());
+        listaFragments.add(Opciones_Pago.newInstance());
         fm.beginTransaction().replace(R.id.fragment2, listaFragments.get(0)).commit();
         fasesTotales = listaFragments.size();
     }

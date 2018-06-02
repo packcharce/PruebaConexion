@@ -25,7 +25,8 @@
                 android:layout_marginBottom="8dp"
                 android:layout_marginTop="8dp"
                 android:hint="Nombre"
-                android:inputType="textNoSuggestions|textPersonName" />
+                android:inputType="textNoSuggestions|textPersonName"
+                android:singleLine="true" />
 
             <EditText
                 android:id="@+id/editTextApellido1"
@@ -34,7 +35,8 @@
                 android:layout_marginBottom="8dp"
                 android:layout_marginTop="8dp"
                 android:hint="Apellido"
-                android:inputType="textNoSuggestions|textPersonName" />
+                android:inputType="textNoSuggestions|textPersonName"
+                android:singleLine="true" />
 
             <EditText
                 android:id="@+id/editTextCalle"
@@ -43,7 +45,8 @@
                 android:layout_marginBottom="8dp"
                 android:layout_marginTop="8dp"
                 android:hint="Calle"
-                android:inputType="textMultiLine" />
+                android:inputType="text"
+                android:singleLine="true" />
 
             <EditText
                 android:id="@+id/editTextPortal"
@@ -51,7 +54,8 @@
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="8dp"
                 android:layout_marginTop="8dp"
-                android:hint="Portal" />
+                android:hint="Portal"
+                android:singleLine="true" />
 
             <EditText
                 android:id="@+id/editTextPuerta"
@@ -59,7 +63,8 @@
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="8dp"
                 android:layout_marginTop="8dp"
-                android:hint="Puerta" />
+                android:hint="Puerta"
+                android:singleLine="true" />
 
             <EditText
                 android:id="@+id/editTextCodPostal"
@@ -68,12 +73,14 @@
                 android:layout_marginBottom="8dp"
                 android:layout_marginTop="8dp"
                 android:hint="Codigo Postal"
-                android:inputType="numberSigned" />
+                android:inputType="numberSigned"
+                android:singleLine="true" />
 
             <EditText
                 android:id="@+id/editTextClienteId"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:singleLine="true"
                 android:visibility="gone" />
 
             <EditText
@@ -83,7 +90,8 @@
                 android:layout_marginBottom="8dp"
                 android:layout_marginTop="8dp"
                 android:hint="Telefono"
-                android:inputType="phone" />
+                android:inputType="phone"
+                android:singleLine="true" />
 
             <EditText
                 android:id="@+id/editTextUrbanizacion"
@@ -92,7 +100,8 @@
                 android:layout_marginBottom="8dp"
                 android:layout_marginTop="8dp"
                 android:hint="Urbanizacion"
-                android:inputType="textMultiLine" />
+                android:inputType="text"
+                android:singleLine="true" />
 
             <EditText
                 android:id="@+id/editTextPiso"
@@ -101,7 +110,8 @@
                 android:layout_marginBottom="8dp"
                 android:layout_marginTop="8dp"
                 android:hint="Numero Piso"
-                android:inputType="numberSigned" />
+                android:inputType="numberSigned"
+                android:singleLine="true" />
 
             <Button
                 android:id="@+id/buttonAddUpdate"

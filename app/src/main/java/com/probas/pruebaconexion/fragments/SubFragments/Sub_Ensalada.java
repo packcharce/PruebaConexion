@@ -57,6 +57,9 @@ public class Sub_Ensalada extends Fragment {
         super.onCreate(savedInstanceState);
     }
 
+    RecyclerView mRecyclerView;
+    RecyclerView.LayoutManager mLayoutManager;
+    RecyclerView.Adapter mAdapter;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -64,20 +67,20 @@ public class Sub_Ensalada extends Fragment {
         View v = inflater.inflate(R.layout.fragment_sub_ensalada, container, false);
         Bundle pasaDatos = new Bundle();
 
-        final RecyclerView mRecyclerView = v.findViewById(R.id.rec_ensalada_pedido);
+        mRecyclerView = v.findViewById(R.id.rec_ensalada_pedido);
 
         // use this setting to improve performance if you know that changes
         // in content do not change the layout size of the RecyclerView
         mRecyclerView.setHasFixedSize(true);
 
         // use a linear layout manager
-        RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(v.getContext());
+        mLayoutManager = new LinearLayoutManager(v.getContext());
         mRecyclerView.setLayoutManager(mLayoutManager);
 
         pasaDatos.putSerializable(ARG_PARAM1, (ArrayList<Ensalada>) MainActivity.listaEnsa);
 
 
-        RecyclerView.Adapter mAdapter = new MyAdapter(pasaDatos, TIPO_ENSALADAS, new ClickListener() {
+        mAdapter = new MyAdapter(pasaDatos, TIPO_ENSALADAS, new ClickListener() {
             @Override
             public void onPositionClicked(View v, int position) {
                 if(v.getId() == R.id.anadir) {

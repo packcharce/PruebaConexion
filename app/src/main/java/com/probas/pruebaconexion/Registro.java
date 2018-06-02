@@ -49,7 +49,7 @@ public class Registro extends AppCompatActivity {
         editTextCodPostal = findViewById(R.id.editTextCodPostal);
 
 
-        buttonRegistro =findViewById(R.id.buttonAddUpdate);
+        buttonRegistro = findViewById(R.id.buttonAddUpdate);
 
         buttonRegistro.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -61,6 +61,7 @@ public class Registro extends AppCompatActivity {
     }
 
     String user, pass;
+
     private void crearCliente() {
         String nombre = editTextNombre.getText().toString();
         String ap1 = editTextApellido1.getText().toString();
@@ -108,11 +109,13 @@ public class Registro extends AppCompatActivity {
             editTextPiso.requestFocus();
             return;
         }
-        if (TextUtils.isEmpty(puerta)) {
-            editTextPuerta.setError("Please enter pueta");
+        */
+        if (puerta.length() > 3) {
+            editTextPuerta.setError("Por favor, maximo 3 caracteres");
             editTextPuerta.requestFocus();
             return;
         }
+        /*
         if (TextUtils.isEmpty(urba)) {
             editTextPuerta.setError("Please enter urba");
             editTextPuerta.requestFocus();
@@ -177,6 +180,7 @@ public class Registro extends AppCompatActivity {
         protected void onPreExecute() {
             super.onPreExecute();
         }
+
         @Override
         protected String doInBackground(Void... voids) {
             RequestHandler requestHandler = new RequestHandler();
@@ -184,7 +188,6 @@ public class Registro extends AppCompatActivity {
             if (requestCode == MainActivity.CODE_POST_REQUEST)
                 return requestHandler.sendPostRequest(url, params);
             return null;
-
         }
 
         @Override
@@ -195,18 +198,16 @@ public class Registro extends AppCompatActivity {
                 JSONObject object = new JSONObject(s);
                 if (object.length() != 0) {
                     if (!object.getBoolean("error")) {
-                        if (object.getString("message").length() != 0) {
-                            Toast.makeText(getApplicationContext(), "Registrado Correctamente, haga login", Toast.LENGTH_SHORT).show();
-                            Intent i= new Intent(getApplicationContext(), Login.class);
-                            startActivity(i);
-                            finishAffinity();
-                        }
-                    }else{
+                        Toast.makeText(getApplicationContext(), "Registrado Correctamente, haga login", Toast.LENGTH_SHORT).show();
+                        Intent i = new Intent(getApplicationContext(), Login.class);
+                        startActivity(i);
+                        finishAffinity();
+                    } else {
                         Toast.makeText(getApplicationContext(), object.getString("descError"), Toast.LENGTH_LONG).show();
                     }
                 }
 
-            }catch (JSONException js){
+            } catch (JSONException js) {
                 js.printStackTrace();
             }
         }

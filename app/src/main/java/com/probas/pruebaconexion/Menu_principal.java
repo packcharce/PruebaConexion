@@ -24,6 +24,7 @@ import com.probas.pruebaconexion.fragments.ConfirmacionPedido;
 import com.probas.pruebaconexion.fragments.Crea_pedido;
 import com.probas.pruebaconexion.fragments.Datos_cliente;
 import com.probas.pruebaconexion.fragments.Mis_pedidos;
+import com.probas.pruebaconexion.fragments.SubFragments.Opciones_Pago;
 import com.probas.pruebaconexion.fragments.SubFragments.Sub_Ensalada;
 import com.probas.pruebaconexion.fragments.SubFragments.Sub_Hamburguesa;
 import com.probas.pruebaconexion.fragments.SubFragments.Sub_Lasania;
@@ -53,6 +54,7 @@ public class Menu_principal extends AppCompatActivity
         Sub_Pasta.OnFragmentInteractionListener,
         Crea_pedido.OnFragmentInteractionListener,
         Datos_cliente.OnFragmentInteractionListener,
+        Opciones_Pago.OnFragmentInteractionListener,
         ConfirmacionPedido.NoticeDialogListener {
 
     static Context context;
