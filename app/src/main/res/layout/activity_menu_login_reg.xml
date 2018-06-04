@@ -19,12 +19,12 @@
             android:id="@+id/botLog"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Login" />
+            android:text="@string/btn_login_login" />
 
         <Button
             android:id="@+id/botReg"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Registro" />
+            android:text="@string/btn_registro_login_menu" />
     </LinearLayout>
 </android.support.constraint.ConstraintLayout>

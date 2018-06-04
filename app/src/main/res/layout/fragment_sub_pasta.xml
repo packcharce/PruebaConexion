@@ -21,7 +21,7 @@
                 android:id="@+id/titulo_primera_mitad"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Pastas"
+                android:text="@string/tit_pastas_sub_pasta"
                 android:visibility="visible" />
 
             <Space

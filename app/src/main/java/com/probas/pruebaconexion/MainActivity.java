@@ -4,6 +4,14 @@ import android.content.Context;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 
+import com.probas.pruebaconexion.ClasesBasicas.Bebida;
+import com.probas.pruebaconexion.ClasesBasicas.Cliente;
+import com.probas.pruebaconexion.ClasesBasicas.Ensalada;
+import com.probas.pruebaconexion.ClasesBasicas.Hamburguesa;
+import com.probas.pruebaconexion.ClasesBasicas.Ingrediente;
+import com.probas.pruebaconexion.ClasesBasicas.Lasania;
+import com.probas.pruebaconexion.ClasesBasicas.Pasta;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -65,17 +73,17 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void cargaDatosAMovil(){
-        cargaFijos("hamburguesa", 'h');
-        cargaFijos("lasania", 'l');
-        cargaFijos("ensalada", 'e');
-        cargaFijos("pasta", 'p');
-        cargaFijos("bebida", 'b');
+        cargaFijos(getString(R.string.key_hamburguesa_main), 'h');
+        cargaFijos(getString(R.string.key_lasania_main), 'l');
+        cargaFijos(getString(R.string.key_ensalada_main), 'e');
+        cargaFijos(getString(R.string.key_pasta_main), 'p');
+        cargaFijos(getString(R.string.kay_bebida_main), 'b');
         cargaIngredientes();
     }
 
     private void cargaFijos(String nombreTabla, char tipoDato){
         HashMap<String, String> params = new HashMap<>();
-        params.put("nombreTabla", nombreTabla);
+        params.put(getString(R.string.key_nombre_tabla_main), nombreTabla);
         PerformNetworkRequest request = new PerformNetworkRequest(Api.URL_GET_DATOS, params, CODE_POST_REQUEST, tipoDato);
         request.execute();
     }

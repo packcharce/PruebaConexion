@@ -9,26 +9,20 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
 
-import com.probas.pruebaconexion.Bebida;
-import com.probas.pruebaconexion.Ensalada;
-import com.probas.pruebaconexion.Hamburguesa;
-import com.probas.pruebaconexion.Ingrediente;
-import com.probas.pruebaconexion.Lasania;
+import com.probas.pruebaconexion.ClasesBasicas.Bebida;
+import com.probas.pruebaconexion.ClasesBasicas.Ensalada;
+import com.probas.pruebaconexion.ClasesBasicas.Hamburguesa;
+import com.probas.pruebaconexion.ClasesBasicas.Ingrediente;
+import com.probas.pruebaconexion.ClasesBasicas.Lasania;
+import com.probas.pruebaconexion.ClasesBasicas.Pasta;
 import com.probas.pruebaconexion.MainActivity;
-import com.probas.pruebaconexion.Pasta;
+import com.probas.pruebaconexion.Menu_principal;
 import com.probas.pruebaconexion.R;
 
 import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 
 public class MyAdapter extends RecyclerView.Adapter {
-
-    private static final String ARG_PARAM1 = "ingredientes";
-    private static final String ARG_PARAM2 = "bebidas";
-    private static final String ARG_PARAM3 = "ensaladas";
-    private static final String ARG_PARAM4 = "hamburguesas";
-    private static final String ARG_PARAM5 = "pasta";
-    private static final String ARG_PARAM6 = "lasania";
 
     private static final int TIPO_HIST_PEDIDO = 0;
 
@@ -98,7 +92,6 @@ public class MyAdapter extends RecyclerView.Adapter {
                     if(numIngred>0) {
                         numIngred--;
                         numIngreds.setText(String.valueOf(numIngred));
-                        //Crea_pedido.pedido.getListaPizzas().get(numeroDePizza).quitaIngrediente(listaIngredientes.get(getAdapterPosition()).getNombre());
                     }
                     break;
             }
@@ -184,7 +177,6 @@ public class MyAdapter extends RecyclerView.Adapter {
     }
 
     public static class LasaniaViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
-        // each data item is just a string in this case
         TextView nombLas, numIngreds;
         Button anhade, quita;
         private WeakReference<ClickListener> listenerRef;
@@ -260,7 +252,6 @@ public class MyAdapter extends RecyclerView.Adapter {
     }
 
     public static class PastaViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
-        // each data item is just a string in this case
         TextView nombPasta, numIngreds;
         Button anhade, quita;
         private WeakReference<ClickListener> listenerRef;
@@ -303,12 +294,12 @@ public class MyAdapter extends RecyclerView.Adapter {
     public MyAdapter(Bundle b, int tipo, ClickListener clickListener) {
         switch (tipo) {
             case TIPO_HIST_PEDIDO:
-                numeroPedido = b.getStringArrayList("numeroPedido");
-                fecha = b.getStringArrayList("fecha");
-                total = b.getStringArrayList("total");
+                numeroPedido = b.getStringArrayList(Menu_principal.context.getString(R.string.key_num_pedido_mis_pedidos));
+                fecha = b.getStringArrayList(Menu_principal.context.getString(R.string.key_fecha_pedido_mis_pedidos));
+                total = b.getStringArrayList(Menu_principal.context.getString(R.string.key_total_mis_pedidos));
                 break;
             case TIPO_INGREDIENTES:
-                numPizza = b.getInt("numeroDePizza");
+                numPizza = b.getInt(Menu_principal.context.getString(R.string.key_num_pizza_my_adapter));
                 listaIngredientes = (ArrayList<Ingrediente>) MainActivity.listaIngredientes;
                 break;
             case TIPO_BEBIDAS:
@@ -364,11 +355,6 @@ public class MyAdapter extends RecyclerView.Adapter {
             case TIPO_PASTA:
                 v = layoutInflater.inflate(R.layout.cont_recy_crea_pedido, parent, false);
                 return new PastaViewHolder(v, clickListener);
-
-                /*
-            default:
-                v=null;
-                */
         }
         return new PedidosViewHolder(v);
     }

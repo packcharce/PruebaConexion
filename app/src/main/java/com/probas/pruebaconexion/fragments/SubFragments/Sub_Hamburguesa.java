@@ -10,8 +10,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.probas.pruebaconexion.ClasesBasicas.Hamburguesa;
 import com.probas.pruebaconexion.CreaPedido2;
-import com.probas.pruebaconexion.Hamburguesa;
 import com.probas.pruebaconexion.MainActivity;
 import com.probas.pruebaconexion.R;
 import com.probas.pruebaconexion.fragments.ClickListener;
@@ -105,7 +105,7 @@ public class Sub_Hamburguesa extends Fragment {
             mListener = (OnFragmentInteractionListener) context;
         } else {
             throw new RuntimeException(context.toString()
-                    + " must implement OnFragmentInteractionListener");
+                    + getString(R.string.excep_notice_dialog_listener));
         }
     }
 

@@ -1,21 +1,25 @@
-package com.probas.pruebaconexion;
+/*
+ * Copyright (c) Carlos Solana. Todos los derechos reservados.
+ */
+
+package com.probas.pruebaconexion.ClasesBasicas;
 
 import java.io.Serializable;
 
-public class Lasania implements Serializable {
+public class Pasta implements Serializable {
     private int id;
     private String nombre, ingredientes;
     private double precio;
 
-    public Lasania(int id, String nombre, String ingredientes, double precio) {
+    public Pasta(int id, String nombre, String ingredientes, double precio) {
         this.id=id;
         this.nombre = nombre;
         this.ingredientes = ingredientes;
         this.precio = precio;
     }
 
-    public Lasania(Lasania lasania) {
-        this(lasania.getId(), lasania.getNombre(), lasania.getIngredientes(), lasania.getPrecio());
+    public Pasta(Pasta pasta) {
+        this(pasta.getId(), pasta.getNombre(), pasta.getIngredientes(), pasta.getPrecio());
     }
     public int getId() {
         return id;
@@ -40,4 +44,5 @@ public class Lasania implements Serializable {
     public double getPrecio() {
         return precio;
     }
+
 }

@@ -21,7 +21,7 @@
                 android:id="@+id/titulo_primera_mitad"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Ensaladas"
+                android:text="@string/tit_ensaladas_sub_ensaladas"
                 android:visibility="visible" />
 
             <Space

@@ -18,7 +18,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="fill"
         android:layout_weight="1"
-        android:text="+" />
+        android:text="@string/char_mas" />
 
     <TextView
         android:id="@+id/cantidad_comp_pedido"
@@ -26,7 +26,7 @@
         android:layout_height="match_parent"
         android:layout_weight="1"
         android:gravity="center"
-        android:text="0" />
+        android:text="@string/default_0_rec_crea_pedido" />
 
     <Button
         android:id="@+id/quitar"
@@ -34,6 +34,6 @@
         android:layout_height="wrap_content"
         android:layout_gravity="fill"
         android:layout_weight="1"
-        android:text="-" />
+        android:text="@string/char_menos" />
 
 </LinearLayout>

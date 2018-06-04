@@ -28,6 +28,7 @@ public class Login extends AppCompatActivity {
 
         editTextUsuario = findViewById(R.id.editTextUsuario);
         editTextContrasenia = findViewById(R.id.editTextContrasenia);
+        editTextUsuario.requestFocus();
 
         buttonLogin =findViewById(R.id.buttonAddUpdate);
         buttonLogin.setOnClickListener(new View.OnClickListener() {
@@ -37,7 +38,7 @@ public class Login extends AppCompatActivity {
                 login(editTextUsuario.getText().toString(), editTextContrasenia.getText().toString());
                 if (!LOGIN) {
                     try {
-                        this.finalize();
+                        finish();
                     } catch (Throwable throwable) {
                         throwable.printStackTrace();
                     }
@@ -51,8 +52,8 @@ public class Login extends AppCompatActivity {
 
     private void login(String user, String pass){
         HashMap<String, String> params = new HashMap<>();
-        params.put("usuario", user);
-        params.put("contrasenia", pass);
+        params.put(getString(R.string.key_usuario_login), user);
+        params.put(getString(R.string.key_pass_login), pass);
 
         PerformNetworkRequest request = new PerformNetworkRequest(Api.URL_LOGIN, params, MainActivity.CODE_POST_REQUEST, 'a');
         request.execute();

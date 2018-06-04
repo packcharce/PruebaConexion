@@ -12,7 +12,7 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="8dp"
         android:layout_marginTop="8dp"
-        android:hint="Usuario"
+        android:hint="@string/txt_usuario_login"
         android:inputType="text"
         android:singleLine="true" />
 
@@ -22,7 +22,7 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="8dp"
         android:layout_marginTop="8dp"
-        android:hint="Contrasenia"
+        android:hint="@string/txt_contrasenia_login"
         android:inputType="textPassword"
         android:singleLine="true" />
 
@@ -30,6 +30,6 @@
         android:id="@+id/buttonAddUpdate"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Login" />
+        android:text="@string/btn_login_login" />
 
 </LinearLayout>

@@ -1,15 +1,200 @@
 <resources>
-    <string name="app_name">Prueba Conexion</string>
+    <string name="app_name">Freshpizza</string>
     <string name="title_activity_menu_principal">Menu Principal</string>
-    <string name="navigation_drawer_open">Open navigation drawer</string>
-    <string name="navigation_drawer_close">Close navigation drawer</string>
-    <string name="nav_header_title">Android Studio</string>
-    <string name="nav_header_subtitle">android.studio@android.com</string>
-    <string name="nav_header_desc">Navigation header</string>
-    <string name="action_settings">Settings</string>
 
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="nav_header_title" translatable="false">Android Studio</string>
+    <string name="nav_header_subtitle" translatable="false">android.studio@android.com</string>
+    <string name="nav_header_desc" translatable="false">Navigation header</string>
+    <string name="action_settings">Opciones</string>
+
+    <!-- General -->
+    <string name="key_nombre" translatable="false">nombre</string>
+    <string name="key_apellido" translatable="false">apellido</string>
+    <string name="key_tlfno" translatable="false">tlfno</string>
+    <string name="key_calle" translatable="false">calle</string>
+    <string name="key_portal" translatable="false">portal</string>
+    <string name="key_piso" translatable="false">piso</string>
+    <string name="key_puerta" translatable="false">puerta</string>
+    <string name="key_urbanizacion" translatable="false">urbanizacion</string>
+    <string name="key_cod_postal" translatable="false">codigoPostal</string>
+    <string name="key_error" translatable="false">error</string>
+    <string name="default_name_pizza" translatable="false">none</string>
+    <string name="key_id" translatable="false">id</string>
+
+    <string name="txt_nombre">Nombre</string>
+    <string name="txt_apellido">Apellido</string>
+    <string name="txt_usuario">Usuario</string>
+    <string name="txt_contrasenia">Contrasenia</string>
+    <string name="txt_calle">Calle</string>
+    <string name="txt_portal">Portal</string>
+    <string name="txt_puerta">Puerta</string>
+    <string name="txt_codigo_postal">Codigo Postal</string>
+    <string name="txt_telefono">Telefono</string>
+    <string name="txt_urbanizacion">Urbanizacion</string>
+    <string name="txt_numero_piso">Numero Piso</string>
+    <string name="txt_registrarse">Registrarse</string>
+    <string name="char_mas" translatable="false">+</string>
+    <string name="char_menos" translatable="false">-</string>
+
+    <!-- - API - -->
+    <string name="root_url" translatable="false">http://192.168.1.11/TFGApi/v1/api.php?apicall=</string>
+    <string name="url_create_cliente" translatable="false">createCliente</string>
+    <string name="url_login" translatable="false">login</string>
+    <string name="url_update_cliente" translatable="false">updateCliente</string>
+    <string name="url_create_pedido" translatable="false">createPedido</string>
+    <string name="url_get_pedido" translatable="false">getPedido</string>
+    <string name="url_get_datos" translatable="false">cargaDatos</string>
+    <string name="url_get_ingredientes" translatable="false">cargaIngredientes</string>
+
+    <!-- CreaPedido2 -->
+    <string name="error_no_borrar_panel_no_pizza">Solo puedes borrar pizzas</string>
+    <string name="tag_name_dialog_confir_pedido" translatable="false">NoticeDialogFragment</string>
+    <string name="key_ref_cliente_pedido" translatable="false">refCliente</string>
+    <string name="key_num_pedido" translatable="false">numPedido</string>
+    <string name="key_extra_domicilio" translatable="false">extra_domicilio</string>
+    <string name="key_extra_recoger" translatable="false">extra_recoger</string>
+    <string name="key_extra_local" translatable="false">extra_local</string>
+    <string name="key_subtotal_pedido" translatable="false">subtotal</string>
+    <string name="key_impuesto_pedido" translatable="false">impuesto</string>
+    <string name="key_total_pedido" translatable="false">total</string>
+    <string name="key_lista_pizzas_pedido" translatable="false">listaPizzas</string>
+    <string name="key_lista_lasania_pedido" translatable="false">listaLasania</string>
+    <string name="key_lista_ensalada_pedido" translatable="false">listaEnsaladas</string>
+    <string name="key_lista_bebidas_pedido" translatable="false">listaBebs</string>
+    <string name="key_lista_pasta_pedido" translatable="false">listaPasta</string>
+    <string name="key_lista_hamburguesas_pedido" translatable="false">listaHamburguesas</string>
+    <string name="error_pedido_vacio">Error, pedido vacio</string>
+
+    <string name="numero_de_pizzas_crea_pedido">Numero de Pizzas:</string>
+    <string name="num_default_pizza_crea_pedido" translatable="false">1</string>
+    <string name="btn_anterior_crea_pedido">Anterior</string>
+    <string name="btn_siguiente_crea_pedido">Siguiente</string>
+
+    <string name="default_0_rec_crea_pedido" translatable="false">0</string>
+
+    <!-- Login -->
+    <string name="key_usuario_login" translatable="false">usuario</string>
+    <string name="key_pass_login" translatable="false">contrasenia</string>
+
+    <string name="txt_usuario_login">Usuario</string>
+    <string name="txt_contrasenia_login">Contrasenia</string>
+    <string name="btn_login_login">Login</string>
+
+    <!-- MainActivity -->
+    <string name="key_hamburguesa_main" translatable="false">hamburguesa</string>
+    <string name="key_lasania_main" translatable="false">lasania</string>
+    <string name="key_ensalada_main" translatable="false">ensalada</string>
+    <string name="key_pasta_main" translatable="false">pasta</string>
+    <string name="kay_bebida_main" translatable="false">bebida</string>
+    <string name="key_nombre_tabla_main" translatable="false">nombreTabla</string>
+
+    <!-- Menu_Principal -->
+    <string name="navigation_drawer_open" translatable="false">Open navigation drawer</string>
+    <string name="navigation_drawer_close" translatable="false">Close navigation drawer</string>
+    <string name="key_nombre_param_menu_princ" translatable="false">nombrePar</string>
+    <string name="key_ref_cliente_menu_princ" translatable="false">refCliente</string>
+    <string name="key_valor_princ_menu_princ" translatable="false">valorPar</string>
+    <string name="tit_numero_pedido_mis_pedidos">Referencia pedido</string>
+    <string name="tit_fecha_mis_pedidos">Fecha Pedido</string>
+    <string name="tit_total_mis_pedidos">Precio pedido</string>
+    <string name="key_num_pedido_mis_pedidos" translatable="false">numPedido</string>
+    <string name="key_fecha_pedido_mis_pedidos" translatable="false">fechaPedido</string>
+    <string name="key_total_mis_pedidos" translatable="false">total</string>
+
+    <string name="txt_crear_pedido_drawer_menu">Crear pedido</string>
+    <string name="txt_mis_pedidos_drawer_menu">Mis pedidos</string>
+    <string name="txt_perfil_drawer_menu">Perfil</string>
+    <string name="txt_ofertas_drawer_menu">Ofertas</string>
+    <string name="txt_pizzas_drawer_menu">Pizzas</string>
+    <string name="tix_sobre_nosotros_drawer_menu">Sobre nosotros</string>
+    <string name="tit_contacta_con_nosotros_drawer_menu">Contacta con nosotros</string>
+
+
+    <!-- MenuLoginReg -->
+    <string name="btn_registro_login_menu">Registro</string>
+
+    <!-- PerformNetworkRequest -->
+    <string name="key_datos_pnreq" translatable="false">datos</string>
+    <string name="error_login_pnreq">Error de login</string>
+    <string name="key_num_error_pnreq" translatable="false">numError</string>
+    <string name="error_user_existente_pnreq">El nombre de usuario ya existe</string>
+    <string name="key_ingredientes_pnreq" translatable="false">ingredientes</string>
+    <string name="key_precio_pnreq" translatable="false">precio</string>
+    <string name="key_tipo_pnreq" translatable="false">tipo</string>
+    <string name="key_stock_pnreq" translatable="false">stock</string>
+    <string name="msg_datos_cargados_pnreq">Datos Cargados</string>
+    <string name="msg_login_correcto_pnreq">Login Correcto</string>
+
+    <!-- Pizza -->
+
+    <!-- Registro -->
+    <string name="error_introd_nombre_registro">Introduzca nombre</string>
+    <string name="error_introd_ap_registro">Introduzca apellido</string>
+    <string name="error_introd_tlfn_registro">Introduzca teléfono</string>
+    <string name="error_introd_calle_registro">Introduzca calle</string>
+    <string name="error_introd_portal">Introduzca portal</string>
+    <string name="error_num_caract_puerta_registro">Introduzca maximo 3 caracteres</string>
+    <string name="error_introd_user_registro">Introduzca usuario</string>
+    <string name="error_introd_pass_registro">Introduzca  contraseña</string>
+    <string name="error_introd_cod_postal_registro">Introduzca codigo postal de 5 numeros</string>
+    <string name="msg_registro_exito_registro">Registrado Correctamente, haga login</string>
+    <string name="key_desc_error_registro" translatable="false">descError</string>
+
+    <!-- ConfirmacionPedido -->
+    <string name="excep_notice_dialog_listener" translatable="false">must implement NoticeDialogListener</string>
+    <string name="msq_crea_pedido_dialogo_confped">El pedido se creará, ¿esta seguro? Asciende a: </string>
+    <string name="msg_si_confpedido">Acepto</string>
+    <string name="msq_no_confpedido">No</string>
+
+    <!-- Datos_cliente -->
+    <string name="tit_frag_mi_perfil_miperfil">Mi Perfil</string>
+    <string name="msg_actualizado_datos_cliente">Actualizado</string>
+    <string name="key_message_datos_cliente" translatable="false">message</string>
+    <string name="key_apellido1" translatable="false">apellido1</string>
+
+    <string name="btn_guardar_cambios_datos_cliente">Guardar Cambios</string>
+
+    <!-- Mis_pedidos -->
+    <string name="tit_historial_mis_pedidos">Historial de Pedidos</string>
+
+    <!-- MyAdapter -->
+    <string name="key_num_pizza_my_adapter" translatable="false">numeroDePizza</string>
+
+    <!-- Opciones-pago -->
+    <string name="msg_op_pago_oppago">Opciones de Pago</string>
+
+    <string name="txt_correo_electronico_opc_pago">Correo Electrónico</string>
+    <string name="txt_contrasena_paypal_opc_pago">Contraseña PayPal</string>
+    <string name="txt_numero_de_tarjeta_opc_pago">Numero de Tarjeta</string>
+    <string name="txt_numero_de_seguridad_opc_pago">Numero de seguridad</string>
+    <string name="txt_fecha_caducidad_opc_pago">Fecha Caducidad</string>
+    <string name="txt_dispongo_de_cambio_opc_pago">Dispongo de cambio</string>
+    <string name="txt_facil_pago_opc_pago">Para facilitar el pago de su pedido, indique si dispone de cambio.</string>
+
+    <!-- Sub_bebidas -->
+    <string name="txt_bebidas_sub_bebidas">Bebidas</string>
+
+    <!-- Sub_crea_pedido -->
+    <string name="tit_crear_pedido_crea_pedido">Crear Pedido</string>
+    <string name="tit_ing_pizza_compl_crea_pedido">Ingredientes Pizza Completa</string>
+    <string name="tit_ing_prim_mitad_crea_pedido">Ingredientes Primera Mitad</string>
+
+    <string name="txt_dividir_en_mitades_sub_crea_pedido">Dividir en mitades</string>
+    <string name="tit_ingredientes_pizza_completa_crea_pedido">Ingredientes Pizza Completa</string>
+    <string name="tit_seg_mitad_sub_crea_pedido">Segunda Mitad</string>
+
+    <!-- Sub_ensalada -->
+    <string name="tit_ensaladas_sub_ensaladas">Ensaladas</string>
+
+    <!-- Sub_Hambuerguesa -->
+    <string name="tit_hamburguesas_sub_hamb">Hamburguesas</string>
+
+    <!-- Sub_Lasania -->
+    <string name="tit_lasania_sub_lasania">Lasañas</string>
+
+    <!-- Sub_Pasta -->
+    <string name="tit_pastas_sub_pasta">Pastas</string>
+
 
     <array name="listaPizzasSpinner">
         <item>Elija una pizza</item>
@@ -18,11 +203,19 @@
         <item>4 Quesos</item>
         <item>Custom</item>
     </array>
-    <string name="title_activity_maps">Map</string>
     <array name="metodosPago">
         <item>Elija un metodo de pago</item>
         <item>Tarjeta</item>
         <item>PayPal</item>
         <item>Efectivo</item>
     </array>
+
+    <string name="title_activity_maps">Mapas</string>
+    <string name="error_longitud_opc_pago">Error de longitud de numero. (16 caracteres)</string>
+    <string name="error_longitud_3_opc_pago">Error de longitud de numero. (3 caracteres)</string>
+    <string name="error_mes_opc_pago">El mes introducido no es correcto.</string>
+    <string name="error_tarj_caducada_opc_pago">La tarjeta se encuentra caducada.</string>
+    <string name="error_formato_opc_pago">Error de formato de numero mm/aa.</string>
+
+
 </resources>

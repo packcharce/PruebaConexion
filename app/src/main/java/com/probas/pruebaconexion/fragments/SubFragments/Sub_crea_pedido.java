@@ -17,8 +17,8 @@ import android.widget.Spinner;
 import android.widget.Switch;
 import android.widget.TextView;
 
+import com.probas.pruebaconexion.ClasesBasicas.Ingrediente;
 import com.probas.pruebaconexion.CreaPedido2;
-import com.probas.pruebaconexion.Ingrediente;
 import com.probas.pruebaconexion.MainActivity;
 import com.probas.pruebaconexion.R;
 import com.probas.pruebaconexion.fragments.ClickListener;
@@ -64,17 +64,17 @@ public class Sub_crea_pedido extends Fragment implements AdapterView.OnItemSelec
         Bundle args = new Bundle();
         args.putSerializable(ARG_PARAM1, numeroDePizza);
         fragment.setArguments(args);
+
         return fragment;
     }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (getArguments() != null && numeroDePizza == -1) {
+        if (getArguments() != null) {
             numeroDePizza = getArguments().getInt(ARG_PARAM1);
         }
         listaIngredientes = (ArrayList<Ingrediente>) MainActivity.listaIngredientes;
-
         creaPizzaPref();
     }
 
@@ -104,7 +104,7 @@ public class Sub_crea_pedido extends Fragment implements AdapterView.OnItemSelec
 
         switchMitades = v.findViewById(R.id.switchMitades);
         switchMitades.setVisibility(View.GONE);
-
+        getActivity().setTitle(getString(R.string.tit_crear_pedido_crea_pedido));
         return v;
     }
 
@@ -172,8 +172,6 @@ public class Sub_crea_pedido extends Fragment implements AdapterView.OnItemSelec
         mRecyclerView2.setAdapter(mAdapter);
 
 
-        //final TextView tituloPrimeraMitad = v.findViewById(R.id.titulo_primera_mitad);
-        //final TextView tituloSegundaMitad = v.findViewById(R.id.titulo_segunda_mitad);
         switchMitades.setChecked(false);
         final Space space = v.findViewById(R.id.space_bot_crea_pedido);
         space.setVisibility(View.GONE);
@@ -181,7 +179,7 @@ public class Sub_crea_pedido extends Fragment implements AdapterView.OnItemSelec
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if (!isChecked) {
-                    tituloGeneral.setText("Ingredientes Pizza Completa");
+                    tituloGeneral.setText(R.string.tit_ing_pizza_compl_crea_pedido);
                     tituloSegMitad.setVisibility(View.GONE);
                     mRecyclerView2.setVisibility(View.GONE);
                     space.setVisibility(View.GONE);
@@ -192,7 +190,7 @@ public class Sub_crea_pedido extends Fragment implements AdapterView.OnItemSelec
                     }
                     mRecyclerView2.setAdapter(null);
                 } else {
-                    tituloGeneral.setText("Ingredientes Primera Mitad");
+                    tituloGeneral.setText(R.string.tit_ing_prim_mitad_crea_pedido);
                     tituloSegMitad.setVisibility(View.VISIBLE);
                     mRecyclerView2.setAdapter(mAdapter);
                     mRecyclerView2.setVisibility(View.VISIBLE);
@@ -224,7 +222,7 @@ public class Sub_crea_pedido extends Fragment implements AdapterView.OnItemSelec
             mListener = (OnFragmentInteractionListener) context;
         } else {
             throw new RuntimeException(context.toString()
-                    + " must implement OnFragmentInteractionListener");
+                    + getString(R.string.excep_notice_dialog_listener));
         }
     }
 
@@ -305,6 +303,8 @@ public class Sub_crea_pedido extends Fragment implements AdapterView.OnItemSelec
                     break;
                 case "Tomate":
                     pizzaMargarita.add(i);
+                    cQuesos.add(i);
+                    pizzaBarbacoa.add(i);
                     break;
             }
         }

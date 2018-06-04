@@ -22,8 +22,9 @@
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="8dp"
                 android:layout_marginTop="8dp"
-                android:hint="Nombre"
+                android:hint="@string/txt_nombre"
                 android:inputType="textNoSuggestions|textPersonName"
+                android:maxLength="30"
                 android:singleLine="true" />
 
             <EditText
@@ -32,8 +33,9 @@
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="8dp"
                 android:layout_marginTop="8dp"
-                android:hint="Apellido"
+                android:hint="@string/txt_apellido"
                 android:inputType="textNoSuggestions|textPersonName"
+                android:maxLength="30"
                 android:singleLine="true" />
 
             <EditText
@@ -42,7 +44,8 @@
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="8dp"
                 android:layout_marginTop="8dp"
-                android:hint="Usuario"
+                android:hint="@string/txt_usuario"
+                android:maxLength="30"
                 android:singleLine="true" />
 
             <EditText
@@ -51,8 +54,9 @@
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="8dp"
                 android:layout_marginTop="8dp"
-                android:hint="Contrasenia"
+                android:hint="@string/txt_contrasenia"
                 android:inputType="textPassword"
+                android:maxLength="16"
                 android:singleLine="true" />
 
             <EditText
@@ -61,8 +65,9 @@
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="8dp"
                 android:layout_marginTop="8dp"
-                android:hint="Calle"
+                android:hint="@string/txt_calle"
                 android:inputType="textMultiLine"
+                android:maxLength="50"
                 android:singleLine="true" />
 
             <EditText
@@ -71,7 +76,8 @@
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="8dp"
                 android:layout_marginTop="8dp"
-                android:hint="Portal"
+                android:hint="@string/txt_portal"
+                android:maxLength="10"
                 android:singleLine="true" />
 
             <EditText
@@ -80,7 +86,8 @@
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="8dp"
                 android:layout_marginTop="8dp"
-                android:hint="Puerta"
+                android:hint="@string/txt_puerta"
+                android:maxLength="20"
                 android:singleLine="true" />
 
             <EditText
@@ -89,16 +96,10 @@
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="8dp"
                 android:layout_marginTop="8dp"
-                android:hint="Codigo Postal"
+                android:hint="@string/txt_codigo_postal"
                 android:inputType="numberSigned"
+                android:maxLength="5"
                 android:singleLine="true" />
-
-            <EditText
-                android:id="@+id/editTextClienteId"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:singleLine="true"
-                android:visibility="gone" />
 
             <EditText
                 android:id="@+id/editTextTlfno"
@@ -106,8 +107,9 @@
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="8dp"
                 android:layout_marginTop="8dp"
-                android:hint="Telefono"
+                android:hint="@string/txt_telefono"
                 android:inputType="phone"
+                android:maxLength="9"
                 android:singleLine="true" />
 
             <EditText
@@ -116,8 +118,9 @@
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="8dp"
                 android:layout_marginTop="8dp"
-                android:hint="Urbanizacion"
+                android:hint="@string/txt_urbanizacion"
                 android:inputType="textMultiLine"
+                android:maxLength="100"
                 android:singleLine="true" />
 
             <EditText
@@ -126,15 +129,17 @@
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="8dp"
                 android:layout_marginTop="8dp"
-                android:hint="Numero Piso"
+                android:hint="@string/txt_numero_piso"
                 android:inputType="numberSigned"
+                android:maxLength="3"
+                android:maxLines="3"
                 android:singleLine="true" />
 
             <Button
                 android:id="@+id/buttonAddUpdate"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Registrarse" />
+                android:text="@string/txt_registrarse" />
         </LinearLayout>
 
     </ScrollView>

@@ -6,35 +6,31 @@
     <group android:checkableBehavior="single">
         <item
             android:id="@+id/nav_crea_pedido"
-            android:title="Crear pedido" />
+            android:title="@string/txt_crear_pedido_drawer_menu" />
         <item
             android:id="@+id/nav_mis_pedidos"
-            android:title="Mis pedidos" />
+            android:title="@string/txt_mis_pedidos_drawer_menu" />
         <!--android:icon="@drawable/ic_menu_camera"-->
         <item
             android:id="@+id/nav_perfil"
 
-            android:title="Perfil" />
+            android:title="@string/txt_perfil_drawer_menu" />
         <item
             android:id="@+id/nav_ofertas"
 
-            android:title="Ofertas" />
+            android:title="@string/txt_ofertas_drawer_menu" />
         <item
             android:id="@+id/nav_pizzas"
 
-            android:title="Pizzas" />
+            android:title="@string/txt_pizzas_drawer_menu" />
     </group>
 
-    <item android:title="Sobre nosotros">
+    <item android:title="@string/tix_sobre_nosotros_drawer_menu">
         <menu>
-            <item
-                android:id="@+id/nav_donde_estamos"
-                android:icon="@drawable/ic_menu_share"
-                android:title="Donde Estamos" />
             <item
                 android:id="@+id/nav_contacto"
                 android:icon="@drawable/ic_menu_send"
-                android:title="Contacta con nosotros" />
+                android:title="@string/tit_contacta_con_nosotros_drawer_menu" />
         </menu>
     </item>
 

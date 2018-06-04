@@ -1,6 +1,5 @@
 package com.probas.pruebaconexion;
 
-import android.app.DialogFragment;
 import android.app.Fragment;
 import android.app.FragmentTransaction;
 import android.content.Context;
@@ -17,20 +16,10 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import com.google.gson.Gson;
-import com.probas.pruebaconexion.fragments.ConfirmacionPedido;
-import com.probas.pruebaconexion.fragments.Crea_pedido;
 import com.probas.pruebaconexion.fragments.Datos_cliente;
 import com.probas.pruebaconexion.fragments.Mis_pedidos;
 import com.probas.pruebaconexion.fragments.SubFragments.Opciones_Pago;
-import com.probas.pruebaconexion.fragments.SubFragments.Sub_Ensalada;
-import com.probas.pruebaconexion.fragments.SubFragments.Sub_Hamburguesa;
-import com.probas.pruebaconexion.fragments.SubFragments.Sub_Lasania;
-import com.probas.pruebaconexion.fragments.SubFragments.Sub_Pasta;
-import com.probas.pruebaconexion.fragments.SubFragments.Sub_bebidas;
-import com.probas.pruebaconexion.fragments.SubFragments.Sub_crea_pedido;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -41,29 +30,19 @@ import java.util.HashMap;
 
 import static com.probas.pruebaconexion.MainActivity.CODE_POST_REQUEST;
 
-//import com.probas.pruebaconexion.fragments.Crea_pedido;
-
 public class Menu_principal extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener,
         Mis_pedidos.OnFragmentInteractionListener,
-        Sub_crea_pedido.OnFragmentInteractionListener,
-        Sub_bebidas.OnFragmentInteractionListener,
-        Sub_Hamburguesa.OnFragmentInteractionListener,
-        Sub_Lasania.OnFragmentInteractionListener,
-        Sub_Ensalada.OnFragmentInteractionListener,
-        Sub_Pasta.OnFragmentInteractionListener,
-        Crea_pedido.OnFragmentInteractionListener,
         Datos_cliente.OnFragmentInteractionListener,
-        Opciones_Pago.OnFragmentInteractionListener,
-        ConfirmacionPedido.NoticeDialogListener {
+        Opciones_Pago.OnFragmentInteractionListener {
 
-    static Context context;
+    public static Context context;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_menu_principal);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         context = getApplicationContext();
 
@@ -90,7 +69,7 @@ public class Menu_principal extends AppCompatActivity
 
     @Override
     public void onBackPressed() {
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        DrawerLayout drawer = findViewById(R.id.drawer_layout);
         if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START);
         } else {
@@ -144,8 +123,6 @@ public class Menu_principal extends AppCompatActivity
 
             } else if (id == R.id.nav_pizzas) {
 
-            } else if (id == R.id.nav_donde_estamos) {
-
             } else if (id == R.id.nav_contacto) {
 
             } else if (id == R.id.nav_crea_pedido) {
@@ -165,8 +142,8 @@ public class Menu_principal extends AppCompatActivity
     private void pidePedidosCliente() {
         Mis_pedidos.PEDIDOS = true;
         HashMap<String, String> params = new HashMap<>();
-        params.put("nombrePar", "refCliente");
-        params.put("valorPar", String.valueOf(MainActivity.clienteActivo.getId()));
+        params.put(getString(R.string.key_nombre_param_menu_princ), getString(R.string.key_ref_cliente_menu_princ));
+        params.put(getString(R.string.key_valor_princ_menu_princ), String.valueOf(MainActivity.clienteActivo.getId()));
         PerformNetworkRequest request = new PerformNetworkRequest(Api.URL_GET_PEDIDO, params, CODE_POST_REQUEST, '0');
         request.execute();
     }
@@ -179,60 +156,19 @@ public class Menu_principal extends AppCompatActivity
         numeroPedido.clear();
         fecha.clear();
         total.clear();
-        numeroPedido.add("Referencia\npedido");
-        fecha.add("Fecha\nPedido");
-        total.add("Precio\npedido");
+        numeroPedido.add(context.getString(R.string.tit_numero_pedido_mis_pedidos));
+        fecha.add(context.getString(R.string.tit_fecha_mis_pedidos));
+        total.add(context.getString(R.string.tit_total_mis_pedidos));
         for (int i = 0; i < datos.length(); i++) {
             JSONObject obj = datos.getJSONObject(i);
-            numeroPedido.add(obj.getString("numPedido"));
-            fecha.add(obj.getString("fechaPedido"));
-            total.add(String.valueOf(obj.getDouble("total")));
+            numeroPedido.add(obj.getString(context.getString(R.string.key_num_pedido_mis_pedidos)));
+            fecha.add(obj.getString(context.getString(R.string.key_fecha_pedido_mis_pedidos)));
+            total.add(String.valueOf(obj.getDouble(context.getString(R.string.key_total_mis_pedidos))));
         }
         Mis_pedidos.CARGA_COMPLETA_PEDIDOS = true;
     }
 
     @Override
-    public void onDialogPositiveClick(DialogFragment dialog) {
-        // User touched the dialog's positive button
-        Pedido p = CreaPedido2.pedido;
-        if (p.getTotal() != 0.0) {
-
-            HashMap<String, String> params = new HashMap<>();
-
-            //TODO quitar todo este tocho y pasar el objeto Pedido p directamente
-            params.put("refCliente", String.valueOf(MainActivity.clienteActivo.getId()));
-            params.put("numPedido", String.valueOf(p.getNumPedido()));
-            params.put("extra_domicilio", String.valueOf(p.getExtra_domicilio()));
-            params.put("extra_recoger", String.valueOf(p.getExtra_domicilio()));
-            params.put("extra_local", String.valueOf(p.getExtra_local()));
-            params.put("subtotal", String.valueOf(p.getSubtotal()));
-            params.put("impuesto", String.valueOf(p.getImpuesto()));
-            params.put("total", String.valueOf(p.getTotal()));
-
-            params.put("listaPizzas", new Gson().toJson(p.getListaPizzas()));
-            params.put("listaLasania", new Gson().toJson(p.getListaLas()));
-            params.put("listaEnsaladas", new Gson().toJson(p.getListaEnsa()));
-            params.put("listaBebs", new Gson().toJson(p.getListaBebs()));
-            params.put("listaPasta", new Gson().toJson(p.getListaPasta()));
-            params.put("listaHamburguesas", new Gson().toJson(p.getListaHamb()));
-
-
-            PerformNetworkRequest request = new PerformNetworkRequest(Api.URL_CREATE_PEDIDO, params, MainActivity.CODE_POST_REQUEST, 'a');
-            request.execute();
-            this.finish();
-        } else {
-            dialog.dismiss();
-            Toast.makeText(getApplicationContext(), "Error, pedido vacio", Toast.LENGTH_LONG).show();
-        }
-    }
-
-    @Override
-    public void onDialogNegativeClick(DialogFragment dialog) {
-        dialog.dismiss();
-    }
-
-    @Override
     public void onFragmentInteraction(Uri uri) {
-
     }
 }

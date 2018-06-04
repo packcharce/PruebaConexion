@@ -1,4 +1,8 @@
-package com.probas.pruebaconexion;
+/*
+ * Copyright (c) Carlos Solana. Todos los derechos reservados.
+ */
+
+package com.probas.pruebaconexion.ClasesBasicas;
 
 
 import java.io.Serializable;
@@ -15,7 +19,7 @@ public class Ingrediente implements Serializable{
     // 2: segunda mitad
     private byte mitad;
 
-    Ingrediente(int id, String tipo, String nombre, int stock, double precio) {
+    public Ingrediente(int id, String tipo, String nombre, int stock, double precio) {
         this.id=id;
         Ingrediente.numeroIngrediente++;
         this.tipo = tipo;

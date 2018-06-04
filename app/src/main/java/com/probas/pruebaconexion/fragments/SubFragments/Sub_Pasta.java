@@ -10,9 +10,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.probas.pruebaconexion.ClasesBasicas.Pasta;
 import com.probas.pruebaconexion.CreaPedido2;
 import com.probas.pruebaconexion.MainActivity;
-import com.probas.pruebaconexion.Pasta;
 import com.probas.pruebaconexion.R;
 import com.probas.pruebaconexion.fragments.ClickListener;
 import com.probas.pruebaconexion.fragments.MyAdapter;
@@ -91,12 +91,6 @@ public class Sub_Pasta extends Fragment {
         return v;
     }
 
-    // TODO: Rename method, update argument and hook method into UI event
-    public void onButtonPressed(Uri uri) {
-        if (mListener != null) {
-            mListener.onFragmentInteraction(uri);
-        }
-    }
 
     @Override
     public void onAttach(Context context) {
@@ -105,7 +99,7 @@ public class Sub_Pasta extends Fragment {
             mListener = (OnFragmentInteractionListener) context;
         } else {
             throw new RuntimeException(context.toString()
-                    + " must implement OnFragmentInteractionListener");
+                    + getString(R.string.excep_notice_dialog_listener));
         }
     }
 

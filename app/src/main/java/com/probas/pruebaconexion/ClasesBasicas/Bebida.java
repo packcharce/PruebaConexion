@@ -1,4 +1,8 @@
-package com.probas.pruebaconexion;
+/*
+ * Copyright (c) Carlos Solana. Todos los derechos reservados.
+ */
+
+package com.probas.pruebaconexion.ClasesBasicas;
 
 import java.io.Serializable;
 

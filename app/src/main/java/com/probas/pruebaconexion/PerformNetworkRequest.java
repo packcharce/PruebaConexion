@@ -4,6 +4,13 @@ import android.content.Intent;
 import android.os.AsyncTask;
 import android.widget.Toast;
 
+import com.probas.pruebaconexion.ClasesBasicas.Bebida;
+import com.probas.pruebaconexion.ClasesBasicas.Cliente;
+import com.probas.pruebaconexion.ClasesBasicas.Ensalada;
+import com.probas.pruebaconexion.ClasesBasicas.Hamburguesa;
+import com.probas.pruebaconexion.ClasesBasicas.Ingrediente;
+import com.probas.pruebaconexion.ClasesBasicas.Lasania;
+import com.probas.pruebaconexion.ClasesBasicas.Pasta;
 import com.probas.pruebaconexion.fragments.Mis_pedidos;
 
 import org.json.JSONArray;
@@ -47,29 +54,27 @@ public class PerformNetworkRequest extends AsyncTask<Void, Void, String> {
         try {
             JSONObject object = new JSONObject(s);
             if (object.length() != 0) {
-                if (!object.getBoolean("error")) {
+                if (!object.getBoolean(MainActivity.context.getResources().getString(R.string.key_error))) {
                     //Toast.makeText(MainActivity.context, object.getString("message"), Toast.LENGTH_SHORT).show();
 
                     if (MainActivity.CARGADATOS)
-                        cargaData(object.getJSONArray("datos"), tipoDato);
+                        cargaData(object.getJSONArray(MainActivity.context.getResources().getString(R.string.key_datos_pnreq)), tipoDato);
                     if (Login.LOGIN)
-                        if (object.getJSONArray("datos").length() != 0)
-                            login(object.getJSONArray("datos"));
+                        if (object.getJSONArray(MainActivity.context.getResources().getString(R.string.key_datos_pnreq)).length() != 0)
+                            login(object.getJSONArray(MainActivity.context.getResources().getString(R.string.key_datos_pnreq)));
                         else {
                             Login.LOGIN = false;
-                            Toast.makeText(MainActivity.context, "Error de login", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(MainActivity.context, MainActivity.context.getResources().getString(R.string.error_login_pnreq), Toast.LENGTH_SHORT).show();
                         }
                     if (Mis_pedidos.PEDIDOS)
-                        if (object.getJSONArray("datos").length() != 0) {
+                        if (object.getJSONArray(MainActivity.context.getResources().getString(R.string.key_datos_pnreq)).length() != 0) {
                             Mis_pedidos.PEDIDOS = false;
-                            //misPedidos(object.getJSONArray("datos"));
-                            Menu_principal.cargaDatos(object.getJSONArray("datos"));
+                            Menu_principal.cargaDatos(object.getJSONArray(MainActivity.context.getResources().getString(R.string.key_datos_pnreq)));
                         }
 
                 } else {
-                    if (Integer.parseInt(object.getString("numError")) == 1062)
-                        Toast.makeText(MainActivity.context, "El nombre de usuario ya existe", Toast.LENGTH_SHORT).show();
-                    //Toast.makeText(getApplicationContext(), object.getString("numError"), Toast.LENGTH_SHORT).show();
+                    if (Integer.parseInt(object.getString(MainActivity.context.getResources().getString(R.string.key_num_error_pnreq))) == 1062)
+                        Toast.makeText(MainActivity.context, MainActivity.context.getResources().getString(R.string.error_user_existente_pnreq), Toast.LENGTH_SHORT).show();
                 }
             }
         } catch (JSONException e) {
@@ -104,58 +109,58 @@ public class PerformNetworkRequest extends AsyncTask<Void, Void, String> {
             switch (tipoDato) {
                 case 'h':
                     MainActivity.listaHamb.add(new Hamburguesa(
-                            obj.getInt("id"),
-                            obj.getString("nombre"),
-                            obj.getString("ingredientes"),
-                            obj.getDouble("precio")
+                            obj.getInt(MainActivity.context.getResources().getString(R.string.key_id)),
+                            obj.getString(MainActivity.context.getResources().getString(R.string.key_nombre)),
+                            obj.getString(MainActivity.context.getResources().getString(R.string.key_ingredientes_pnreq)),
+                            obj.getDouble(MainActivity.context.getResources().getString(R.string.key_precio_pnreq))
                     ));
                     break;
                 case 'e':
                     MainActivity.listaEnsa.add(new Ensalada(
-                            obj.getInt("id"),
-                            obj.getString("nombre"),
-                            obj.getString("ingredientes"),
-                            obj.getDouble("precio")
+                            obj.getInt(MainActivity.context.getResources().getString(R.string.key_id)),
+                            obj.getString(MainActivity.context.getResources().getString(R.string.key_nombre)),
+                            obj.getString(MainActivity.context.getResources().getString(R.string.key_ingredientes_pnreq)),
+                            obj.getDouble(MainActivity.context.getResources().getString(R.string.key_precio_pnreq))
                     ));
                     break;
                 case 'l':
                     MainActivity.listaLas.add(new Lasania(
-                            obj.getInt("id"),
-                            obj.getString("nombre"),
-                            obj.getString("ingredientes"),
-                            obj.getDouble("precio")
+                            obj.getInt(MainActivity.context.getResources().getString(R.string.key_id)),
+                            obj.getString(MainActivity.context.getResources().getString(R.string.key_nombre)),
+                            obj.getString(MainActivity.context.getResources().getString(R.string.key_ingredientes_pnreq)),
+                            obj.getDouble(MainActivity.context.getResources().getString(R.string.key_precio_pnreq))
                     ));
                     break;
                 case 'b':
                     MainActivity.listaBebs.add(new Bebida(
-                            obj.getInt("id"),
-                            obj.getString("nombre"),
-                            obj.getString("ingredientes"),
-                            obj.getDouble("precio")
+                            obj.getInt(MainActivity.context.getResources().getString(R.string.key_id)),
+                            obj.getString(MainActivity.context.getResources().getString(R.string.key_nombre)),
+                            obj.getString(MainActivity.context.getResources().getString(R.string.key_ingredientes_pnreq)),
+                            obj.getDouble(MainActivity.context.getResources().getString(R.string.key_precio_pnreq))
                     ));
                     break;
                 case 'p':
                     MainActivity.listaPasta.add(new Pasta(
-                            obj.getInt("id"),
-                            obj.getString("nombre"),
-                            obj.getString("ingredientes"),
-                            obj.getDouble("precio")
+                            obj.getInt(MainActivity.context.getResources().getString(R.string.key_id)),
+                            obj.getString(MainActivity.context.getResources().getString(R.string.key_nombre)),
+                            obj.getString(MainActivity.context.getResources().getString(R.string.key_ingredientes_pnreq)),
+                            obj.getDouble(MainActivity.context.getResources().getString(R.string.key_precio_pnreq))
                     ));
                     break;
                 case 'i':
                     MainActivity.listaIngredientes.add(new Ingrediente(
-                            obj.getInt("id"),
-                            obj.getString("tipo"),
-                            obj.getString("nombre"),
-                            obj.getInt("stock"),
-                            obj.getDouble("precio")
+                            obj.getInt(MainActivity.context.getResources().getString(R.string.key_id)),
+                            obj.getString(MainActivity.context.getResources().getString(R.string.key_tipo_pnreq)),
+                            obj.getString(MainActivity.context.getResources().getString(R.string.key_nombre)),
+                            obj.getInt(MainActivity.context.getResources().getString(R.string.key_stock_pnreq)),
+                            obj.getDouble(MainActivity.context.getResources().getString(R.string.key_precio_pnreq))
                     ));
                     break;
             }
         }
         MainActivity.haAcabadoCargaDatos++;
         if (MainActivity.haAcabadoCargaDatos >= 6) {
-            Toast.makeText(MainActivity.context, "Datos Cargados" + MainActivity.haAcabadoCargaDatos, Toast.LENGTH_SHORT).show();
+            Toast.makeText(MainActivity.context, MainActivity.context.getResources().getString(R.string.msg_datos_cargados_pnreq) + MainActivity.haAcabadoCargaDatos, Toast.LENGTH_SHORT).show();
             Intent i = new Intent(MainActivity.context, MenuLoginReg.class);
             MainActivity.context.startActivity(i);
             MainActivity.CARGADATOS = false;
@@ -167,18 +172,18 @@ public class PerformNetworkRequest extends AsyncTask<Void, Void, String> {
         JSONObject obj = datos.getJSONObject(0);
 
         MainActivity.clienteActivo = new Cliente(
-                obj.getInt("id"),
-                obj.getString("nombre"),
-                obj.getString("apellido"),
-                obj.getString("tlfno"),
-                obj.getString("calle"),
-                obj.getString("portal"),
-                obj.getString("piso"),
-                obj.getString("puerta"),
-                obj.getString("urbanizacion"),
-                obj.getString("codigoPostal")
+                obj.getInt(MainActivity.context.getResources().getString(R.string.key_id)),
+                obj.getString(MainActivity.context.getResources().getString(R.string.key_nombre)),
+                obj.getString(MainActivity.context.getResources().getString(R.string.key_apellido)),
+                obj.getString(MainActivity.context.getResources().getString(R.string.key_tlfno)),
+                obj.getString(MainActivity.context.getResources().getString(R.string.key_calle)),
+                obj.getString(MainActivity.context.getResources().getString(R.string.key_portal)),
+                obj.getString(MainActivity.context.getResources().getString(R.string.key_piso)),
+                obj.getString(MainActivity.context.getResources().getString(R.string.key_puerta)),
+                obj.getString(MainActivity.context.getResources().getString(R.string.key_urbanizacion)),
+                obj.getString(MainActivity.context.getResources().getString(R.string.key_cod_postal))
         );
-        Toast.makeText(Login.context, "Login Correcto", Toast.LENGTH_SHORT).show();
+        Toast.makeText(Login.context, MainActivity.context.getResources().getString(R.string.msg_login_correcto_pnreq), Toast.LENGTH_SHORT).show();
         Login.LOGIN = false;
         Intent i = new Intent(Login.context, Menu_principal.class);
         Login.context.startActivity(i);

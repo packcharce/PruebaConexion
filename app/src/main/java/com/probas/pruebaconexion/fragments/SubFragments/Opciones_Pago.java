@@ -1,18 +1,21 @@
 package com.probas.pruebaconexion.fragments.SubFragments;
 
+import android.app.Fragment;
 import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.Spinner;
 
 import com.probas.pruebaconexion.R;
+
+import java.util.Calendar;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -41,31 +44,75 @@ public class Opciones_Pago extends android.app.Fragment implements AdapterView.O
     }
 
     LinearLayout paypalCont, tarjCont, efectCont;
+    EditText numTarj, numSec, fechaCad;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
 
         View view = inflater.inflate(R.layout.fragment_opciones_pago, container, false);
         Spinner metoPago = view.findViewById(R.id.spMetPago);
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(getActivity().getApplicationContext(), R.array.metodosPago, android.R.layout.simple_spinner_dropdown_item);
         metoPago.setAdapter(adapter);
         metoPago.setOnItemSelectedListener(this);
-        getActivity().setTitle("Opciones de Pago");
-
-        //TODO meter el precio en el textview efectivo para preguntar si tiene cambio
 
         paypalCont = view.findViewById(R.id.contPaypal);
         tarjCont = view.findViewById(R.id.contTarjeta);
         efectCont = view.findViewById(R.id.contEfec);
-        return view;
-    }
 
-    // TODO: Rename method, update argument and hook method into UI event
-    public void onButtonPressed(Uri uri) {
-        if (mListener != null) {
-            mListener.onFragmentInteraction(uri);
-        }
+        numTarj = view.findViewById(R.id.num_tarj);
+        numTarj.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                if (!hasFocus) {
+                    if (numTarj.getText().length() != 16)
+                        numTarj.setError(getString(R.string.error_longitud_opc_pago));
+                }
+            }
+        });
+
+        numSec = view.findViewById(R.id.num_seg);
+        numSec.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                if (!hasFocus) {
+                    if (numSec.getText().length() != 3)
+                        numSec.setError(getString(R.string.error_longitud_3_opc_pago));
+                }
+            }
+        });
+
+        fechaCad = view.findViewById(R.id.fecha_caduc);
+        fechaCad.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                if (!hasFocus) {
+                    try {
+                        int mes = Integer.parseInt(String.format("%s%s", fechaCad.getText().charAt(0), fechaCad.getText().charAt(1)));
+                        int anio = Integer.parseInt(String.format("%s%s", fechaCad.getText().charAt(3), fechaCad.getText().charAt(4)));
+
+                        if (fechaCad.getText().charAt(2) == '/') {
+                            if (mes > 12 || mes < 1) {
+                                fechaCad.setError(getString(R.string.error_mes_opc_pago));
+                            } else {
+                                Calendar c = Calendar.getInstance();
+                                int anio2 = c.get(Calendar.YEAR) % 2000;
+                                int mes2 = c.get(Calendar.MONTH);
+                                if (((anio == anio2) && (mes < (mes2 + 1))) || (anio < anio2)) {
+                                    fechaCad.setError(getString(R.string.error_tarj_caducada_opc_pago));
+                                }
+                            }
+                        }else{
+                            fechaCad.setError(getString(R.string.error_formato_opc_pago));
+                        }
+                    } catch (NumberFormatException | IndexOutOfBoundsException ex) {
+                        fechaCad.setError(getString(R.string.error_formato_opc_pago));
+                    }
+                }
+            }
+        });
+
+        return view;
     }
 
     @Override
@@ -75,7 +122,7 @@ public class Opciones_Pago extends android.app.Fragment implements AdapterView.O
             mListener = (OnFragmentInteractionListener) context;
         } else {
             throw new RuntimeException(context.toString()
-                    + " must implement OnFragmentInteractionListener");
+                    + getString(R.string.excep_notice_dialog_listener));
         }
     }
 
@@ -87,8 +134,11 @@ public class Opciones_Pago extends android.app.Fragment implements AdapterView.O
 
     @Override
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-        switch (position){
+        switch (position) {
             case 0:
+                efectCont.setVisibility(View.GONE);
+                tarjCont.setVisibility(View.GONE);
+                paypalCont.setVisibility(View.GONE);
                 break;
             case 2:
                 efectCont.setVisibility(View.GONE);
@@ -105,6 +155,7 @@ public class Opciones_Pago extends android.app.Fragment implements AdapterView.O
                 tarjCont.setVisibility(View.GONE);
                 efectCont.setVisibility(View.VISIBLE);
                 break;
+
         }
     }
 
@@ -124,7 +175,6 @@ public class Opciones_Pago extends android.app.Fragment implements AdapterView.O
      * >Communicating with Other Fragments</a> for more information.
      */
     public interface OnFragmentInteractionListener {
-        // TODO: Update argument type and name
         void onFragmentInteraction(Uri uri);
     }
 }

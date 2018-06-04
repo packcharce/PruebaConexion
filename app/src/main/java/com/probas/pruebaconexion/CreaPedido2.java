@@ -13,6 +13,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.gson.Gson;
+import com.probas.pruebaconexion.ClasesBasicas.Pizza;
 import com.probas.pruebaconexion.fragments.ConfirmacionPedido;
 import com.probas.pruebaconexion.fragments.SubFragments.Opciones_Pago;
 import com.probas.pruebaconexion.fragments.SubFragments.Sub_Ensalada;
@@ -58,7 +59,7 @@ public class CreaPedido2 extends AppCompatActivity implements
         numeroDePizza = 0;
 
         pedido = new Pedido();
-        pedido.getListaPizzas().put(numeroDePizza, new Pizza("none"));
+        pedido.getListaPizzas().put(numeroDePizza, new Pizza(getString(R.string.default_name_pizza)));
 
         cargaFragments();
 
@@ -74,7 +75,7 @@ public class CreaPedido2 extends AppCompatActivity implements
             @Override
             public void onClick(View v) {
                 numeroDePizza++;
-                pedido.getListaPizzas().put(numeroDePizza, new Pizza("Custom"));
+                pedido.getListaPizzas().put(numeroDePizza, new Pizza(getString(R.string.default_name_pizza)));
 
                 contPizzas.setText(
                         String.valueOf(Integer.parseInt(contPizzas.getText().toString()) + 1));
@@ -107,7 +108,7 @@ public class CreaPedido2 extends AppCompatActivity implements
 
                         fasesTotales--;
                     } else {
-                        Toast.makeText(getApplicationContext(), "Solo puedes borrar pizzas", Toast.LENGTH_LONG).show();
+                        Toast.makeText(getApplicationContext(), R.string.error_no_borrar_panel_no_pizza, Toast.LENGTH_LONG).show();
                     }
                 }
             }
@@ -145,13 +146,11 @@ public class CreaPedido2 extends AppCompatActivity implements
 
                 } else {
                     DialogFragment dialog = new ConfirmacionPedido();
-                    dialog.show(getFragmentManager(), "NoticeDialogFragment");
+                    dialog.show(getFragmentManager(), getString(R.string.tag_name_dialog_confir_pedido));
                 }
                 anterior.setVisibility(View.VISIBLE);
             }
         });
-
-
     }
 
     FragmentManager fm = getFragmentManager();
@@ -165,21 +164,21 @@ public class CreaPedido2 extends AppCompatActivity implements
             HashMap<String, String> params = new HashMap<>();
 
             //TODO quitar todo este tocho y pasar el objeto Pedido p directamente
-            params.put("refCliente", String.valueOf(MainActivity.clienteActivo.getId()));
-            params.put("numPedido", String.valueOf(p.getNumPedido()));
-            params.put("extra_domicilio", String.valueOf(p.getExtra_domicilio()));
-            params.put("extra_recoger", String.valueOf(p.getExtra_domicilio()));
-            params.put("extra_local", String.valueOf(p.getExtra_local()));
-            params.put("subtotal", String.valueOf(p.getSubtotal()));
-            params.put("impuesto", String.valueOf(p.getImpuesto()));
-            params.put("total", String.valueOf(p.getTotal()));
+            params.put(getString(R.string.key_ref_cliente_pedido), String.valueOf(MainActivity.clienteActivo.getId()));
+            params.put(getString(R.string.key_num_pedido), String.valueOf(p.getNumPedido()));
+            params.put(getString(R.string.key_extra_domicilio), String.valueOf(p.getExtra_domicilio()));
+            params.put(getString(R.string.key_extra_recoger), String.valueOf(p.getExtra_domicilio()));
+            params.put(getString(R.string.key_extra_local), String.valueOf(p.getExtra_local()));
+            params.put(getString(R.string.key_subtotal_pedido), String.valueOf(p.getSubtotal()));
+            params.put(getString(R.string.key_impuesto_pedido), String.valueOf(p.getImpuesto()));
+            params.put(getString(R.string.key_total_pedido), String.valueOf(p.getTotal()));
 
-            params.put("listaPizzas", new Gson().toJson(p.getListaPizzas()));
-            params.put("listaLasania", new Gson().toJson(p.getListaLas()));
-            params.put("listaEnsaladas", new Gson().toJson(p.getListaEnsa()));
-            params.put("listaBebs", new Gson().toJson(p.getListaBebs()));
-            params.put("listaPasta", new Gson().toJson(p.getListaPasta()));
-            params.put("listaHamburguesas", new Gson().toJson(p.getListaHamb()));
+            params.put(getString(R.string.key_lista_pizzas_pedido), new Gson().toJson(p.getListaPizzas()));
+            params.put(getString(R.string.key_lista_lasania_pedido), new Gson().toJson(p.getListaLas()));
+            params.put(getString(R.string.key_lista_ensalada_pedido), new Gson().toJson(p.getListaEnsa()));
+            params.put(getString(R.string.key_lista_bebidas_pedido), new Gson().toJson(p.getListaBebs()));
+            params.put(getString(R.string.key_lista_pasta_pedido), new Gson().toJson(p.getListaPasta()));
+            params.put(getString(R.string.key_lista_hamburguesas_pedido), new Gson().toJson(p.getListaHamb()));
 
 
             PerformNetworkRequest request = new PerformNetworkRequest(Api.URL_CREATE_PEDIDO, params, MainActivity.CODE_POST_REQUEST, 'a');
@@ -187,7 +186,7 @@ public class CreaPedido2 extends AppCompatActivity implements
             this.finish();
         } else {
             dialog.dismiss();
-            Toast.makeText(getApplicationContext(), "Error, pedido vacio", Toast.LENGTH_LONG).show();
+            Toast.makeText(getApplicationContext(), R.string.error_pedido_vacio, Toast.LENGTH_LONG).show();
         }
     }
 

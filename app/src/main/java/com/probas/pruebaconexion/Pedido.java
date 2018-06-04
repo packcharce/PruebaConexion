@@ -1,5 +1,12 @@
 package com.probas.pruebaconexion;
 
+import com.probas.pruebaconexion.ClasesBasicas.Bebida;
+import com.probas.pruebaconexion.ClasesBasicas.Ensalada;
+import com.probas.pruebaconexion.ClasesBasicas.Hamburguesa;
+import com.probas.pruebaconexion.ClasesBasicas.Lasania;
+import com.probas.pruebaconexion.ClasesBasicas.Pasta;
+import com.probas.pruebaconexion.ClasesBasicas.Pizza;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -38,32 +45,16 @@ public class Pedido {
         return listaHamb;
     }
 
-    public void setListaHamb(List<Hamburguesa> listaHamb) {
-        listaHamb = listaHamb;
-    }
-
     public List<Lasania> getListaLas() {
         return listaLas;
-    }
-
-    public void setListaLas(List<Lasania> listaLas) {
-        listaLas = listaLas;
     }
 
     public  List<Ensalada> getListaEnsa() {
         return listaEnsa;
     }
 
-    public  void setListaEnsa(List<Ensalada> listaEnsa) {
-        listaEnsa = listaEnsa;
-    }
-
     public  List<Bebida> getListaBebs() {
         return listaBebs;
-    }
-
-    public  void setListaBebs(List<Bebida> listaBebs) {
-        listaBebs = listaBebs;
     }
 
     public void quitaBebida(String nombre){
@@ -115,44 +106,24 @@ public class Pedido {
         return listaPasta;
     }
 
-    public  void setListaPasta(List<Pasta> listaPasta) {
-        listaPasta = listaPasta;
-    }
-
-    public int getRefCliente() {
-        return refCliente;
-    }
-
     public int getNumPedido() {
         return numPedido;
     }
 
     public void setNumPedido(int numPedido) {
-        this.numPedido = numPedido;
+        numPedido = numPedido;
     }
 
     public float getExtra_domicilio() {
         return extra_domicilio;
     }
 
-    public void setExtra_domicilio(float extra_domicilio) {
-        this.extra_domicilio = extra_domicilio;
-    }
-
     public float getExtra_local() {
         return extra_local;
     }
 
-    public void setExtra_local(float extra_local) {
-        this.extra_local = extra_local;
-    }
-
-    public float getExtra_recoger() {
+    private float getExtra_recoger() {
         return extra_recoger;
-    }
-
-    public void setExtra_recoger(float extra_recoger) {
-        this.extra_recoger = extra_recoger;
     }
 
     public float getSubtotal() {
@@ -165,10 +136,6 @@ public class Pedido {
 
     public float getImpuesto() {
         return impuesto;
-    }
-
-    public void setImpuesto(int impuesto) {
-        this.impuesto = impuesto/100;
     }
 
     public float getTotal() {

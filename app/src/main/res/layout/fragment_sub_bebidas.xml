@@ -21,7 +21,7 @@
                 android:id="@+id/titulo_primera_mitad"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Bebidas"
+                android:text="@string/txt_bebidas_sub_bebidas"
                 android:visibility="visible" />
 
             <Space

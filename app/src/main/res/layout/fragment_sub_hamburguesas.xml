@@ -20,7 +20,7 @@
                 android:id="@+id/titulo_primera_mitad"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Hamburguesas"
+                android:text="@string/tit_hamburguesas_sub_hamb"
                 android:visibility="visible" />
 
             <Space

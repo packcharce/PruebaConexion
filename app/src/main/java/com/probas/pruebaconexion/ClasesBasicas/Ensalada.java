@@ -1,24 +1,25 @@
-package com.probas.pruebaconexion;
+/*
+ * Copyright (c) Carlos Solana. Todos los derechos reservados.
+ */
+
+package com.probas.pruebaconexion.ClasesBasicas;
 
 import java.io.Serializable;
 
-public class Hamburguesa implements Serializable {
+public class Ensalada implements Serializable {
     private int id;
     private String nombre, ingredientes;
     private double precio;
 
-    public Hamburguesa(int id, String nombre, String ingredientes, double precio) {
+    public Ensalada(int id, String nombre, String ingredientes, double precio) {
         this.id=id;
         this.nombre = nombre;
         this.ingredientes = ingredientes;
         this.precio = precio;
     }
 
-    public Hamburguesa(Hamburguesa hamburguesa) {
-        this(hamburguesa.getId(), hamburguesa.getNombre(), hamburguesa.getIngredientes(), hamburguesa.getPrecio());
-    }
-    public int getId() {
-        return id;
+    public Ensalada(Ensalada ensalada) {
+        this(ensalada.getId(), ensalada.getNombre(), ensalada.getIngredientes(), ensalada.getPrecio());
     }
 
     public String getNombre() {
@@ -41,7 +42,7 @@ public class Hamburguesa implements Serializable {
         return precio;
     }
 
-    public void setPrecio(double precio) {
-        this.precio = precio;
+    public int getId() {
+        return id;
     }
 }

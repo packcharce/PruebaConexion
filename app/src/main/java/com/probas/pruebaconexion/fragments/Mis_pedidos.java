@@ -14,6 +14,7 @@ import android.view.ViewGroup;
 
 import com.probas.pruebaconexion.Api;
 import com.probas.pruebaconexion.MainActivity;
+import com.probas.pruebaconexion.Menu_principal;
 import com.probas.pruebaconexion.R;
 import com.probas.pruebaconexion.RequestHandler;
 
@@ -60,9 +61,9 @@ public class Mis_pedidos extends Fragment {
     public static Mis_pedidos newInstance(ArrayList<String> numPedido, ArrayList<String> fecha, ArrayList<String> total) {
         Mis_pedidos fragment = new Mis_pedidos();
         Bundle args = new Bundle();
-        args.putStringArrayList("numPedido", numPedido);
-        args.putStringArrayList("fecha", fecha);
-        args.putStringArrayList("total", total);
+        args.putStringArrayList(Menu_principal.context.getResources().getString(R.string.key_num_pedido_mis_pedidos), numPedido);
+        args.putStringArrayList(Menu_principal.context.getResources().getString(R.string.key_fecha_pedido_mis_pedidos), fecha);
+        args.putStringArrayList(Menu_principal.context.getResources().getString(R.string.key_total_mis_pedidos), total);
         fragment.setArguments(args);
 
         return fragment;
@@ -72,9 +73,9 @@ public class Mis_pedidos extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if(getArguments() != null) {
-            numeroPedido = getArguments().getStringArrayList("numPedido");
-            total = getArguments().getStringArrayList("total");
-            fecha = getArguments().getStringArrayList("fecha");
+            numeroPedido = getArguments().getStringArrayList(Menu_principal.context.getResources().getString(R.string.key_num_pedido_mis_pedidos));
+            total = getArguments().getStringArrayList(Menu_principal.context.getResources().getString(R.string.key_fecha_pedido_mis_pedidos));
+            fecha = getArguments().getStringArrayList(Menu_principal.context.getResources().getString(R.string.key_total_mis_pedidos));
         }
     }
 
@@ -95,19 +96,18 @@ public class Mis_pedidos extends Fragment {
         mRecyclerView.setLayoutManager(mLayoutManager);
 
         Bundle b= new Bundle();
-        b.putStringArrayList("numeroPedido", numeroPedido);
-        b.putStringArrayList("fecha", fecha);
-        b.putStringArrayList("total", total);
+        b.putStringArrayList(Menu_principal.context.getResources().getString(R.string.key_num_pedido_mis_pedidos), numeroPedido);
+        b.putStringArrayList(Menu_principal.context.getResources().getString(R.string.key_fecha_pedido_mis_pedidos), fecha);
+        b.putStringArrayList(Menu_principal.context.getResources().getString(R.string.key_total_mis_pedidos), total);
         // specify an adapter (see also next example)
         mAdapter = new MyAdapter(b, 0, new ClickListener() {
             @Override
             public void onPositionClicked(View v, int position) {
-                System.out.println(position + " Mis Pedidos");
             }
         });
         mRecyclerView.setAdapter(mAdapter);
 
-        getActivity().setTitle("Historial de Pedidos");
+        getActivity().setTitle(getString(R.string.tit_historial_mis_pedidos));
 
         sw = v.findViewById(R.id.swiperefresh);
         sw.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
@@ -136,7 +136,7 @@ public class Mis_pedidos extends Fragment {
             mListener = (OnFragmentInteractionListener) context;
         } else {
             throw new RuntimeException(context.toString()
-                    + " must implement OnFragmentInteractionListener");
+                    + getString(R.string.excep_notice_dialog_listener));
         }
     }
 
@@ -149,8 +149,8 @@ public class Mis_pedidos extends Fragment {
 
     private void pideDatos(){
         HashMap<String, String> params = new HashMap<>();
-        params.put("nombrePar", "refCliente");
-        params.put("valorPar", String.valueOf(MainActivity.clienteActivo.getId()));
+        params.put(getString(R.string.key_nombre_param_menu_princ), getString(R.string.key_ref_cliente_menu_princ));
+        params.put(getString(R.string.key_valor_princ_menu_princ), String.valueOf(MainActivity.clienteActivo.getId()));
         Refrescadora request = new Refrescadora(Api.URL_GET_PEDIDO, params, CODE_POST_REQUEST, '0');
         request.execute();
     }
@@ -210,25 +210,25 @@ public class Mis_pedidos extends Fragment {
             try {
                 JSONObject object = new JSONObject(s);
                 if (object.length() != 0) {
-                    if (!object.getBoolean("error")) {
-                        if (object.getJSONArray("datos").length() != 0) {
+                    if (!object.getBoolean(getResources().getString(R.string.key_error))) {
+                        if (object.getJSONArray(getString(R.string.key_datos_pnreq)).length() != 0) {
                             numeroPedido.clear();
                             fecha.clear();
                             total.clear();
-                            numeroPedido.add("Referencia\npedido");
-                            fecha.add("Fecha\nPedido");
-                            total.add("Precio\npedido");
-                            JSONArray datos = object.getJSONArray("datos");
+                            numeroPedido.add(getString(R.string.tit_numero_pedido_mis_pedidos));
+                            fecha.add(getString(R.string.tit_fecha_mis_pedidos));
+                            total.add(getString(R.string.tit_total_mis_pedidos));
+                            JSONArray datos = object.getJSONArray(getString(R.string.key_datos_pnreq));
                             for (int i = 0; i < datos.length(); i++) {
                                 JSONObject obj = datos.getJSONObject(i);
-                                numeroPedido.add(obj.getString("numPedido"));
-                                fecha.add(obj.getString("fechaPedido"));
-                                total.add(String.valueOf(obj.getDouble("total")));
+                                numeroPedido.add(obj.getString(getString(R.string.key_num_pedido_mis_pedidos)));
+                                fecha.add(obj.getString(getString(R.string.key_fecha_pedido_mis_pedidos)));
+                                total.add(String.valueOf(obj.getDouble(getString(R.string.key_total_mis_pedidos))));
                             }
                             Bundle b= new Bundle();
-                            b.putStringArrayList("numeroPedido", numeroPedido);
-                            b.putStringArrayList("fecha", fecha);
-                            b.putStringArrayList("total", total);
+                            b.putStringArrayList(getString(R.string.key_num_pedido_mis_pedidos), numeroPedido);
+                            b.putStringArrayList(getString(R.string.key_fecha_pedido_mis_pedidos), fecha);
+                            b.putStringArrayList(getString(R.string.key_total_mis_pedidos), total);
                             mAdapter = new MyAdapter(b, 0, null);
                             mRecyclerView.setAdapter(mAdapter);
                         }

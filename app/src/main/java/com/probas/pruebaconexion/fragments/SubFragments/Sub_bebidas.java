@@ -10,7 +10,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.probas.pruebaconexion.Bebida;
+import com.probas.pruebaconexion.ClasesBasicas.Bebida;
 import com.probas.pruebaconexion.CreaPedido2;
 import com.probas.pruebaconexion.MainActivity;
 import com.probas.pruebaconexion.R;
@@ -105,7 +105,7 @@ public class Sub_bebidas extends Fragment {
             mListener = (OnFragmentInteractionListener) context;
         } else {
             throw new RuntimeException(context.toString()
-                    + " must implement OnFragmentInteractionListener");
+                    + getString(R.string.excep_notice_dialog_listener));
         }
     }
 

@@ -10,9 +10,11 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import com.probas.pruebaconexion.Api;
 import com.probas.pruebaconexion.MainActivity;
+import com.probas.pruebaconexion.Menu_principal;
 import com.probas.pruebaconexion.R;
 import com.probas.pruebaconexion.RequestHandler;
 
@@ -103,7 +105,7 @@ public class Datos_cliente extends Fragment {
                 actualizaCliente();
             }
         });
-        getActivity().setTitle("Mi Perfil");
+        getActivity().setTitle(getString(R.string.tit_frag_mi_perfil_miperfil));
         // Inflate the layout for this fragment
         return view;
     }
@@ -122,7 +124,7 @@ public class Datos_cliente extends Fragment {
             mListener = (OnFragmentInteractionListener) context;
         } else {
             throw new RuntimeException(context.toString()
-                    + " must implement OnFragmentInteractionListener");
+                    + getString(R.string.excep_notice_dialog_listener));
         }
     }
 
@@ -149,16 +151,16 @@ public class Datos_cliente extends Fragment {
 
     private void actualizaCliente(){
         HashMap<String, String> params = new HashMap<>();
-        params.put("id", String.valueOf(MainActivity.clienteActivo.getId()));
-        params.put("nombre", editTextNombre.getText().toString());
-        params.put("apellido1", editTextApellido1.getText().toString());
-        params.put("tlfno", editTextTlfno.getText().toString());
-        params.put("calle", editTextCalle.getText().toString());
-        params.put("portal", editTextPortal.getText().toString());
-        params.put("piso", editTextPiso.getText().toString());
-        params.put("puerta", editTextPuerta.getText().toString());
-        params.put("urbanizacion", editTextUrbanizacion.getText().toString());
-        params.put("codigoPostal", editTextCodPostal.getText().toString());
+        params.put(Menu_principal.context.getResources().getString(R.string.key_id), String.valueOf(MainActivity.clienteActivo.getId()));
+        params.put(Menu_principal.context.getResources().getString(R.string.key_nombre), editTextNombre.getText().toString());
+        params.put(Menu_principal.context.getResources().getString(R.string.key_apellido1), editTextApellido1.getText().toString());
+        params.put(Menu_principal.context.getResources().getString(R.string.key_tlfno), editTextTlfno.getText().toString());
+        params.put(Menu_principal.context.getResources().getString(R.string.key_calle), editTextCalle.getText().toString());
+        params.put(Menu_principal.context.getResources().getString(R.string.key_portal), editTextPortal.getText().toString());
+        params.put(Menu_principal.context.getResources().getString(R.string.key_piso), editTextPiso.getText().toString());
+        params.put(Menu_principal.context.getResources().getString(R.string.key_puerta), editTextPuerta.getText().toString());
+        params.put(Menu_principal.context.getResources().getString(R.string.key_urbanizacion), editTextUrbanizacion.getText().toString());
+        params.put(Menu_principal.context.getResources().getString(R.string.key_cod_postal), editTextCodPostal.getText().toString());
 
         Actualizadora ac = new Actualizadora(Api.URL_UPDATE_CLIENTE, params, CODE_POST_REQUEST);
         ac.execute();
@@ -202,10 +204,10 @@ public class Datos_cliente extends Fragment {
             try {
                 JSONObject object = new JSONObject(s);
                 if (object.length() != 0) {
-                    if (!object.getBoolean("error")) {
-                        System.out.println("Actualizado");
+                    if (!object.getBoolean(Menu_principal.context.getResources().getString(R.string.key_error))) {
+                        Toast.makeText(getActivity(), getString(R.string.msg_actualizado_datos_cliente), Toast.LENGTH_LONG).show();
                     }else{
-                        System.out.println(object.getString("message"));
+                        Toast.makeText(getActivity(), object.getString(getString(R.string.key_message_datos_cliente)), Toast.LENGTH_LONG).show();
                     }
                 }
             }catch (JSONException js){

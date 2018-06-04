@@ -8,6 +8,7 @@ import android.content.DialogInterface;
 import android.os.Bundle;
 
 import com.probas.pruebaconexion.CreaPedido2;
+import com.probas.pruebaconexion.R;
 
 
 public class ConfirmacionPedido extends DialogFragment {
@@ -28,7 +29,7 @@ public class ConfirmacionPedido extends DialogFragment {
         } catch (ClassCastException e) {
             // The activity doesn't implement the interface, throw exception
             throw new ClassCastException(activity.toString()
-                    + " must implement NoticeDialogListener");
+                    + getString(R.string.excep_notice_dialog_listener));
         }
     }
 
@@ -38,13 +39,13 @@ public class ConfirmacionPedido extends DialogFragment {
         // Use the Builder class for convenient dialog construction
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
         CreaPedido2.pedido.calculaTotal();
-        builder.setMessage("El pedido se creará, ¿esta seguro? Asciende a: "+ CreaPedido2.pedido.getTotal() + "€")
-                .setPositiveButton("Tiiii!!!", new DialogInterface.OnClickListener() {
+        builder.setMessage(String.format("%s%s€", getString(R.string.msq_crea_pedido_dialogo_confped), CreaPedido2.pedido.getTotal()))
+                .setPositiveButton(R.string.msg_si_confpedido, new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
                         mListener.onDialogPositiveClick(ConfirmacionPedido.this);
                     }
                 })
-                .setNegativeButton("Quieto paraoo!!!!", new DialogInterface.OnClickListener() {
+                .setNegativeButton(R.string.msq_no_confpedido, new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
                         mListener.onDialogNegativeClick(ConfirmacionPedido.this);
                     }

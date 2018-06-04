@@ -1,5 +1,6 @@
 package com.probas.pruebaconexion;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -17,6 +18,7 @@ import java.util.HashMap;
 
 public class Registro extends AppCompatActivity {
 
+    private static Context context;
     EditText
             editTextNombre,
             editTextApellido1,
@@ -48,6 +50,7 @@ public class Registro extends AppCompatActivity {
         editTextContrasenia = findViewById(R.id.editTextContrasenia);
         editTextCodPostal = findViewById(R.id.editTextCodPostal);
 
+        context=getApplicationContext();
 
         buttonRegistro = findViewById(R.id.buttonAddUpdate);
 
@@ -55,7 +58,6 @@ public class Registro extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 crearCliente();
-                System.out.println("Cargado todo");
             }
         });
     }
@@ -78,61 +80,48 @@ public class Registro extends AppCompatActivity {
 
         //validating the inputs
         if (TextUtils.isEmpty(nombre)) {
-            editTextNombre.setError("Please enter name");
+            editTextNombre.setError(getString(R.string.error_introd_nombre_registro));
             editTextNombre.requestFocus();
             return;
         }
 
         if (TextUtils.isEmpty(ap1)) {
-            editTextApellido1.setError("Please enter real ap");
+            editTextApellido1.setError(getString(R.string.error_introd_ap_registro));
             editTextApellido1.requestFocus();
             return;
         }
         if (TextUtils.isEmpty(tlfno)) {
-            editTextTlfno.setError("Please enter tlfn");
+            editTextTlfno.setError(getString(R.string.error_introd_tlfn_registro));
             editTextTlfno.requestFocus();
             return;
         }
         if (TextUtils.isEmpty(calle)) {
-            editTextCalle.setError("Please enter calle");
+            editTextCalle.setError(getString(R.string.error_introd_calle_registro));
             editTextCalle.requestFocus();
             return;
         }
         if (TextUtils.isEmpty(portal)) {
-            editTextPortal.setError("Please enter portal");
+            editTextPortal.setError(getString(R.string.error_introd_portal));
             editTextPortal.requestFocus();
             return;
         }
-        /*
-        if (TextUtils.isEmpty(piso)) {
-            editTextPiso.setError("Please enter piso");
-            editTextPiso.requestFocus();
-            return;
-        }
-        */
         if (puerta.length() > 3) {
-            editTextPuerta.setError("Por favor, maximo 3 caracteres");
+            editTextPuerta.setError(getString(R.string.error_num_caract_puerta_registro));
             editTextPuerta.requestFocus();
             return;
         }
-        /*
-        if (TextUtils.isEmpty(urba)) {
-            editTextPuerta.setError("Please enter urba");
-            editTextPuerta.requestFocus();
-            return;
-        }*/
         if (TextUtils.isEmpty(user)) {
-            editTextUsuario.setError("Please enter user");
+            editTextUsuario.setError(getString(R.string.error_introd_user_registro));
             editTextUsuario.requestFocus();
             return;
         }
         if (TextUtils.isEmpty(pass)) {
-            editTextContrasenia.setError("Please enter pass");
+            editTextContrasenia.setError(getString(R.string.error_introd_pass_registro));
             editTextContrasenia.requestFocus();
             return;
         }
-        if (TextUtils.isEmpty(codPostal)) {
-            editTextCodPostal.setError("Please enter codpostal");
+        if (TextUtils.isEmpty(codPostal) || codPostal.length() != 5) {
+            editTextCodPostal.setError(getString(R.string.error_introd_cod_postal_registro));
             editTextCodPostal.requestFocus();
             return;
         }
@@ -140,17 +129,17 @@ public class Registro extends AppCompatActivity {
         //if validation passes
 
         HashMap<String, String> params = new HashMap<>();
-        params.put("nombre", nombre);
-        params.put("apellido1", ap1);
-        params.put("tlfno", tlfno);
-        params.put("calle", calle);
-        params.put("portal", portal);
-        params.put("piso", piso);
-        params.put("puerta", puerta);
-        params.put("urbanizacion", urba);
-        params.put("usuario", user);
-        params.put("contrasenia", pass);
-        params.put("codigoPostal", codPostal);
+        params.put(Registro.context.getResources().getString(R.string.key_nombre), nombre);
+        params.put(Registro.context.getResources().getString(R.string.key_apellido), ap1);
+        params.put(Registro.context.getResources().getString(R.string.key_tlfno), tlfno);
+        params.put(Registro.context.getResources().getString(R.string.key_calle), calle);
+        params.put(Registro.context.getResources().getString(R.string.key_portal), portal);
+        params.put(Registro.context.getResources().getString(R.string.key_piso), piso);
+        params.put(Registro.context.getResources().getString(R.string.key_puerta), puerta);
+        params.put(Registro.context.getResources().getString(R.string.key_urbanizacion), urba);
+        params.put(Registro.context.getResources().getString(R.string.key_usuario_login), user);
+        params.put(Registro.context.getResources().getString(R.string.key_pass_login), pass);
+        params.put(Registro.context.getResources().getString(R.string.key_cod_postal), codPostal);
 
 
         Registradora request = new Registradora(Api.URL_CREATE_CLIENTE, params, MainActivity.CODE_POST_REQUEST, 'a');
@@ -197,13 +186,13 @@ public class Registro extends AppCompatActivity {
             try {
                 JSONObject object = new JSONObject(s);
                 if (object.length() != 0) {
-                    if (!object.getBoolean("error")) {
-                        Toast.makeText(getApplicationContext(), "Registrado Correctamente, haga login", Toast.LENGTH_SHORT).show();
+                    if (!object.getBoolean(Login.context.getResources().getString(R.string.key_error))) {
+                        Toast.makeText(getApplicationContext(), R.string.msg_registro_exito_registro, Toast.LENGTH_SHORT).show();
                         Intent i = new Intent(getApplicationContext(), Login.class);
                         startActivity(i);
                         finishAffinity();
                     } else {
-                        Toast.makeText(getApplicationContext(), object.getString("descError"), Toast.LENGTH_LONG).show();
+                        Toast.makeText(getApplicationContext(), object.getString(getString(R.string.key_desc_error_registro)), Toast.LENGTH_LONG).show();
                     }
                 }
 
