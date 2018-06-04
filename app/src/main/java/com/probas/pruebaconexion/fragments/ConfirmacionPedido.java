@@ -13,7 +13,7 @@ import com.probas.pruebaconexion.R;
 
 public class ConfirmacionPedido extends DialogFragment {
 
-    NoticeDialogListener mListener;
+    private NoticeDialogListener mListener;
 
     public interface NoticeDialogListener {
         void onDialogPositiveClick(DialogFragment dialog);

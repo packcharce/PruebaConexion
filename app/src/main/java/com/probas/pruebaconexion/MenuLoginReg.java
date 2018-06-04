@@ -8,7 +8,8 @@ import android.widget.Button;
 
 public class MenuLoginReg extends AppCompatActivity {
 
-    Button login,registro;
+    private Button login;
+    private Button registro;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

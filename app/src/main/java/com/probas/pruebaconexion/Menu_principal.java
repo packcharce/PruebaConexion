@@ -110,24 +110,31 @@ public class Menu_principal extends AppCompatActivity
         //item.setCheckable(false);
         Intent i;
         try {
-            if (id == R.id.nav_mis_pedidos) {
-                newFragment = Mis_pedidos.newInstance(numeroPedido, fecha, total);
-                transaction.replace(R.id.fragment, newFragment);
-                transaction.commit();
-            } else if (id == R.id.nav_perfil) {
-                newFragment = Datos_cliente.newInstance();
-                transaction.replace(R.id.fragment, newFragment);
-                transaction.commit();
+            switch (id) {
+                case R.id.nav_mis_pedidos:
+                    newFragment = Mis_pedidos.newInstance(numeroPedido, fecha, total);
+                    transaction.replace(R.id.fragment, newFragment);
+                    transaction.commit();
+                    break;
+                case R.id.nav_perfil:
+                    newFragment = Datos_cliente.newInstance();
+                    transaction.replace(R.id.fragment, newFragment);
+                    transaction.commit();
 
-            } else if (id == R.id.nav_ofertas) {
+                    break;
+                case R.id.nav_ofertas:
 
-            } else if (id == R.id.nav_pizzas) {
+                    break;
+                case R.id.nav_pizzas:
 
-            } else if (id == R.id.nav_contacto) {
+                    break;
+                case R.id.nav_contacto:
 
-            } else if (id == R.id.nav_crea_pedido) {
-                i = new Intent(this, CreaPedido2.class);
-                startActivity(i);
+                    break;
+                case R.id.nav_crea_pedido:
+                    i = new Intent(this, CreaPedido2.class);
+                    startActivity(i);
+                    break;
             }
 
             DrawerLayout drawer = findViewById(R.id.drawer_layout);

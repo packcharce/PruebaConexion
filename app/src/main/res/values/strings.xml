@@ -161,7 +161,6 @@
     <string name="key_num_pizza_my_adapter" translatable="false">numeroDePizza</string>
 
     <!-- Opciones-pago -->
-    <string name="msg_op_pago_oppago">Opciones de Pago</string>
 
     <string name="txt_correo_electronico_opc_pago">Correo Electrónico</string>
     <string name="txt_contrasena_paypal_opc_pago">Contraseña PayPal</string>
@@ -216,6 +215,7 @@
     <string name="error_mes_opc_pago">El mes introducido no es correcto.</string>
     <string name="error_tarj_caducada_opc_pago">La tarjeta se encuentra caducada.</string>
     <string name="error_formato_opc_pago">Error de formato de numero mm/aa.</string>
+    <string name="txt_mm_aa_opc_pago">mm/aa</string>
 
 
 </resources>

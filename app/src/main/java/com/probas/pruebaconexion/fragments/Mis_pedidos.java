@@ -119,9 +119,9 @@ public class Mis_pedidos extends Fragment {
 
         return v;
     }
-    SwipeRefreshLayout sw;
-    RecyclerView mRecyclerView;
-    RecyclerView.Adapter mAdapter;
+    private SwipeRefreshLayout sw;
+    private RecyclerView mRecyclerView;
+    private RecyclerView.Adapter mAdapter;
 
     public void onButtonPressed(Uri uri) {
         if (mListener != null) {
@@ -189,10 +189,6 @@ public class Mis_pedidos extends Fragment {
             this.tipoDato = tipoDato;
         }
 
-        @Override
-        protected void onPreExecute() {
-            super.onPreExecute();
-        }
         @Override
         protected String doInBackground(Void... voids) {
             RequestHandler requestHandler = new RequestHandler();

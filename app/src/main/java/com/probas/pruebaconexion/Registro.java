@@ -19,19 +19,19 @@ import java.util.HashMap;
 public class Registro extends AppCompatActivity {
 
     private static Context context;
-    EditText
-            editTextNombre,
-            editTextApellido1,
-            editTextTlfno,
-            editTextCalle,
-            editTextPortal,
-            editTextPiso,
-            editTextPuerta,
-            editTextUrbanizacion,
-            editTextUsuario,
-            editTextContrasenia,
-            editTextCodPostal;
-    Button buttonRegistro;
+    private EditText
+            editTextNombre;
+    private EditText editTextApellido1;
+    private EditText editTextTlfno;
+    private EditText editTextCalle;
+    private EditText editTextPortal;
+    private EditText editTextPiso;
+    private EditText editTextPuerta;
+    private EditText editTextUrbanizacion;
+    private EditText editTextUsuario;
+    private EditText editTextContrasenia;
+    private EditText editTextCodPostal;
+    private Button buttonRegistro;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -62,7 +62,8 @@ public class Registro extends AppCompatActivity {
         });
     }
 
-    String user, pass;
+    private String user;
+    private String pass;
 
     private void crearCliente() {
         String nombre = editTextNombre.getText().toString();
@@ -148,26 +149,21 @@ public class Registro extends AppCompatActivity {
 
     private class Registradora extends AsyncTask<Void, Void, String> {
 
-        String url;
+        final String url;
 
         //the parameters
-        HashMap<String, String> params;
+        final HashMap<String, String> params;
 
         //the request code to define whether it is a GET or POST
-        int requestCode;
+        final int requestCode;
 
-        char tipoDato;
+        final char tipoDato;
 
         private Registradora(String url, HashMap<String, String> params, int requestCode, char tipoDato) {
             this.url = url;
             this.params = params;
             this.requestCode = requestCode;
             this.tipoDato = tipoDato;
-        }
-
-        @Override
-        protected void onPreExecute() {
-            super.onPreExecute();
         }
 
         @Override

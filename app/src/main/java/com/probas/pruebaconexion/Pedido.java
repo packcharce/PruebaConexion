@@ -12,22 +12,21 @@ import java.util.HashMap;
 import java.util.List;
 
 public class Pedido {
-    private int refCliente;
     private static int numPedido;
     private float extra_domicilio, extra_local, extra_recoger;
     private float subtotal, impuesto, total;
 
-    private HashMap<Integer, Pizza> listaPizzas;
+    private final HashMap<Integer, Pizza> listaPizzas;
 
-    private List<Hamburguesa> listaHamb;
-    private List<Lasania> listaLas;
-    private List<Ensalada> listaEnsa;
-    private List<Bebida> listaBebs;
-    private List<Pasta> listaPasta;
+    private final List<Hamburguesa> listaHamb;
+    private final List<Lasania> listaLas;
+    private final List<Ensalada> listaEnsa;
+    private final List<Bebida> listaBebs;
+    private final List<Pasta> listaPasta;
 
 
     public Pedido() {
-        this.refCliente = MainActivity.clienteActivo.getId();
+        int refCliente = MainActivity.clienteActivo.getId();
         numPedido++;
         listaPizzas = new HashMap<>();
         listaHamb = new ArrayList<>();
@@ -108,10 +107,6 @@ public class Pedido {
 
     public int getNumPedido() {
         return numPedido;
-    }
-
-    public void setNumPedido(int numPedido) {
-        numPedido = numPedido;
     }
 
     public float getExtra_domicilio() {

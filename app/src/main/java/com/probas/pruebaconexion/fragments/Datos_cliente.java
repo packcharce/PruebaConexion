@@ -47,7 +47,6 @@ public class Datos_cliente extends Fragment {
             editTextPuerta,
             editTextUrbanizacion,
             editTextCodPostal;
-    private Button buttonRegistro;
 
     private OnFragmentInteractionListener mListener;
 
@@ -64,11 +63,6 @@ public class Datos_cliente extends Fragment {
     // TODO: Rename and change types and number of parameters
     public static Datos_cliente newInstance() {
         return new Datos_cliente();
-    }
-
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
     }
 
     @Override
@@ -96,7 +90,7 @@ public class Datos_cliente extends Fragment {
         editTextUrbanizacion.setText(MainActivity.clienteActivo.getUrbanizacion());
         editTextCodPostal.setText(MainActivity.clienteActivo.getCodigoPostal());
 
-        buttonRegistro = view.findViewById(R.id.buttonAddUpdate);
+        Button buttonRegistro = view.findViewById(R.id.buttonAddUpdate);
 
         buttonRegistro.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -184,10 +178,6 @@ public class Datos_cliente extends Fragment {
             this.requestCode = requestCode;
         }
 
-        @Override
-        protected void onPreExecute() {
-            super.onPreExecute();
-        }
         @Override
         protected String doInBackground(Void... voids) {
             RequestHandler requestHandler = new RequestHandler();

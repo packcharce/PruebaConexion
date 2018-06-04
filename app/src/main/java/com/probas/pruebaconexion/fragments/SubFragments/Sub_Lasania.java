@@ -32,7 +32,7 @@ public class Sub_Lasania extends Fragment {
     private static final String ARG_PARAM1 = "lasania";
     private static final int TIPO_LASANIA = 6;
 
-    public static ArrayList<Lasania> listaLasania;
+    private static ArrayList<Lasania> listaLasania;
 
     private OnFragmentInteractionListener mListener;
 

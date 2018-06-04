@@ -44,7 +44,7 @@
     <string name="error_introd_user_registro">Enter username</string>
     <string name="error_introd_pass_registro">Enter password</string>
     <string name="error_introd_cod_postal_registro">Enter 5 number postalcode</string>
-    <string name="msg_registro_exito_registro">Registration succesful, sign up</string>
+    <string name="msg_registro_exito_registro">Registration successful, sign up</string>
     <string name="msq_crea_pedido_dialogo_confped">"The order will be created, Are you sure? It will cost: "</string>
     <string name="msg_si_confpedido">Accept</string>
     <string name="msq_no_confpedido">No</string>
@@ -52,7 +52,6 @@
     <string name="msg_actualizado_datos_cliente">Updated</string>
     <string name="btn_guardar_cambios_datos_cliente">Save changes</string>
     <string name="tit_historial_mis_pedidos">Order history</string>
-    <string name="msg_op_pago_oppago">Payment options</string>
     <string name="txt_correo_electronico_opc_pago">Email</string>
     <string name="txt_contrasena_paypal_opc_pago">PayPal password</string>
     <string name="txt_numero_de_tarjeta_opc_pago">Credit card number</string>

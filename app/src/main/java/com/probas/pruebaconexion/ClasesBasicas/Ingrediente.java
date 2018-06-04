@@ -8,7 +8,7 @@ package com.probas.pruebaconexion.ClasesBasicas;
 import java.io.Serializable;
 
 public class Ingrediente implements Serializable{
-    private int id;
+    private final int id;
     private static short numeroIngrediente=0;
     private String tipo, nombre;
     private static int stock;
@@ -31,11 +31,11 @@ public class Ingrediente implements Serializable{
     public Ingrediente(Ingrediente ingrediente) {
         this(ingrediente.getId(), ingrediente.getTipo(), ingrediente.getNombre(), ingrediente.getStock(), ingrediente.getPrecio());
     }
-    public int getId() {
+    private int getId() {
         return id;
     }
 
-    public String getTipo() {
+    private String getTipo() {
         return tipo;
     }
 
@@ -51,7 +51,7 @@ public class Ingrediente implements Serializable{
         this.nombre = nombre;
     }
 
-    public int getStock() {
+    private int getStock() {
         return stock;
     }
 

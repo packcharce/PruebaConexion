@@ -39,11 +39,11 @@ public class CreaPedido2 extends AppCompatActivity implements
     public static Pedido pedido;
 
     private int numeroDePizza;
-    ArrayList<Fragment> listaFragments;
+    private ArrayList<Fragment> listaFragments;
 
-    TextView contPizzas;
-    Button siguiente;
-    Button anterior;
+    private TextView contPizzas;
+    private Button siguiente;
+    private Button anterior;
 
 
     private int fasePedido, fasesTotales;
@@ -153,7 +153,7 @@ public class CreaPedido2 extends AppCompatActivity implements
         });
     }
 
-    FragmentManager fm = getFragmentManager();
+    private final FragmentManager fm = getFragmentManager();
 
     @Override
     public void onDialogPositiveClick(DialogFragment dialog) {

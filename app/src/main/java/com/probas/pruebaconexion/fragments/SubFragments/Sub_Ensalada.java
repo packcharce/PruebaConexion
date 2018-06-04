@@ -32,7 +32,7 @@ public class Sub_Ensalada extends Fragment {
     private static final String ARG_PARAM1 = "ensaladas";
     private static final int TIPO_ENSALADAS = 4;
 
-    public static ArrayList<Ensalada> listaEnsaladas;
+    private static ArrayList<Ensalada> listaEnsaladas;
 
     private OnFragmentInteractionListener mListener;
 
@@ -57,9 +57,9 @@ public class Sub_Ensalada extends Fragment {
         super.onCreate(savedInstanceState);
     }
 
-    RecyclerView mRecyclerView;
-    RecyclerView.LayoutManager mLayoutManager;
-    RecyclerView.Adapter mAdapter;
+    private RecyclerView mRecyclerView;
+    private RecyclerView.LayoutManager mLayoutManager;
+    private RecyclerView.Adapter mAdapter;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {

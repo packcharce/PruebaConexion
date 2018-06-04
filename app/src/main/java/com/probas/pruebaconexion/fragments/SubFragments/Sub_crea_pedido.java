@@ -78,12 +78,15 @@ public class Sub_crea_pedido extends Fragment implements AdapterView.OnItemSelec
         creaPizzaPref();
     }
 
-    RecyclerView mRecyclerView, mRecyclerView2;
-    RecyclerView.LayoutManager mLayoutManager;
-    Switch switchMitades;
-    Spinner spinner;
-    View v;
-    TextView dividir, tituloGeneral, tituloSegMitad;
+    private RecyclerView mRecyclerView;
+    private RecyclerView mRecyclerView2;
+    private RecyclerView.LayoutManager mLayoutManager;
+    private Switch switchMitades;
+    private Spinner spinner;
+    private View v;
+    private TextView dividir;
+    private TextView tituloGeneral;
+    private TextView tituloSegMitad;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -115,7 +118,7 @@ public class Sub_crea_pedido extends Fragment implements AdapterView.OnItemSelec
         }
     }
 
-    RecyclerView.Adapter mAdapter;
+    private RecyclerView.Adapter mAdapter;
 
     private void cargaRecyclers() {
 
@@ -232,7 +235,7 @@ public class Sub_crea_pedido extends Fragment implements AdapterView.OnItemSelec
         mListener = null;
     }
 
-    byte pizzaActual = -1;
+    private byte pizzaActual = -1;
 
     @Override
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
@@ -279,7 +282,9 @@ public class Sub_crea_pedido extends Fragment implements AdapterView.OnItemSelec
         }
     }
 
-    List<Ingrediente> pizzaBarbacoa, pizzaMargarita, cQuesos;
+    private List<Ingrediente> pizzaBarbacoa;
+    private List<Ingrediente> pizzaMargarita;
+    private List<Ingrediente> cQuesos;
 
     private void creaPizzaPref() {
         pizzaBarbacoa = new LinkedList<>();

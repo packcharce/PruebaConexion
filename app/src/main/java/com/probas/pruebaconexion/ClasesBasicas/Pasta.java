@@ -7,9 +7,9 @@ package com.probas.pruebaconexion.ClasesBasicas;
 import java.io.Serializable;
 
 public class Pasta implements Serializable {
-    private int id;
+    private final int id;
     private String nombre, ingredientes;
-    private double precio;
+    private final double precio;
 
     public Pasta(int id, String nombre, String ingredientes, double precio) {
         this.id=id;
@@ -21,7 +21,7 @@ public class Pasta implements Serializable {
     public Pasta(Pasta pasta) {
         this(pasta.getId(), pasta.getNombre(), pasta.getIngredientes(), pasta.getPrecio());
     }
-    public int getId() {
+    private int getId() {
         return id;
     }
 
@@ -33,7 +33,7 @@ public class Pasta implements Serializable {
         this.nombre = nombre;
     }
 
-    public String getIngredientes() {
+    private String getIngredientes() {
         return ingredientes;
     }
 

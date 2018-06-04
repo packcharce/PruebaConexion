@@ -7,9 +7,10 @@ package com.probas.pruebaconexion.ClasesBasicas;
 import java.io.Serializable;
 
 public class Bebida implements Serializable {
-    private int id;
-    private String nombre, ingredientes;
-    private double precio;
+    private final int id;
+    private String nombre;
+    private final String ingredientes;
+    private final double precio;
 
     public Bebida(int id, String nombre, String ingredientes, double precio) {
         this.id=id;
@@ -21,7 +22,7 @@ public class Bebida implements Serializable {
         this(bebida.getId(), bebida.getNombre(), bebida.getIngredientes(), bebida.getPrecio());
     }
 
-    public int getId() {
+    private int getId() {
         return id;
     }
 
@@ -33,7 +34,7 @@ public class Bebida implements Serializable {
         this.nombre = nombre;
     }
 
-    public String getIngredientes() {
+    private String getIngredientes() {
         return ingredientes;
     }
 

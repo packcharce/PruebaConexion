@@ -31,7 +31,7 @@ public class Sub_Pasta extends Fragment {
     private static final String ARG_PARAM1 = "pasta";
     private static final int TIPO_PASTA = 5;
 
-    public static ArrayList<Pasta> listaPasta;
+    private static ArrayList<Pasta> listaPasta;
 
     private OnFragmentInteractionListener mListener;
 

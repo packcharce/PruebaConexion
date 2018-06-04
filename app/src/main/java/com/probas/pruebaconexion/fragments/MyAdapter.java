@@ -48,9 +48,11 @@ public class MyAdapter extends RecyclerView.Adapter {
     private int tipoObjeto;
 
 
-    public static class PedidosViewHolder extends RecyclerView.ViewHolder {
+    static class PedidosViewHolder extends RecyclerView.ViewHolder {
         // each data item is just a string in this case
-        public TextView total, fecha, numPedido;
+        TextView total;
+        TextView fecha;
+        TextView numPedido;
         PedidosViewHolder(View v) {
             super(v);
             total = v.findViewById(R.id.total);
@@ -59,7 +61,7 @@ public class MyAdapter extends RecyclerView.Adapter {
         }
     }
 
-    public static class IngredsViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
+    static class IngredsViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
         TextView nombIngred, numIngreds;
         Button anhade, quita;
         int numeroDePizza;
@@ -100,7 +102,7 @@ public class MyAdapter extends RecyclerView.Adapter {
     }
 
 
-    public static class BebidasViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
+    static class BebidasViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
         // each data item is just a string in this case
         TextView nombBebida, numIngreds;
         Button anhade, quita;
@@ -138,7 +140,7 @@ public class MyAdapter extends RecyclerView.Adapter {
         }
     }
 
-    public static class HamburguesasViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
+    static class HamburguesasViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         // each data item is just a string in this case
         TextView nombHamb, numIngreds;
         Button anhade, quita;
@@ -176,7 +178,7 @@ public class MyAdapter extends RecyclerView.Adapter {
         }
     }
 
-    public static class LasaniaViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
+    static class LasaniaViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
         TextView nombLas, numIngreds;
         Button anhade, quita;
         private WeakReference<ClickListener> listenerRef;
@@ -213,7 +215,7 @@ public class MyAdapter extends RecyclerView.Adapter {
         }
     }
 
-    public static class EnsaladaViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
+    static class EnsaladaViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
         // each data item is just a string in this case
         TextView nombEnsal, numIngreds;
         Button anhade, quita;
@@ -251,7 +253,7 @@ public class MyAdapter extends RecyclerView.Adapter {
         }
     }
 
-    public static class PastaViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
+    static class PastaViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
         TextView nombPasta, numIngreds;
         Button anhade, quita;
         private WeakReference<ClickListener> listenerRef;

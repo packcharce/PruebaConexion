@@ -38,13 +38,12 @@ public class Opciones_Pago extends android.app.Fragment implements AdapterView.O
         return new Opciones_Pago();
     }
 
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-    }
-
-    LinearLayout paypalCont, tarjCont, efectCont;
-    EditText numTarj, numSec, fechaCad;
+    private LinearLayout paypalCont;
+    private LinearLayout tarjCont;
+    private LinearLayout efectCont;
+    private EditText numTarj;
+    private EditText numSec;
+    private EditText fechaCad;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,

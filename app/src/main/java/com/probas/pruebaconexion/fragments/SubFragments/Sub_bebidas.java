@@ -32,7 +32,7 @@ public class Sub_bebidas extends Fragment {
     private static final String ARG_PARAM1 = "bebidas";
     private static final int TIPO_BEBIDAS = 2;
 
-    public static ArrayList<Bebida> listaBebidas;
+    private static ArrayList<Bebida> listaBebidas;
 
     private OnFragmentInteractionListener mListener;
 

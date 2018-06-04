@@ -12,9 +12,9 @@ import java.util.HashMap;
 public class Login extends AppCompatActivity {
 
     static Context context;
-    EditText editTextUsuario,
-            editTextContrasenia;
-    Button buttonLogin;
+    private EditText editTextUsuario;
+    private EditText editTextContrasenia;
+    private Button buttonLogin;
 
     static boolean LOGIN;
 

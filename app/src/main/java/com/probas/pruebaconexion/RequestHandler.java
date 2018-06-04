@@ -84,7 +84,7 @@ public class RequestHandler {
 
             String s;
             while ((s = bufferedReader.readLine()) != null) {
-                sb.append(s + "\n");
+                sb.append(s).append("\n");
             }
         } catch (Exception e) {
             e.printStackTrace();

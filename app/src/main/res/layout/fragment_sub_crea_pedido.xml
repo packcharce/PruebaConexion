@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="?attr/colorBackgroundFloating"
+    android:background="@android:color/background_light"
     tools:context=".fragments.SubFragments.Sub_crea_pedido">
 
     <!-- TODO: Update blank fragment layout -->
@@ -16,7 +16,7 @@
         <LinearLayout
             android:id="@+id/conttotal"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:orientation="vertical">
 
             <Spinner

@@ -19,7 +19,7 @@ import org.json.JSONObject;
 
 import java.util.HashMap;
 
-public class PerformNetworkRequest extends AsyncTask<Void, Void, String> {
+class PerformNetworkRequest extends AsyncTask<Void, Void, String> {
 
     //the url where we need to send the request
     private String url;
@@ -38,12 +38,6 @@ public class PerformNetworkRequest extends AsyncTask<Void, Void, String> {
         this.params = params;
         this.requestCode = requestCode;
         this.tipoDato = tipoDato;
-    }
-
-    //when the task started displaying a progressbar
-    @Override
-    protected void onPreExecute() {
-        super.onPreExecute();
     }
 
 
