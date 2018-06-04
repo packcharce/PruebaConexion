@@ -92,4 +92,6 @@
         <item>PayPal</item>
         <item>Cash</item>
     </array>
+    <string name="title_registro_registro">Sign up</string>
+    <string name="title_login_login">Login</string>
 </resources>

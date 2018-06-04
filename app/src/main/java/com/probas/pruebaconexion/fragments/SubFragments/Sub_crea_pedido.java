@@ -82,7 +82,6 @@ public class Sub_crea_pedido extends Fragment implements AdapterView.OnItemSelec
     private RecyclerView mRecyclerView2;
     private RecyclerView.LayoutManager mLayoutManager;
     private Switch switchMitades;
-    private Spinner spinner;
     private View v;
     private TextView dividir;
     private TextView tituloGeneral;
@@ -94,7 +93,7 @@ public class Sub_crea_pedido extends Fragment implements AdapterView.OnItemSelec
 
         v = inflater.inflate(R.layout.fragment_sub_crea_pedido, container, false);
 
-        spinner = v.findViewById(R.id.spinner_pizzas);
+        Spinner spinner = v.findViewById(R.id.spinner_pizzas);
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(getActivity().getApplicationContext(), R.array.listaPizzasSpinner, android.R.layout.simple_spinner_dropdown_item);
         spinner.setAdapter(adapter);
         spinner.setOnItemSelectedListener(this);

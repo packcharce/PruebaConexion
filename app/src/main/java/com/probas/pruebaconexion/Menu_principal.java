@@ -19,6 +19,7 @@ import android.widget.TextView;
 
 import com.probas.pruebaconexion.fragments.Datos_cliente;
 import com.probas.pruebaconexion.fragments.Mis_pedidos;
+import com.probas.pruebaconexion.fragments.Ofertas;
 import com.probas.pruebaconexion.fragments.SubFragments.Opciones_Pago;
 
 import org.json.JSONArray;
@@ -34,6 +35,7 @@ public class Menu_principal extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener,
         Mis_pedidos.OnFragmentInteractionListener,
         Datos_cliente.OnFragmentInteractionListener,
+        Ofertas.OnFragmentInteractionListener,
         Opciones_Pago.OnFragmentInteractionListener {
 
     public static Context context;
@@ -112,18 +114,23 @@ public class Menu_principal extends AppCompatActivity
         try {
             switch (id) {
                 case R.id.nav_mis_pedidos:
+                    setTitle(getString(R.string.txt_mis_pedidos_drawer_menu));
                     newFragment = Mis_pedidos.newInstance(numeroPedido, fecha, total);
                     transaction.replace(R.id.fragment, newFragment);
                     transaction.commit();
                     break;
                 case R.id.nav_perfil:
+                    setTitle(getString(R.string.txt_perfil_drawer_menu));
                     newFragment = Datos_cliente.newInstance();
                     transaction.replace(R.id.fragment, newFragment);
                     transaction.commit();
 
                     break;
                 case R.id.nav_ofertas:
-
+                    setTitle(getString(R.string.txt_ofertas_drawer_menu));
+                    newFragment = Ofertas.newInstance();
+                    transaction.replace(R.id.fragment, newFragment);
+                    transaction.commit();
                     break;
                 case R.id.nav_pizzas:
 
@@ -132,6 +139,7 @@ public class Menu_principal extends AppCompatActivity
 
                     break;
                 case R.id.nav_crea_pedido:
+                    setTitle(getString(R.string.txt_crear_pedido_drawer_menu));
                     i = new Intent(this, CreaPedido2.class);
                     startActivity(i);
                     break;

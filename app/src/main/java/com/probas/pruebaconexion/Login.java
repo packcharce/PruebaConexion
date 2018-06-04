@@ -14,7 +14,6 @@ public class Login extends AppCompatActivity {
     static Context context;
     private EditText editTextUsuario;
     private EditText editTextContrasenia;
-    private Button buttonLogin;
 
     static boolean LOGIN;
 
@@ -30,7 +29,7 @@ public class Login extends AppCompatActivity {
         editTextContrasenia = findViewById(R.id.editTextContrasenia);
         editTextUsuario.requestFocus();
 
-        buttonLogin =findViewById(R.id.buttonAddUpdate);
+        Button buttonLogin = findViewById(R.id.buttonAddUpdate);
         buttonLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
