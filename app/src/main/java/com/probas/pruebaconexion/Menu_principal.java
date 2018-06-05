@@ -6,6 +6,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
@@ -17,6 +18,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
 
+import com.probas.pruebaconexion.fragments.Contacto;
 import com.probas.pruebaconexion.fragments.Datos_cliente;
 import com.probas.pruebaconexion.fragments.Mis_pedidos;
 import com.probas.pruebaconexion.fragments.Ofertas;
@@ -36,6 +38,7 @@ public class Menu_principal extends AppCompatActivity
         Mis_pedidos.OnFragmentInteractionListener,
         Datos_cliente.OnFragmentInteractionListener,
         Ofertas.OnFragmentInteractionListener,
+        Contacto.OnFragmentInteractionListener,
         Opciones_Pago.OnFragmentInteractionListener {
 
     public static Context context;
@@ -103,40 +106,38 @@ public class Menu_principal extends AppCompatActivity
 
     @SuppressWarnings("StatementWithEmptyBody")
     @Override
-    public boolean onNavigationItemSelected(MenuItem item) {
-        // Handle navigation view item clicks here.
-        int id = item.getItemId();
+    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         Fragment newFragment;
         FragmentTransaction transaction = getFragmentManager().beginTransaction();
-        //item.setChecked(false);
-        //item.setCheckable(false);
         Intent i;
         try {
-            switch (id) {
+            switch (item.getItemId()) {
                 case R.id.nav_mis_pedidos:
                     setTitle(getString(R.string.txt_mis_pedidos_drawer_menu));
                     newFragment = Mis_pedidos.newInstance(numeroPedido, fecha, total);
-                    transaction.replace(R.id.fragment, newFragment);
+                    transaction.replace(R.id.fragment, newFragment, "mispedidos");
                     transaction.commit();
                     break;
                 case R.id.nav_perfil:
                     setTitle(getString(R.string.txt_perfil_drawer_menu));
                     newFragment = Datos_cliente.newInstance();
-                    transaction.replace(R.id.fragment, newFragment);
+                    transaction.replace(R.id.fragment, newFragment, "miperfil");
                     transaction.commit();
-
                     break;
                 case R.id.nav_ofertas:
                     setTitle(getString(R.string.txt_ofertas_drawer_menu));
                     newFragment = Ofertas.newInstance();
-                    transaction.replace(R.id.fragment, newFragment);
+                    transaction.replace(R.id.fragment, newFragment, "ofertas");
                     transaction.commit();
                     break;
                 case R.id.nav_pizzas:
 
                     break;
                 case R.id.nav_contacto:
-
+                    setTitle(getString(R.string.tit_contacto_contacto));
+                    newFragment = Contacto.newInstance();
+                    transaction.replace(R.id.fragment, newFragment, "contacto");
+                    transaction.commit();
                     break;
                 case R.id.nav_crea_pedido:
                     setTitle(getString(R.string.txt_crear_pedido_drawer_menu));

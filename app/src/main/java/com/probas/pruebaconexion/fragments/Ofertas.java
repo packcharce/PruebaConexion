@@ -5,16 +5,13 @@
 package com.probas.pruebaconexion.fragments;
 
 import android.content.Context;
-import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 
-import com.probas.pruebaconexion.CreaPedido2;
 import com.probas.pruebaconexion.R;
 
 /**
@@ -45,21 +42,9 @@ public class Ofertas extends android.app.Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        View v = inflater.inflate(R.layout.fragment_ofertas, container, false);
-        ImageView iv = v.findViewById(R.id.img_view_oferta);
-        iv.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent i = new Intent(getActivity(), CreaPedido2.class);
-                startActivity(i);
-            }
-        });
-
-        return v;
+        return inflater.inflate(R.layout.fragment_ofertas, container, false);
     }
 
-    // TODO: Rename method, update argument and hook method into UI event
     public void onButtonPressed(Uri uri) {
         if (mListener != null) {
             mListener.onFragmentInteraction(uri);
@@ -94,7 +79,6 @@ public class Ofertas extends android.app.Fragment {
      * >Communicating with Other Fragments</a> for more information.
      */
     public interface OnFragmentInteractionListener {
-        // TODO: Update argument type and name
         void onFragmentInteraction(Uri uri);
     }
 }

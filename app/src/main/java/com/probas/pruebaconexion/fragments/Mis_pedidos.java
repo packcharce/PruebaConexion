@@ -74,8 +74,8 @@ public class Mis_pedidos extends Fragment {
         super.onCreate(savedInstanceState);
         if(getArguments() != null) {
             numeroPedido = getArguments().getStringArrayList(Menu_principal.context.getResources().getString(R.string.key_num_pedido_mis_pedidos));
-            total = getArguments().getStringArrayList(Menu_principal.context.getResources().getString(R.string.key_fecha_pedido_mis_pedidos));
-            fecha = getArguments().getStringArrayList(Menu_principal.context.getResources().getString(R.string.key_total_mis_pedidos));
+            fecha = getArguments().getStringArrayList(Menu_principal.context.getResources().getString(R.string.key_fecha_pedido_mis_pedidos));
+            total = getArguments().getStringArrayList(Menu_principal.context.getResources().getString(R.string.key_total_mis_pedidos));
         }
     }
 

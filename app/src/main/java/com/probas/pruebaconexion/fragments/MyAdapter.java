@@ -49,7 +49,6 @@ public class MyAdapter extends RecyclerView.Adapter {
 
 
     static class PedidosViewHolder extends RecyclerView.ViewHolder {
-        // each data item is just a string in this case
         TextView total;
         TextView fecha;
         TextView numPedido;

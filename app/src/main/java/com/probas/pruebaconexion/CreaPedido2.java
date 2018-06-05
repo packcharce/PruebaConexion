@@ -216,6 +216,7 @@ public class CreaPedido2 extends AppCompatActivity implements
     @Override
     public void onBackPressed() {
         if (fasePedido == 0) {
+            //setTitle(getString(R.string.));
             this.finish();
         } else {
             anterior.performClick();

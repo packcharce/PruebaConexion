@@ -154,7 +154,7 @@ class PerformNetworkRequest extends AsyncTask<Void, Void, String> {
         }
         MainActivity.haAcabadoCargaDatos++;
         if (MainActivity.haAcabadoCargaDatos >= 6) {
-            Toast.makeText(MainActivity.context, MainActivity.context.getResources().getString(R.string.msg_datos_cargados_pnreq) + MainActivity.haAcabadoCargaDatos, Toast.LENGTH_SHORT).show();
+            Toast.makeText(MainActivity.context, MainActivity.context.getResources().getString(R.string.msg_datos_cargados_pnreq), Toast.LENGTH_SHORT).show();
             Intent i = new Intent(MainActivity.context, MenuLoginReg.class);
             MainActivity.context.startActivity(i);
             MainActivity.CARGADATOS = false;

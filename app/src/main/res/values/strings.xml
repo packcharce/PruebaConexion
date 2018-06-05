@@ -1,3 +1,7 @@
+<!--
+  ~ Copyright (c) Carlos Solana. Todos los derechos reservados.
+  -->
+
 <resources>
     <string name="app_name">Freshpizza</string>
     <string name="title_activity_menu_principal">Menu Principal</string>
@@ -24,7 +28,7 @@
     <string name="txt_nombre">Nombre</string>
     <string name="txt_apellido">Apellido</string>
     <string name="txt_usuario">Usuario</string>
-    <string name="txt_contrasenia">Contrasenia</string>
+    <string name="txt_contrasenia">Contraseña</string>
     <string name="txt_calle">Calle</string>
     <string name="txt_portal">Portal</string>
     <string name="txt_puerta">Puerta</string>
@@ -78,7 +82,7 @@
     <string name="key_pass_login" translatable="false">contrasenia</string>
 
     <string name="txt_usuario_login">Usuario</string>
-    <string name="txt_contrasenia_login">Contrasenia</string>
+    <string name="txt_contrasenia_login">Contraseña</string>
     <string name="btn_login_login">Login</string>
 
     <!-- MainActivity -->
@@ -143,7 +147,7 @@
     <string name="key_desc_error_registro" translatable="false">descError</string>
 
     <!-- ConfirmacionPedido -->
-    <string name="excep_notice_dialog_listener" translatable="false">must implement NoticeDialogListener</string>
+    <string name="excep_notice_dialog_listener" translatable="false">must implement x Listener</string>
     <string name="msq_crea_pedido_dialogo_confped">El pedido se creará, ¿esta seguro? Asciende a: </string>
     <string name="msg_si_confpedido">Acepto</string>
     <string name="msq_no_confpedido">No</string>
@@ -194,7 +198,7 @@
     <!-- Sub_ensalada -->
     <string name="tit_ensaladas_sub_ensaladas">Ensaladas</string>
 
-    <!-- Sub_Hambuerguesa -->
+    <!-- Sub_Hamburguesa -->
     <string name="tit_hamburguesas_sub_hamb">Hamburguesas</string>
 
     <!-- Sub_Lasania -->
@@ -202,6 +206,9 @@
 
     <!-- Sub_Pasta -->
     <string name="tit_pastas_sub_pasta">Pastas</string>
+
+    <!-- Contacto -->
+    <string name="tit_contacto_contacto">Contacto</string>
 
 
     <array name="listaPizzasSpinner">
@@ -219,6 +226,7 @@
     </array>
 
     <string name="title_activity_maps">Mapas</string>
-
+    <string name="txt_encontrarnos_contacto">Puede encontrarnos en:</string>
+    <string name="txt_calle_contacto">Calle Atilano Rodríguez, 11</string>
 
 </resources>
