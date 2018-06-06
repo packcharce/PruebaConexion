@@ -147,7 +147,7 @@ public class Datos_cliente extends Fragment {
         HashMap<String, String> params = new HashMap<>();
         params.put(Menu_principal.context.getResources().getString(R.string.key_id), String.valueOf(MainActivity.clienteActivo.getId()));
         params.put(Menu_principal.context.getResources().getString(R.string.key_nombre), editTextNombre.getText().toString());
-        params.put(Menu_principal.context.getResources().getString(R.string.key_apellido1), editTextApellido1.getText().toString());
+        params.put(Menu_principal.context.getResources().getString(R.string.key_apellido), editTextApellido1.getText().toString());
         params.put(Menu_principal.context.getResources().getString(R.string.key_tlfno), editTextTlfno.getText().toString());
         params.put(Menu_principal.context.getResources().getString(R.string.key_calle), editTextCalle.getText().toString());
         params.put(Menu_principal.context.getResources().getString(R.string.key_portal), editTextPortal.getText().toString());

@@ -1,16 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Registro">
+    tools:context=".Registro"
+    tools:layout_editor_absoluteY="81dp">
 
     <ScrollView
         android:id="@+id/scrollView"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
-        <LinearLayout
+        <android.support.constraint.ConstraintLayout
             android:id="@+id/linearLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -18,129 +24,186 @@
 
             <EditText
                 android:id="@+id/editTextNombre"
-                android:layout_width="match_parent"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="8dp"
-                android:layout_marginTop="8dp"
+                android:layout_marginEnd="32dp"
+                android:layout_marginStart="32dp"
+                android:layout_marginTop="16dp"
                 android:hint="@string/txt_nombre"
                 android:inputType="textNoSuggestions|textPersonName"
                 android:maxLength="30"
-                android:singleLine="true" />
+                android:singleLine="true"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
             <EditText
                 android:id="@+id/editTextApellido1"
-                android:layout_width="match_parent"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="8dp"
-                android:layout_marginTop="8dp"
+                android:layout_marginEnd="32dp"
+                android:layout_marginStart="32dp"
+                android:layout_marginTop="30dp"
                 android:hint="@string/txt_apellido"
                 android:inputType="textNoSuggestions|textPersonName"
                 android:maxLength="30"
-                android:singleLine="true" />
+                android:singleLine="true"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/editTextNombre" />
 
             <EditText
                 android:id="@+id/editTextUsuario"
-                android:layout_width="match_parent"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="8dp"
-                android:layout_marginTop="8dp"
+                android:layout_marginEnd="8dp"
+                android:layout_marginStart="32dp"
+                android:layout_marginTop="30dp"
                 android:hint="@string/txt_usuario"
+                android:inputType="text"
                 android:maxLength="30"
-                android:singleLine="true" />
+                android:nextFocusDown="@id/editTextContrasenia"
+                android:singleLine="true"
+                app:layout_constraintEnd_toStartOf="@+id/editTextContrasenia"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/editTextTlfno" />
 
             <EditText
                 android:id="@+id/editTextContrasenia"
-                android:layout_width="match_parent"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="8dp"
-                android:layout_marginTop="8dp"
+                android:layout_marginEnd="32dp"
+                android:layout_marginStart="8dp"
                 android:hint="@string/txt_contrasenia"
                 android:inputType="textPassword"
                 android:maxLength="16"
-                android:singleLine="true" />
+                android:singleLine="true"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/editTextUsuario"
+                app:layout_constraintTop_toTopOf="@+id/editTextUsuario" />
 
             <EditText
                 android:id="@+id/editTextCalle"
-                android:layout_width="match_parent"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="8dp"
-                android:layout_marginTop="8dp"
+                android:layout_marginEnd="32dp"
+                android:layout_marginStart="32dp"
+                android:layout_marginTop="30dp"
                 android:hint="@string/txt_calle"
-                android:inputType="textMultiLine"
+                android:inputType="textPostalAddress"
                 android:maxLength="50"
-                android:singleLine="true" />
+                android:singleLine="true"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/editTextApellido1" />
 
             <EditText
                 android:id="@+id/editTextPortal"
-                android:layout_width="match_parent"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="8dp"
-                android:layout_marginTop="8dp"
+                android:layout_marginEnd="8dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="30dp"
                 android:hint="@string/txt_portal"
                 android:maxLength="10"
-                android:singleLine="true" />
+                android:nextFocusDown="@id/editTextPuerta"
+                android:singleLine="true"
+                app:layout_constraintEnd_toStartOf="@+id/editTextPuerta"
+                app:layout_constraintStart_toEndOf="@+id/editTextCodPostal"
+                app:layout_constraintTop_toBottomOf="@+id/editTextUrbanizacion" />
 
             <EditText
                 android:id="@+id/editTextPuerta"
-                android:layout_width="match_parent"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="8dp"
-                android:layout_marginTop="8dp"
+                android:layout_marginEnd="8dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="30dp"
                 android:hint="@string/txt_puerta"
                 android:maxLength="20"
-                android:singleLine="true" />
+                android:nextFocusDown="@id/editTextPiso"
+                android:singleLine="true"
+                app:layout_constraintEnd_toStartOf="@+id/editTextPiso"
+                app:layout_constraintStart_toEndOf="@+id/editTextPortal"
+                app:layout_constraintTop_toBottomOf="@+id/editTextUrbanizacion" />
 
             <EditText
                 android:id="@+id/editTextCodPostal"
-                android:layout_width="match_parent"
+                android:layout_width="80dp"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="8dp"
-                android:layout_marginTop="8dp"
+                android:layout_marginEnd="8dp"
+                android:layout_marginStart="32dp"
+                android:layout_marginTop="30dp"
                 android:hint="@string/txt_codigo_postal"
                 android:inputType="numberSigned"
                 android:maxLength="5"
-                android:singleLine="true" />
+                android:nextFocusDown="@id/editTextPortal"
+                android:singleLine="true"
+                app:layout_constraintEnd_toStartOf="@+id/editTextPortal"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/editTextUrbanizacion" />
 
             <EditText
                 android:id="@+id/editTextTlfno"
-                android:layout_width="match_parent"
+                android:layout_width="127dp"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="8dp"
-                android:layout_marginTop="8dp"
+                android:layout_marginStart="32dp"
+                android:layout_marginTop="30dp"
                 android:hint="@string/txt_telefono"
                 android:inputType="phone"
                 android:maxLength="9"
-                android:singleLine="true" />
+                android:nextFocusDown="@id/editTextUsuario"
+                android:singleLine="true"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/editTextCodPostal" />
 
             <EditText
                 android:id="@+id/editTextUrbanizacion"
-                android:layout_width="match_parent"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="8dp"
-                android:layout_marginTop="8dp"
+                android:layout_marginEnd="32dp"
+                android:layout_marginStart="32dp"
+                android:layout_marginTop="30dp"
                 android:hint="@string/txt_urbanizacion"
-                android:inputType="textMultiLine"
+                android:inputType="textPostalAddress"
                 android:maxLength="100"
-                android:singleLine="true" />
+                android:nextFocusDown="@id/editTextCodPostal"
+                android:singleLine="true"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/editTextCalle" />
 
             <EditText
                 android:id="@+id/editTextPiso"
-                android:layout_width="match_parent"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="8dp"
-                android:layout_marginTop="8dp"
+                android:layout_marginEnd="32dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="30dp"
                 android:hint="@string/txt_numero_piso"
                 android:inputType="numberSigned"
                 android:maxLength="3"
                 android:maxLines="3"
-                android:singleLine="true" />
+                android:nextFocusDown="@id/editTextTlfno"
+                android:singleLine="true"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/editTextPuerta"
+                app:layout_constraintTop_toBottomOf="@+id/editTextUrbanizacion" />
 
             <Button
                 android:id="@+id/buttonAddUpdate"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/txt_registrarse" />
-        </LinearLayout>
+                android:layout_marginBottom="16dp"
+                android:layout_marginEnd="32dp"
+                android:layout_marginTop="30dp"
+                android:text="@string/txt_registrarse"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/editTextContrasenia" />
+
+        </android.support.constraint.ConstraintLayout>
 
     </ScrollView>
+
 </android.support.constraint.ConstraintLayout>

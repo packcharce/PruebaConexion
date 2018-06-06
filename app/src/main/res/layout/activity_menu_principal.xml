@@ -23,6 +23,6 @@
         app:headerLayout="@layout/nav_header_menu_principal"
         app:itemIconTint="@color/color_fondo_drawer_items"
         app:itemTextColor="@color/texto_titulos"
-        app:menu="@menu/activity_menu_principal_drawer" />
+        app:menu="@menu/menus_lateral" />
 
 </android.support.v4.widget.DrawerLayout>

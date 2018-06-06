@@ -130,9 +130,6 @@ public class Menu_principal extends AppCompatActivity
                     transaction.replace(R.id.fragment, newFragment, "ofertas");
                     transaction.commit();
                     break;
-                case R.id.nav_pizzas:
-
-                    break;
                 case R.id.nav_contacto:
                     setTitle(getString(R.string.tit_contacto_contacto));
                     newFragment = Contacto.newInstance();

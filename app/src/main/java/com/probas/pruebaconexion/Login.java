@@ -4,6 +4,7 @@ import android.content.Context;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
 
@@ -28,6 +29,7 @@ public class Login extends AppCompatActivity {
         editTextUsuario = findViewById(R.id.editTextUsuario);
         editTextContrasenia = findViewById(R.id.editTextContrasenia);
         editTextUsuario.requestFocus();
+        getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_VISIBLE);
 
         Button buttonLogin = findViewById(R.id.buttonAddUpdate);
         buttonLogin.setOnClickListener(new View.OnClickListener() {

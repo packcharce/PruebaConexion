@@ -182,7 +182,7 @@ public class Registro extends AppCompatActivity {
             try {
                 JSONObject object = new JSONObject(s);
                 if (object.length() != 0) {
-                    if (!object.getBoolean(Login.context.getResources().getString(R.string.key_error))) {
+                    if (!object.getBoolean(MainActivity.context.getResources().getString(R.string.key_error))) {
                         Toast.makeText(getApplicationContext(), R.string.msg_registro_exito_registro, Toast.LENGTH_SHORT).show();
                         Intent i = new Intent(getApplicationContext(), Login.class);
                         startActivity(i);
