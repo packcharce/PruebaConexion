@@ -14,7 +14,7 @@
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="@color/navBar"
+            android:background="@color/colorPrimary"
             app:titleTextColor="@color/texto_titulos" />
 
     </android.support.design.widget.AppBarLayout>

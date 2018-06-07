@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/color_fondo_drawer_items"
+    android:background="@color/fondo_generico"
     tools:context=".Registro"
     tools:layout_editor_absoluteY="81dp">
 
@@ -14,7 +14,7 @@
         android:layout_height="match_parent"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.0">
@@ -25,13 +25,22 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
+            <TextView
+                android:id="@+id/textView7"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:text="@string/txt_nombre"
+                app:layout_constraintBottom_toTopOf="@+id/editTextNombre"
+                app:layout_constraintStart_toStartOf="@+id/editTextNombre" />
+
             <EditText
                 android:id="@+id/editTextNombre"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="32dp"
                 android:layout_marginStart="32dp"
-                android:layout_marginTop="16dp"
+                android:layout_marginTop="32dp"
                 android:hint="@string/txt_nombre"
                 android:inputType="textNoSuggestions|textPersonName"
                 android:maxLength="30"
@@ -39,6 +48,15 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/textView9"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:text="@string/txt_apellido"
+                app:layout_constraintBottom_toTopOf="@+id/editTextApellido1"
+                app:layout_constraintStart_toStartOf="@+id/editTextApellido1" />
 
             <EditText
                 android:id="@+id/editTextApellido1"
@@ -55,6 +73,15 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/editTextNombre" />
 
+            <TextView
+                android:id="@+id/textView10"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:text="@string/txt_calle"
+                app:layout_constraintBottom_toTopOf="@+id/editTextCalle"
+                app:layout_constraintStart_toStartOf="@+id/editTextCalle" />
+
             <EditText
                 android:id="@+id/editTextCalle"
                 android:layout_width="0dp"
@@ -70,11 +97,20 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/editTextApellido1" />
 
+            <TextView
+                android:id="@+id/textView11"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:text="@string/txt_urbanizacion"
+                app:layout_constraintBottom_toTopOf="@+id/editTextUrbanizacion"
+                app:layout_constraintStart_toStartOf="@+id/editTextUrbanizacion" />
+
             <EditText
                 android:id="@+id/editTextPortal"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginEnd="8dp"
+                android:layout_marginEnd="4dp"
                 android:layout_marginStart="8dp"
                 android:layout_marginTop="30dp"
                 android:hint="@string/txt_portal"
@@ -85,12 +121,21 @@
                 app:layout_constraintStart_toEndOf="@+id/editTextCodPostal"
                 app:layout_constraintTop_toBottomOf="@+id/editTextUrbanizacion" />
 
+            <TextView
+                android:id="@+id/textView12"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:text="@string/txt_codigo_postal"
+                app:layout_constraintBottom_toTopOf="@+id/editTextCodPostal"
+                app:layout_constraintStart_toStartOf="@+id/editTextCodPostal" />
+
             <EditText
                 android:id="@+id/editTextPuerta"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginEnd="8dp"
-                android:layout_marginStart="8dp"
+                android:layout_marginEnd="4dp"
+                android:layout_marginStart="4dp"
                 android:layout_marginTop="30dp"
                 android:hint="@string/txt_puerta"
                 android:maxLength="20"
@@ -99,6 +144,15 @@
                 app:layout_constraintEnd_toStartOf="@+id/editTextPiso"
                 app:layout_constraintStart_toEndOf="@+id/editTextPortal"
                 app:layout_constraintTop_toBottomOf="@+id/editTextUrbanizacion" />
+
+            <TextView
+                android:id="@+id/textView13"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:text="@string/txt_portal"
+                app:layout_constraintBottom_toTopOf="@+id/editTextPortal"
+                app:layout_constraintStart_toStartOf="@+id/editTextPortal" />
 
             <EditText
                 android:id="@+id/editTextCodPostal"
@@ -116,6 +170,15 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/editTextUrbanizacion" />
 
+            <TextView
+                android:id="@+id/textView14"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:text="@string/txt_puerta"
+                app:layout_constraintBottom_toTopOf="@+id/editTextPuerta"
+                app:layout_constraintStart_toStartOf="@+id/editTextPuerta" />
+
             <EditText
                 android:id="@+id/editTextTlfno"
                 android:layout_width="127dp"
@@ -128,6 +191,15 @@
                 android:singleLine="true"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/editTextCodPostal" />
+
+            <TextView
+                android:id="@+id/textView15"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:text="@string/txt_numero_piso"
+                app:layout_constraintBottom_toTopOf="@+id/editTextPiso"
+                app:layout_constraintStart_toStartOf="@+id/editTextPiso" />
 
             <EditText
                 android:id="@+id/editTextUrbanizacion"
@@ -145,12 +217,21 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/editTextCalle" />
 
+            <TextView
+                android:id="@+id/textView16"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:text="@string/txt_telefono"
+                app:layout_constraintBottom_toTopOf="@+id/editTextTlfno"
+                app:layout_constraintStart_toStartOf="@+id/editTextTlfno" />
+
             <EditText
                 android:id="@+id/editTextPiso"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="32dp"
-                android:layout_marginStart="8dp"
+                android:layout_marginStart="4dp"
                 android:layout_marginTop="30dp"
                 android:hint="@string/txt_numero_piso"
                 android:inputType="numberSigned"

@@ -33,7 +33,8 @@ public class Sub_bebidas extends Fragment {
     private static final int TIPO_BEBIDAS = 2;
 
     private static ArrayList<Bebida> listaBebidas;
-
+    RecyclerView mRecyclerView;
+    RecyclerView.Adapter mAdapter;
     private OnFragmentInteractionListener mListener;
 
     public Sub_bebidas() {
@@ -62,9 +63,11 @@ public class Sub_bebidas extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View v = inflater.inflate(R.layout.fragment_sub_bebidas, container, false);
+
+
         Bundle pasaDatos = new Bundle();
 
-        final RecyclerView mRecyclerView = v.findViewById(R.id.rec_bebidas_pedido);
+        mRecyclerView = v.findViewById(R.id.rec_bebidas_pedido);
 
         // use this setting to improve performance if you know that changes
         // in content do not change the layout size of the RecyclerView
@@ -77,12 +80,12 @@ public class Sub_bebidas extends Fragment {
         pasaDatos.putSerializable(ARG_PARAM1, (ArrayList<Bebida>) MainActivity.listaBebs);
 
 
-        RecyclerView.Adapter mAdapter = new MyAdapter(pasaDatos, TIPO_BEBIDAS, new ClickListener() {
+        mAdapter = new MyAdapter(pasaDatos, TIPO_BEBIDAS, new ClickListener() {
             @Override
             public void onPositionClicked(View v, int position) {
-                if(v.getId() == R.id.anadir) {
+                if (v.getId() == R.id.anadir) {
                     CreaPedido2.pedido.getListaBebs().add(new Bebida(listaBebidas.get(position)));
-                }else if (v.getId() == R.id.quitar && CreaPedido2.pedido.getListaBebs().size() > 0){
+                } else if (v.getId() == R.id.quitar && CreaPedido2.pedido.getListaBebs().size() > 0) {
                     CreaPedido2.pedido.quitaBebida(MainActivity.listaBebs.get(position).getNombre());
                 }
             }

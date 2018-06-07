@@ -4,8 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@android:color/background_light"
-    tools:context=".fragments.SubFragments.Opciones_Pago">
+    android:background="@color/fondo_generico"
+    tools:context=".fragments.SubFragments.Sub_Opciones_Pago">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -52,6 +52,12 @@
                 android:layout_height="wrap_content"
                 android:ems="10"
                 android:inputType="textPassword" />
+
+            <CheckBox
+                android:id="@+id/checkBox_paypal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Acepto el uso de mis datos segun la GDPR" />
         </LinearLayout>
 
         <LinearLayout
@@ -59,7 +65,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical"
-            android:visibility="visible">
+            android:visibility="gone">
 
             <TextView
                 android:id="@+id/tit_tarjeta"
@@ -107,6 +113,12 @@
                 android:maxLength="5"
                 android:singleLine="true" />
 
+            <CheckBox
+                android:id="@+id/checkBox_tarj"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Acepto el uso de mis datos segun la GDPR" />
+
         </LinearLayout>
 
         <LinearLayout
@@ -114,7 +126,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical"
-            android:visibility="visible">
+            android:visibility="gone">
 
             <TextView
                 android:id="@+id/textView8"

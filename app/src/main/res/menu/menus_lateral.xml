@@ -3,27 +3,27 @@
     xmlns:tools="http://schemas.android.com/tools"
     tools:showIn="navigation_view">
 
-    <group android:checkableBehavior="single">
+
+    <group>
         <item
             android:id="@+id/nav_crea_pedido"
             android:title="@string/txt_crear_pedido_drawer_menu" />
+
+        <item
+            android:id="@+id/nav_ofertas"
+            android:title="@string/txt_ofertas_drawer_menu" />
+
+        <item
+            android:id="@+id/nav_perfil"
+            android:title="@string/txt_perfil_drawer_menu" />
+
         <item
             android:id="@+id/nav_mis_pedidos"
             android:title="@string/txt_mis_pedidos_drawer_menu" />
-        <item
-            android:id="@+id/nav_perfil"
 
-            android:title="@string/txt_perfil_drawer_menu" />
-        <item
-            android:id="@+id/nav_ofertas"
 
-            android:title="@string/txt_ofertas_drawer_menu" />
-        <item
-            android:id="@+id/nav_pizzas"
 
-            android:title="@string/txt_pizzas_drawer_menu" />
     </group>
-
     <item android:title="@string/tix_sobre_nosotros_drawer_menu">
         <menu>
             <item

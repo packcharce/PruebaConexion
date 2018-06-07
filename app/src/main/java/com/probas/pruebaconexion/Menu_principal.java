@@ -22,7 +22,7 @@ import com.probas.pruebaconexion.fragments.Contacto;
 import com.probas.pruebaconexion.fragments.Datos_cliente;
 import com.probas.pruebaconexion.fragments.Mis_pedidos;
 import com.probas.pruebaconexion.fragments.Ofertas;
-import com.probas.pruebaconexion.fragments.SubFragments.Opciones_Pago;
+import com.probas.pruebaconexion.fragments.SubFragments.Sub_Opciones_Pago;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -39,7 +39,7 @@ public class Menu_principal extends AppCompatActivity
         Datos_cliente.OnFragmentInteractionListener,
         Ofertas.OnFragmentInteractionListener,
         Contacto.OnFragmentInteractionListener,
-        Opciones_Pago.OnFragmentInteractionListener {
+        Sub_Opciones_Pago.OnFragmentInteractionListener {
 
     public static Context context;
 
@@ -104,6 +104,7 @@ public class Menu_principal extends AppCompatActivity
         return super.onOptionsItemSelected(item);
     }
 
+    String lasTag;
     @SuppressWarnings("StatementWithEmptyBody")
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
@@ -115,29 +116,37 @@ public class Menu_principal extends AppCompatActivity
                 case R.id.nav_mis_pedidos:
                     setTitle(getString(R.string.txt_mis_pedidos_drawer_menu));
                     newFragment = Mis_pedidos.newInstance(numeroPedido, fecha, total);
+                    lasTag = "mispedidos";
                     transaction.replace(R.id.fragment, newFragment, "mispedidos");
                     transaction.commit();
                     break;
                 case R.id.nav_perfil:
                     setTitle(getString(R.string.txt_perfil_drawer_menu));
                     newFragment = Datos_cliente.newInstance();
+                    lasTag = "miperfil";
                     transaction.replace(R.id.fragment, newFragment, "miperfil");
                     transaction.commit();
                     break;
                 case R.id.nav_ofertas:
                     setTitle(getString(R.string.txt_ofertas_drawer_menu));
                     newFragment = Ofertas.newInstance();
+                    lasTag = "ofertas";
                     transaction.replace(R.id.fragment, newFragment, "ofertas");
                     transaction.commit();
                     break;
                 case R.id.nav_contacto:
                     setTitle(getString(R.string.tit_contacto_contacto));
                     newFragment = Contacto.newInstance();
+                    lasTag = "contacto";
                     transaction.replace(R.id.fragment, newFragment, "contacto");
                     transaction.commit();
                     break;
                 case R.id.nav_crea_pedido:
-                    setTitle(getString(R.string.txt_crear_pedido_drawer_menu));
+                    //setTitle(getString(R.string.txt_crear_pedido_drawer_menu));
+                    if(lasTag != null) {
+                        transaction.remove(getFragmentManager().findFragmentByTag(lasTag));
+                        transaction.commit();
+                    }
                     i = new Intent(this, CreaPedido2.class);
                     startActivity(i);
                     break;

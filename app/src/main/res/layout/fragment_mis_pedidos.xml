@@ -12,6 +12,6 @@
         android:id="@+id/rec_view_misPedidos"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@android:color/background_light"
+        android:background="@color/fondo_generico"
         android:scrollbars="vertical" />
 </android.support.v4.widget.SwipeRefreshLayout>

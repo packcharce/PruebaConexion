@@ -15,10 +15,10 @@ import android.widget.Toast;
 import com.google.gson.Gson;
 import com.probas.pruebaconexion.ClasesBasicas.Pizza;
 import com.probas.pruebaconexion.fragments.ConfirmacionPedido;
-import com.probas.pruebaconexion.fragments.SubFragments.Opciones_Pago;
 import com.probas.pruebaconexion.fragments.SubFragments.Sub_Ensalada;
 import com.probas.pruebaconexion.fragments.SubFragments.Sub_Hamburguesa;
 import com.probas.pruebaconexion.fragments.SubFragments.Sub_Lasania;
+import com.probas.pruebaconexion.fragments.SubFragments.Sub_Opciones_Pago;
 import com.probas.pruebaconexion.fragments.SubFragments.Sub_Pasta;
 import com.probas.pruebaconexion.fragments.SubFragments.Sub_bebidas;
 import com.probas.pruebaconexion.fragments.SubFragments.Sub_crea_pedido;
@@ -33,7 +33,7 @@ public class CreaPedido2 extends AppCompatActivity implements
         Sub_Lasania.OnFragmentInteractionListener,
         Sub_Ensalada.OnFragmentInteractionListener,
         Sub_Pasta.OnFragmentInteractionListener,
-        Opciones_Pago.OnFragmentInteractionListener,
+        Sub_Opciones_Pago.OnFragmentInteractionListener,
         ConfirmacionPedido.NoticeDialogListener {
 
     public static Pedido pedido;
@@ -143,11 +143,18 @@ public class CreaPedido2 extends AppCompatActivity implements
                             .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)
                             .addToBackStack(null)
                             .commit();
-
                 } else {
-                    DialogFragment dialog = new ConfirmacionPedido();
-                    dialog.show(getFragmentManager(), getString(R.string.tag_name_dialog_confir_pedido));
+
+                    pedido.calculaTotal();
+                    if (Sub_Opciones_Pago.readyToPay && pedido.getTotal() != 0.0) {
+                        DialogFragment dialog = new ConfirmacionPedido();
+                        dialog.show(getFragmentManager(), getString(R.string.tag_name_dialog_confir_pedido));
+                    } else {
+                        Toast.makeText(getApplicationContext(), "Error opciones de pago incompletas o pedido vacio", Toast.LENGTH_SHORT).show();
+                    }
                 }
+
+
                 anterior.setVisibility(View.VISIBLE);
             }
         });
@@ -163,7 +170,6 @@ public class CreaPedido2 extends AppCompatActivity implements
 
             HashMap<String, String> params = new HashMap<>();
 
-            //TODO quitar todo este tocho y pasar el objeto Pedido p directamente
             params.put(getString(R.string.key_ref_cliente_pedido), String.valueOf(MainActivity.clienteActivo.getId()));
             params.put(getString(R.string.key_num_pedido), String.valueOf(p.getNumPedido()));
             params.put(getString(R.string.key_extra_domicilio), String.valueOf(p.getExtra_domicilio()));
@@ -202,7 +208,7 @@ public class CreaPedido2 extends AppCompatActivity implements
         listaFragments.add(Sub_Lasania.newInstance());
         listaFragments.add(Sub_Ensalada.newInstance());
         listaFragments.add(Sub_Pasta.newInstance());
-        listaFragments.add(Opciones_Pago.newInstance());
+        listaFragments.add(Sub_Opciones_Pago.newInstance());
         fm.beginTransaction().replace(R.id.fragment2, listaFragments.get(0)).commit();
         fasesTotales = listaFragments.size();
     }
@@ -221,5 +227,10 @@ public class CreaPedido2 extends AppCompatActivity implements
         } else {
             anterior.performClick();
         }
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
     }
 }

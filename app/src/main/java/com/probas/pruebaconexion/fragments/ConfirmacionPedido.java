@@ -10,6 +10,8 @@ import android.os.Bundle;
 import com.probas.pruebaconexion.CreaPedido2;
 import com.probas.pruebaconexion.R;
 
+import java.util.Locale;
+
 
 public class ConfirmacionPedido extends DialogFragment {
 
@@ -39,7 +41,7 @@ public class ConfirmacionPedido extends DialogFragment {
         // Use the Builder class for convenient dialog construction
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
         CreaPedido2.pedido.calculaTotal();
-        builder.setMessage(String.format("%s%s€", getString(R.string.msq_crea_pedido_dialogo_confped), CreaPedido2.pedido.getTotal()))
+        builder.setMessage(String.format(Locale.FRANCE,"%s %.2f€", getString(R.string.msq_crea_pedido_dialogo_confped), CreaPedido2.pedido.getTotal()))
                 .setPositiveButton(R.string.msg_si_confpedido, new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
                         mListener.onDialogPositiveClick(ConfirmacionPedido.this);
