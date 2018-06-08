@@ -1,3 +1,7 @@
+/*
+ * Copyright (c) Carlos Solana. Todos los derechos reservados.
+ */
+
 package com.probas.pruebaconexion.fragments.SubFragments;
 
 import android.app.Fragment;
@@ -47,6 +51,19 @@ public class Sub_crea_pedido extends Fragment implements AdapterView.OnItemSelec
     private OnFragmentInteractionListener mListener;
 
     private int numeroDePizza = 0;
+    private RecyclerView mRecyclerView;
+    private RecyclerView mRecyclerView2;
+    private RecyclerView.LayoutManager mLayoutManager;
+    private Switch switchMitades;
+    private View v;
+    private TextView dividir;
+    private TextView tituloGeneral;
+    private TextView tituloSegMitad;
+    private RecyclerView.Adapter mAdapter;
+    private byte pizzaActual = -1;
+    private List<Ingrediente> pizzaBarbacoa;
+    private List<Ingrediente> pizzaMargarita;
+    private List<Ingrediente> cQuesos;
 
     public Sub_crea_pedido() {
         // Required empty public constructor
@@ -78,15 +95,6 @@ public class Sub_crea_pedido extends Fragment implements AdapterView.OnItemSelec
         creaPizzaPref();
     }
 
-    private RecyclerView mRecyclerView;
-    private RecyclerView mRecyclerView2;
-    private RecyclerView.LayoutManager mLayoutManager;
-    private Switch switchMitades;
-    private View v;
-    private TextView dividir;
-    private TextView tituloGeneral;
-    private TextView tituloSegMitad;
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -94,8 +102,9 @@ public class Sub_crea_pedido extends Fragment implements AdapterView.OnItemSelec
         v = inflater.inflate(R.layout.fragment_sub_crea_pedido, container, false);
 
         Spinner spinner = v.findViewById(R.id.spinner_pizzas);
-        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(getActivity().getApplicationContext(), R.array.listaPizzasSpinner, android.R.layout.simple_spinner_dropdown_item);
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(getActivity(), android.R.layout.simple_list_item_1, getResources().getStringArray(R.array.listaPizzasSpinner));
         spinner.setAdapter(adapter);
+
         spinner.setOnItemSelectedListener(this);
 
         dividir = v.findViewById(R.id.dividir);
@@ -110,14 +119,11 @@ public class Sub_crea_pedido extends Fragment implements AdapterView.OnItemSelec
         return v;
     }
 
-    // TODO: Rename method, update argument and hook method into UI event
     public void onButtonPressed(Uri uri) {
         if (mListener != null) {
             mListener.onFragmentInteraction(uri);
         }
     }
-
-    private RecyclerView.Adapter mAdapter;
 
     private void cargaRecyclers() {
 
@@ -216,7 +222,6 @@ public class Sub_crea_pedido extends Fragment implements AdapterView.OnItemSelec
         }
     }
 
-
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
@@ -233,8 +238,6 @@ public class Sub_crea_pedido extends Fragment implements AdapterView.OnItemSelec
         super.onDetach();
         mListener = null;
     }
-
-    private byte pizzaActual = -1;
 
     @Override
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
@@ -281,10 +284,6 @@ public class Sub_crea_pedido extends Fragment implements AdapterView.OnItemSelec
         }
     }
 
-    private List<Ingrediente> pizzaBarbacoa;
-    private List<Ingrediente> pizzaMargarita;
-    private List<Ingrediente> cQuesos;
-
     private void creaPizzaPref() {
         pizzaBarbacoa = new LinkedList<>();
         pizzaMargarita = new LinkedList<>();
@@ -315,7 +314,7 @@ public class Sub_crea_pedido extends Fragment implements AdapterView.OnItemSelec
     }
 
     private void quitaIngrPizzaPref() {
-        switch (pizzaActual){
+        switch (pizzaActual) {
             case 1:
                 for (Ingrediente i : pizzaBarbacoa) {
                     CreaPedido2.pedido.getListaPizzas().get(numeroDePizza).quitaIngrediente(i.getNombre());
@@ -339,6 +338,14 @@ public class Sub_crea_pedido extends Fragment implements AdapterView.OnItemSelec
 
     }
 
+    @Override
+    public void onPause() {
+        super.onPause();
+        if (mRecyclerView2 != null && switchMitades != null) {
+            mRecyclerView2.setVisibility(View.GONE);
+            switchMitades.setChecked(false);
+        }
+    }
 
     /**
      * This interface must be implemented by activities that contain this
@@ -354,14 +361,5 @@ public class Sub_crea_pedido extends Fragment implements AdapterView.OnItemSelec
         // TODO: Update argument type and name
         void onFragmentInteraction(Uri uri);
 
-    }
-
-    @Override
-    public void onPause() {
-        super.onPause();
-        if (mRecyclerView2 != null && switchMitades != null) {
-            mRecyclerView2.setVisibility(View.GONE);
-            switchMitades.setChecked(false);
-        }
     }
 }

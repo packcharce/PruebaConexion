@@ -1,3 +1,7 @@
+/*
+ * Copyright (c) Carlos Solana. Todos los derechos reservados.
+ */
+
 package com.probas.pruebaconexion;
 
 import android.app.DialogFragment;
@@ -26,6 +30,10 @@ import com.probas.pruebaconexion.fragments.SubFragments.Sub_crea_pedido;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+/**
+ * Actividad principal del pedido
+ * controla el pedido actual y las fases de éste
+ */
 public class CreaPedido2 extends AppCompatActivity implements
         Sub_crea_pedido.OnFragmentInteractionListener,
         Sub_bebidas.OnFragmentInteractionListener,
@@ -36,19 +44,30 @@ public class CreaPedido2 extends AppCompatActivity implements
         Sub_Opciones_Pago.OnFragmentInteractionListener,
         ConfirmacionPedido.NoticeDialogListener {
 
+    // Pedido actual que se está realizando
     public static Pedido pedido;
-
+    private final int numeroFasesProtegidas = 6;
+    private final FragmentManager fm = getFragmentManager();
+    // Identificador interno de la pizza que se está encargando
+    // (cuando hay varias pizzas en el pedido
     private int numeroDePizza;
+    // Lista con los pasos del pedido
     private ArrayList<Fragment> listaFragments;
-
+    // Contador de pizzas, boton siguiente y anterior
     private TextView contPizzas;
     private Button siguiente;
     private Button anterior;
 
-
+    // Identificador de la fase actual del
+    // pedido y de las fases totales que tiene
     private int fasePedido, fasesTotales;
-    private final int numeroFasesProtegidas = 6;
 
+    /**
+     * MEtodo on create
+     * se inicializa el pedido, la fase actual, y numero de pizza
+     * se inicializan los botones y sus respectivos clicklisteners
+     * @param savedInstanceState instancia guardada de la actividad
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -61,7 +80,15 @@ public class CreaPedido2 extends AppCompatActivity implements
         pedido = new Pedido();
         pedido.getListaPizzas().put(numeroDePizza, new Pizza(getString(R.string.default_name_pizza)));
 
-        cargaFragments();
+
+        Thread t1 = new Thread(new Runnable() {
+            @Override
+            public void run() {
+                cargaFragments();
+            }
+        });
+        t1.start();
+
 
 
         siguiente = findViewById(R.id.btnSig);
@@ -160,8 +187,11 @@ public class CreaPedido2 extends AppCompatActivity implements
         });
     }
 
-    private final FragmentManager fm = getFragmentManager();
-
+    /**
+     * Metodo que se ejecuta si en el dialogo de confirmar pedido
+     * se hace click en acepto y manda los datos del pedido a la bd
+     * @param dialog
+     */
     @Override
     public void onDialogPositiveClick(DialogFragment dialog) {
         // User touched the dialog's positive button
@@ -196,11 +226,19 @@ public class CreaPedido2 extends AppCompatActivity implements
         }
     }
 
+    /**
+     * Metodo que se ejecuta si en el dialogo de confirmar pedido
+     * se hace click en "no" y permite continuar la compra
+     * @param dialog
+     */
     @Override
     public void onDialogNegativeClick(DialogFragment dialog) {
         dialog.dismiss();
     }
 
+    /**
+     * Metodo que precarga la lista de fragmentos con los pasos de compra
+     */
     private void cargaFragments() {
         listaFragments.add(Sub_crea_pedido.newInstance(numeroDePizza));
         listaFragments.add(Sub_bebidas.newInstance());
@@ -213,24 +251,25 @@ public class CreaPedido2 extends AppCompatActivity implements
         fasesTotales = listaFragments.size();
     }
 
-
+    /**
+     * Metodo que hay que implementar con los fragmentos
+     * @param uri
+     */
     @Override
     public void onFragmentInteraction(Uri uri) {
-        //you can leave it empty
     }
 
+    /**
+     * Metodo que se ejecuta al pulsar el boton "atras"
+     * físico del dispositivo, yevandote a la fase anterior del pedido
+     * o cerrando la actividad si es la primera fase
+     */
     @Override
     public void onBackPressed() {
         if (fasePedido == 0) {
-            //setTitle(getString(R.string.));
             this.finish();
         } else {
             anterior.performClick();
         }
-    }
-
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
     }
 }

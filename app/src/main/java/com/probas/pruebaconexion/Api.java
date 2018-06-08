@@ -4,6 +4,9 @@
 
 package com.probas.pruebaconexion;
 
+/**
+ * Clase con las url de comunicación con la bd
+ */
 public class Api {
 
     private static final String ROOT_URL = MainActivity.context.getResources().getString(R.string.root_url);

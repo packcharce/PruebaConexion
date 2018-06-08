@@ -1,3 +1,7 @@
+/*
+ * Copyright (c) Carlos Solana. Todos los derechos reservados.
+ */
+
 package com.probas.pruebaconexion;
 
 import java.io.BufferedReader;

@@ -1,4 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ Copyright (c) Carlos Solana. Todos los derechos reservados.
+  -->
+
 <resources>
     <color name="colorPrimary">#6b0000</color>
     <color name="colorPrimaryDark">#7c0000</color>

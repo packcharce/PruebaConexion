@@ -1,3 +1,7 @@
+/*
+ * Copyright (c) Carlos Solana. Todos los derechos reservados.
+ */
+
 package com.probas.pruebaconexion;
 
 import android.content.Context;
@@ -16,8 +20,13 @@ public class Login extends AppCompatActivity {
     private EditText editTextUsuario;
     private EditText editTextContrasenia;
 
+    // Flag que indica si se ha terminado la operacion de login y si ha habido error
     static boolean LOGIN;
 
+    /**
+     * On create que inicializa los botones
+     * @param savedInstanceState
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -51,6 +60,11 @@ public class Login extends AppCompatActivity {
     public Login() {
     }
 
+    /**
+     * Metodo que llama a la operacion de login
+     * @param user
+     * @param pass
+     */
     private void login(String user, String pass){
         HashMap<String, String> params = new HashMap<>();
         params.put(getString(R.string.key_usuario_login), user);
