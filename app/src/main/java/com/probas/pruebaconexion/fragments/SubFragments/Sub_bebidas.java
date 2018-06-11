@@ -27,7 +27,6 @@ import java.util.ArrayList;
  * Fragmento para pedir bebidas
  */
 public class Sub_bebidas extends Fragment {
-    // TODO: Rename parameter arguments, choose names that match
     private static final String ARG_PARAM1 = "bebidas";
     private static final int TIPO_BEBIDAS = 2;
 
@@ -57,7 +56,6 @@ public class Sub_bebidas extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
         View v = inflater.inflate(R.layout.fragment_sub_bebidas, container, false);
 
 
@@ -65,11 +63,8 @@ public class Sub_bebidas extends Fragment {
 
         mRecyclerView = v.findViewById(R.id.rec_bebidas_pedido);
 
-        // use this setting to improve performance if you know that changes
-        // in content do not change the layout size of the RecyclerView
         mRecyclerView.setHasFixedSize(true);
 
-        // use a linear layout manager
         RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(v.getContext());
         mRecyclerView.setLayoutManager(mLayoutManager);
 
@@ -90,7 +85,6 @@ public class Sub_bebidas extends Fragment {
         return v;
     }
 
-    // TODO: Rename method, update argument and hook method into UI event
     public void onButtonPressed(Uri uri) {
         if (mListener != null) {
             mListener.onFragmentInteraction(uri);
@@ -115,18 +109,7 @@ public class Sub_bebidas extends Fragment {
         CreaPedido2.pedido.getListaBebs().clear();
     }
 
-    /**
-     * This interface must be implemented by activities that contain this
-     * fragment to allow an interaction in this fragment to be communicated
-     * to the activity and potentially other fragments contained in that
-     * activity.
-     * <p>
-     * See the Android Training lesson <a href=
-     * "http://developer.android.com/training/basics/fragments/communicating.html"
-     * >Communicating with Other Fragments</a> for more information.
-     */
     public interface OnFragmentInteractionListener {
-        // TODO: Update argument type and name
         void onFragmentInteraction(Uri uri);
     }
 }

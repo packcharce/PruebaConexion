@@ -4,7 +4,6 @@
 
 package com.probas.pruebaconexion.fragments.SubFragments;
 
-import android.app.Fragment;
 import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
@@ -23,12 +22,7 @@ import com.probas.pruebaconexion.R;
 import java.util.Calendar;
 
 /**
- * A simple {@link Fragment} subclass.
- * Activities that contain this fragment must implement the
- * {@link Sub_Opciones_Pago.OnFragmentInteractionListener} interface
- * to handle interaction events.
- * Use the {@link Sub_Opciones_Pago#newInstance} factory method to
- * create an instance of this fragment.
+ * Fragmento para elegir las opciones de pago
  */
 public class Sub_Opciones_Pago extends android.app.Fragment implements AdapterView.OnItemSelectedListener, View.OnFocusChangeListener {
 
@@ -43,7 +37,6 @@ public class Sub_Opciones_Pago extends android.app.Fragment implements AdapterVi
     private EditText fechaCad;
 
     public Sub_Opciones_Pago() {
-        // Required empty public constructor
     }
 
     public static Sub_Opciones_Pago newInstance() {
@@ -76,6 +69,11 @@ public class Sub_Opciones_Pago extends android.app.Fragment implements AdapterVi
         return view;
     }
 
+    /**
+     * Metodo que activa los focus listeners de los edittexts
+     * para poder poner avisos de que están mal rellenados
+     * @param cont
+     */
     private void ponerListeners(int cont) {
         switch (cont) {
             case 0:
@@ -90,6 +88,13 @@ public class Sub_Opciones_Pago extends android.app.Fragment implements AdapterVi
         }
     }
 
+    /**
+     * Metodo que quita los onfocuslisteners para poder alternar
+     * entre las opciones del desplegable y que no salten
+     * errores de rellenado entre por ejemplo pago con paypal o
+     * pago en efectivo
+     * @param cont el contenedor activo con los edittext
+     */
     private void quitaListeners(int cont) {
         switch (cont) {
             case 0:
@@ -104,6 +109,11 @@ public class Sub_Opciones_Pago extends android.app.Fragment implements AdapterVi
         }
     }
 
+    /**
+     * Metodo que se activa cuando se cambia el foco de un edittext
+     * @param v la vista que ha ejecutado el metodo
+     * @param hasFocus si tiene o ha perdido el foco
+     */
     @Override
     public void onFocusChange(View v, boolean hasFocus) {
         if (!hasFocus) {
@@ -172,6 +182,11 @@ public class Sub_Opciones_Pago extends android.app.Fragment implements AdapterVi
         }
     }
 
+    /**
+     * Metodo que comprueba si un correo electronico tiene el formato adecuado
+     * @param target
+     * @return
+     */
     private boolean isValidEmail(CharSequence target) {
         return !TextUtils.isEmpty(target) && android.util.Patterns.EMAIL_ADDRESS.matcher(target).matches();
     }
@@ -193,6 +208,14 @@ public class Sub_Opciones_Pago extends android.app.Fragment implements AdapterVi
         mListener = null;
     }
 
+    /**
+     * Metodo que se ejecuta al selecciona una opcion del
+     * desplegable de opciones de pago
+     * @param parent
+     * @param view
+     * @param position
+     * @param id
+     */
     @Override
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
         switch (position) {
