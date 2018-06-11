@@ -55,20 +55,24 @@ public class Datos_cliente extends Fragment {
     private OnFragmentInteractionListener mListener;
 
     public Datos_cliente() {
-        // Required empty public constructor
     }
 
     /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
+     * Metodo para crear nueva instancia del fragmento
      *
      * @return A new instance of fragment Datos_cliente.
      */
-    // TODO: Rename and change types and number of parameters
     public static Datos_cliente newInstance() {
         return new Datos_cliente();
     }
 
+    /**
+     * Metodo para inicializar las vistas del layout
+     * @param inflater
+     * @param container
+     * @param savedInstanceState
+     * @return
+     */
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -99,16 +103,13 @@ public class Datos_cliente extends Fragment {
         buttonRegistro.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //TODO poner metodo update
                 actualizaCliente();
             }
         });
         getActivity().setTitle(getString(R.string.tit_frag_mi_perfil_miperfil));
-        // Inflate the layout for this fragment
         return view;
     }
 
-    // TODO: Rename method, update argument and hook method into UI event
     public void onButtonPressed(Uri uri) {
         if (mListener != null) {
             mListener.onFragmentInteraction(uri);
@@ -147,6 +148,9 @@ public class Datos_cliente extends Fragment {
         void onFragmentInteraction(Uri uri);
     }
 
+    /**
+     * Metodo que hace la actualizacion de los datos del cliente en la bd
+     */
     private void actualizaCliente(){
         HashMap<String, String> params = new HashMap<>();
         params.put(Menu_principal.context.getResources().getString(R.string.key_id), String.valueOf(MainActivity.clienteActivo.getId()));
@@ -164,6 +168,11 @@ public class Datos_cliente extends Fragment {
         ac.execute();
     }
 
+    /**
+     * Clase privada que hace la llamada a la bd en segundo plano
+     * para actualizar los datos
+     * del cliente
+     */
     private class Actualizadora extends AsyncTask<Void, Void, String> {
 
         String url;
@@ -174,14 +183,17 @@ public class Datos_cliente extends Fragment {
         //the request code to define whether it is a GET or POST
         int requestCode;
 
-        char tipoDato;
-
         private Actualizadora(String url, HashMap<String, String> params, int requestCode) {
             this.url = url;
             this.params = params;
             this.requestCode = requestCode;
         }
 
+        /**
+         * Meotdo que ejecuta la query a la bd
+         * @param voids
+         * @return
+         */
         @Override
         protected String doInBackground(Void... voids) {
             RequestHandler requestHandler = new RequestHandler();
@@ -192,6 +204,10 @@ public class Datos_cliente extends Fragment {
 
         }
 
+        /**
+         * Metodo que recibe la respuesta de la bd
+         * @param s
+         */
         @Override
         protected void onPostExecute(String s) {
             super.onPostExecute(s);

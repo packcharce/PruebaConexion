@@ -26,6 +26,9 @@ import com.probas.pruebaconexion.R;
 import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 
+/**
+ * Adaptador para los recyclerviews de los fragmentos
+ */
 public class MyAdapter extends RecyclerView.Adapter {
 
     private static final int TIPO_HIST_PEDIDO = 0;
@@ -52,6 +55,7 @@ public class MyAdapter extends RecyclerView.Adapter {
     private int tipoObjeto;
 
 
+    // View holders para que se carguen layouts personalizados
     static class PedidosViewHolder extends RecyclerView.ViewHolder {
         TextView total;
         TextView fecha;

@@ -10,17 +10,17 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 
+/**
+ * Clase menú para elegir si registrarte o hacer login
+ */
 public class MenuLoginReg extends AppCompatActivity {
-
-    private Button login;
-    private Button registro;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_menu_login_reg);
-        login=findViewById(R.id.botLog);
-        registro=findViewById(R.id.botReg);
+        Button login = findViewById(R.id.botLog);
+        Button registro = findViewById(R.id.botReg);
 
         login.setOnClickListener(new View.OnClickListener() {
             @Override

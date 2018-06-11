@@ -28,6 +28,7 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Locale;
 
 import static com.probas.pruebaconexion.MainActivity.CODE_POST_REQUEST;
 
@@ -42,12 +43,20 @@ import static com.probas.pruebaconexion.MainActivity.CODE_POST_REQUEST;
  */
 public class Mis_pedidos extends Fragment {
 
+    // Flag que indica que se ha empezado a pedir datos
     public static boolean PEDIDOS=false;
+    // Flag que indica que se ha completado la carga de datos
     public static boolean CARGA_COMPLETA_PEDIDOS=false;
 
+    // Datos
     private static ArrayList<String> numeroPedido;
     private static ArrayList<String> fecha;
     private static ArrayList<String> total;
+
+    // Vistas
+    private SwipeRefreshLayout sw;
+    private RecyclerView mRecyclerView;
+    private RecyclerView.Adapter mAdapter;
 
     private OnFragmentInteractionListener mListener;
 
@@ -123,9 +132,7 @@ public class Mis_pedidos extends Fragment {
 
         return v;
     }
-    private SwipeRefreshLayout sw;
-    private RecyclerView mRecyclerView;
-    private RecyclerView.Adapter mAdapter;
+
 
     public void onButtonPressed(Uri uri) {
         if (mListener != null) {
@@ -150,7 +157,9 @@ public class Mis_pedidos extends Fragment {
         mListener = null;
     }
 
-
+    /**
+     * Metodo que pide los pedidos del cliente a la bd
+     */
     private void pideDatos(){
         HashMap<String, String> params = new HashMap<>();
         params.put(getString(R.string.key_nombre_param_menu_princ), getString(R.string.key_ref_cliente_menu_princ));
@@ -174,6 +183,10 @@ public class Mis_pedidos extends Fragment {
         void onFragmentInteraction(Uri uri);
     }
 
+    /**
+     * Clase privada que es llamada al hacer swipe desde arriba
+     * y refresca los pedidos
+     */
     private class Refrescadora extends AsyncTask<Void, Void, String> {
 
         String url;
@@ -215,15 +228,12 @@ public class Mis_pedidos extends Fragment {
                             numeroPedido.clear();
                             fecha.clear();
                             total.clear();
-                            numeroPedido.add(getString(R.string.tit_numero_pedido_mis_pedidos));
-                            fecha.add(getString(R.string.tit_fecha_mis_pedidos));
-                            total.add(getString(R.string.tit_total_mis_pedidos));
                             JSONArray datos = object.getJSONArray(getString(R.string.key_datos_pnreq));
                             for (int i = 0; i < datos.length(); i++) {
                                 JSONObject obj = datos.getJSONObject(i);
                                 numeroPedido.add(obj.getString(getString(R.string.key_num_pedido_mis_pedidos)));
                                 fecha.add(obj.getString(getString(R.string.key_fecha_pedido_mis_pedidos)));
-                                total.add(String.valueOf(obj.getDouble(getString(R.string.key_total_mis_pedidos))));
+                                total.add(String.format(Locale.FRANCE,"%.2f€", obj.getDouble(getString(R.string.key_total_mis_pedidos))));
                             }
                             Bundle b= new Bundle();
                             b.putStringArrayList(getString(R.string.key_num_pedido_mis_pedidos), numeroPedido);

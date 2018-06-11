@@ -20,7 +20,9 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.probas.pruebaconexion.R;
 
-
+/**
+ * Clase con mapa para los datos de contacto de la empresa
+ */
 public class Contacto extends android.app.Fragment implements OnMapReadyCallback {
 
     private MapView mapa;

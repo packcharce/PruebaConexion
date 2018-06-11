@@ -24,12 +24,7 @@ import com.probas.pruebaconexion.fragments.MyAdapter;
 import java.util.ArrayList;
 
 /**
- * A simple {@link Fragment} subclass.
- * Activities that contain this fragment must implement the
- * {@link Sub_Ensalada.OnFragmentInteractionListener} interface
- * to handle interaction events.
- * Use the {@link Sub_Ensalada#newInstance} factory method to
- * create an instance of this fragment.
+ * Fragmento para pedir ensaladas
  */
 public class Sub_Ensalada extends Fragment {
     // TODO: Rename parameter arguments, choose names that match

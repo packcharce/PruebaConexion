@@ -20,36 +20,31 @@ import java.util.Map;
 import javax.net.ssl.HttpsURLConnection;
 
 public class RequestHandler {
-    //Method to send httpPostRequest
-    //This method is taking two arguments
-    //First argument is the URL of the script to which we will send the request
-    //Other is an HashMap with name value pairs containing the data to be send with the request
+    //Metodo que hace la peticion http
+    //Primer argumento: url donde hacer la peticion
+    //Segundo argumento: hashmap con las parejas de valores para el PHP
     public String sendPostRequest(String requestURL,
                                   HashMap<String, String> postDataParams) {
-        //Creating a URL
         URL url;
 
-        //StringBuilder object to store the message retrieved from the server
+        //StringBuilder para guardar la respuesta del servidor
         StringBuilder sb = new StringBuilder();
         try {
-            //Initializing Url
+            //Inicializando la Url
             url = new URL(requestURL);
 
-            //Creating an httmlurl connection
+            //Conexion http
             HttpURLConnection conn = (HttpURLConnection) url.openConnection();
 
-            //Configuring connection properties
+            //Propiedades del servidor
             conn.setReadTimeout(15000);
             conn.setConnectTimeout(15000);
             conn.setRequestMethod("POST");
             conn.setDoInput(true);
             conn.setDoOutput(true);
 
-            //Creating an output stream
             OutputStream os = conn.getOutputStream();
 
-            //Writing parameters to the request
-            //We are using a method getPostDataString which is defined below
             BufferedWriter writer = new BufferedWriter(
                     new OutputStreamWriter(os, "UTF-8"));
             writer.write(getPostDataString(postDataParams));
@@ -64,7 +59,8 @@ public class RequestHandler {
                 BufferedReader br = new BufferedReader(new InputStreamReader(conn.getInputStream()));
                 sb = new StringBuilder();
                 String response;
-                //Reading server response
+
+                //Respuesta del servidor
                 while ((response = br.readLine()) != null) {
                     System.out.println(response);
                     sb.append(response);
@@ -79,24 +75,12 @@ public class RequestHandler {
         return sb.toString();
     }
 
-    public String sendGetRequest(String requestURL) {
-        StringBuilder sb = new StringBuilder();
-        try {
-            URL url = new URL(requestURL);
-            HttpURLConnection con = (HttpURLConnection) url.openConnection();
-            BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(con.getInputStream()));
-
-            String s;
-            while ((s = bufferedReader.readLine()) != null) {
-                sb.append(s).append("\n");
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return sb.toString();
-    }
-
-
+    /**
+     * Metodo que crea el mensaje para el servidor
+     * @param params
+     * @return
+     * @throws UnsupportedEncodingException
+     */
     private String getPostDataString(HashMap<String, String> params) throws UnsupportedEncodingException {
         StringBuilder result = new StringBuilder();
         boolean first = true;
@@ -110,7 +94,6 @@ public class RequestHandler {
             result.append("=");
             result.append(URLEncoder.encode(entry.getValue(), "UTF-8"));
         }
-        //System.out.print(result.toString());
         return result.toString();
     }
 }

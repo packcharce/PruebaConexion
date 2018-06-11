@@ -33,12 +33,7 @@ import java.util.LinkedList;
 import java.util.List;
 
 /**
- * A simple {@link Fragment} subclass.
- * Activities that contain this fragment must implement the
- * {@link Sub_crea_pedido.OnFragmentInteractionListener} interface
- * to handle interaction events.
- * Use the {@link Sub_crea_pedido#newInstance} factory method to
- * create an instance of this fragment.
+ * Fragmento para hacer la parte del pedido referida a las pizzas
  */
 public class Sub_crea_pedido extends Fragment implements AdapterView.OnItemSelectedListener {
 
@@ -69,13 +64,6 @@ public class Sub_crea_pedido extends Fragment implements AdapterView.OnItemSelec
         // Required empty public constructor
     }
 
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @return A new instance of fragment Sub_crea_pedido.
-     */
-    // TODO: Rename and change types and number of parameters
     public static Sub_crea_pedido newInstance(int numeroDePizza) {
         Sub_crea_pedido fragment = new Sub_crea_pedido();
         Bundle args = new Bundle();
@@ -125,6 +113,9 @@ public class Sub_crea_pedido extends Fragment implements AdapterView.OnItemSelec
         }
     }
 
+    /**
+     * Metodo que carga los recyclerViews del fragmento en pantalla
+     */
     private void cargaRecyclers() {
 
         switchMitades.setVisibility(View.VISIBLE);
@@ -210,6 +201,9 @@ public class Sub_crea_pedido extends Fragment implements AdapterView.OnItemSelec
 
     }
 
+    /**
+     * Metodo que quita los recyclerviews de pantalla
+     */
     private void quitaRecyclers() {
         if (mRecyclerView2 != null && mRecyclerView != null) {
             dividir.setVisibility(View.GONE);
@@ -277,6 +271,10 @@ public class Sub_crea_pedido extends Fragment implements AdapterView.OnItemSelec
 
     }
 
+    /**
+     * Metodo que carga en el pedido los ingredientes de una pizza prefabricada
+     * @param listaIngreds
+     */
     private void cargaIngrPref(List<Ingrediente> listaIngreds) {
         for (Ingrediente i : listaIngreds
                 ) {
@@ -284,6 +282,9 @@ public class Sub_crea_pedido extends Fragment implements AdapterView.OnItemSelec
         }
     }
 
+    /**
+     * Metodo que crea una pizza prefabricada
+     */
     private void creaPizzaPref() {
         pizzaBarbacoa = new LinkedList<>();
         pizzaMargarita = new LinkedList<>();
@@ -313,6 +314,9 @@ public class Sub_crea_pedido extends Fragment implements AdapterView.OnItemSelec
         }
     }
 
+    /**
+     * Metodo que quita una pizza prefabricada
+     */
     private void quitaIngrPizzaPref() {
         switch (pizzaActual) {
             case 1:

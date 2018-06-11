@@ -41,7 +41,7 @@
     <string name="char_menos" translatable="false">-</string>
 
     <!-- - API - -->
-    <string name="root_url" translatable="false">http://192.168.1.11/TFGApi/v1/api.php?apicall=</string>
+    <string name="root_url" translatable="false">http://192.168.137.1/TFGApi/v1/api.php?apicall=</string>
     <string name="url_create_cliente" translatable="false">createCliente</string>
     <string name="url_login" translatable="false">login</string>
     <string name="url_update_cliente" translatable="false">updateCliente</string>
@@ -99,9 +99,9 @@
     <string name="key_nombre_param_menu_princ" translatable="false">nombrePar</string>
     <string name="key_ref_cliente_menu_princ" translatable="false">refCliente</string>
     <string name="key_valor_princ_menu_princ" translatable="false">valorPar</string>
-    <string name="tit_numero_pedido_mis_pedidos">Referencia pedido</string>
+    <string name="tit_numero_pedido_mis_pedidos">Ref Pedido</string>
     <string name="tit_fecha_mis_pedidos">Fecha Pedido</string>
-    <string name="tit_total_mis_pedidos">Precio pedido</string>
+    <string name="tit_total_mis_pedidos">Total Pedido</string>
     <string name="key_num_pedido_mis_pedidos" translatable="false">numPedido</string>
     <string name="key_fecha_pedido_mis_pedidos" translatable="false">fechaPedido</string>
     <string name="key_total_mis_pedidos" translatable="false">total</string>

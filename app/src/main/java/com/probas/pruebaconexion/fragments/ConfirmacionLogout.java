@@ -11,15 +11,12 @@ import android.app.DialogFragment;
 import android.content.DialogInterface;
 import android.os.Bundle;
 
-import com.probas.pruebaconexion.CreaPedido2;
 import com.probas.pruebaconexion.R;
 
-import java.util.Locale;
-
 /**
- * Dialogo para confirmar la realizacion del pedido
+ * Dialogo de confirmacion de cerrar sesión
  */
-public class ConfirmacionPedido extends DialogFragment {
+public class ConfirmacionLogout extends DialogFragment {
 
     private NoticeDialogListener mListener;
 
@@ -44,21 +41,18 @@ public class ConfirmacionPedido extends DialogFragment {
 
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
-        // Use the Builder class for convenient dialog construction
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-        CreaPedido2.pedido.calculaTotal();
-        builder.setMessage(String.format(Locale.FRANCE,"%s %.2f€", getString(R.string.msq_crea_pedido_dialogo_confped), CreaPedido2.pedido.getTotal()))
+        builder.setMessage("¿Seguro que desea desconectarse?")
                 .setPositiveButton(R.string.msg_si_confpedido, new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
-                        mListener.onDialogPositiveClick(ConfirmacionPedido.this);
+                        mListener.onDialogPositiveClick(ConfirmacionLogout.this);
                     }
                 })
                 .setNegativeButton(R.string.msq_no_confpedido, new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
-                        mListener.onDialogNegativeClick(ConfirmacionPedido.this);
+                        mListener.onDialogNegativeClick(ConfirmacionLogout.this);
                     }
                 });
-        // Create the AlertDialog object and return it
         return builder.create();
     }
 }

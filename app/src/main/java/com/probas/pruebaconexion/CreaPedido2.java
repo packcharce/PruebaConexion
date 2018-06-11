@@ -23,6 +23,7 @@ import com.probas.pruebaconexion.fragments.SubFragments.Sub_Ensalada;
 import com.probas.pruebaconexion.fragments.SubFragments.Sub_Hamburguesa;
 import com.probas.pruebaconexion.fragments.SubFragments.Sub_Lasania;
 import com.probas.pruebaconexion.fragments.SubFragments.Sub_Opciones_Pago;
+import com.probas.pruebaconexion.fragments.SubFragments.Sub_Opciones_envio;
 import com.probas.pruebaconexion.fragments.SubFragments.Sub_Pasta;
 import com.probas.pruebaconexion.fragments.SubFragments.Sub_bebidas;
 import com.probas.pruebaconexion.fragments.SubFragments.Sub_crea_pedido;
@@ -42,11 +43,12 @@ public class CreaPedido2 extends AppCompatActivity implements
         Sub_Ensalada.OnFragmentInteractionListener,
         Sub_Pasta.OnFragmentInteractionListener,
         Sub_Opciones_Pago.OnFragmentInteractionListener,
+        Sub_Opciones_envio.OnFragmentInteractionListener,
         ConfirmacionPedido.NoticeDialogListener {
 
     // Pedido actual que se está realizando
     public static Pedido pedido;
-    private final int numeroFasesProtegidas = 6;
+    private final int numeroFasesProtegidas = 7;
     private final FragmentManager fm = getFragmentManager();
     // Identificador interno de la pizza que se está encargando
     // (cuando hay varias pizzas en el pedido
@@ -170,10 +172,16 @@ public class CreaPedido2 extends AppCompatActivity implements
                             .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)
                             .addToBackStack(null)
                             .commit();
+                    if(fasePedido == listaFragments.size() - 1) {
+                        pedido.setTotal(0.0f);
+                        pedido.setExtra_recoger(0.0f);
+                        pedido.setExtra_local(0.0f);
+                        pedido.setExtra_domicilio(0.0f);
+                        pedido.calculaTotal();
+                    }
                 } else {
-
-                    pedido.calculaTotal();
-                    if (Sub_Opciones_Pago.readyToPay && pedido.getTotal() != 0.0) {
+                    if (Sub_Opciones_Pago.readyToPay && pedido.getTotal() != 0.0 && Sub_Opciones_envio.readyToDeliver) {
+                        pedido.calculaTotal();
                         DialogFragment dialog = new ConfirmacionPedido();
                         dialog.show(getFragmentManager(), getString(R.string.tag_name_dialog_confir_pedido));
                     } else {
@@ -194,7 +202,6 @@ public class CreaPedido2 extends AppCompatActivity implements
      */
     @Override
     public void onDialogPositiveClick(DialogFragment dialog) {
-        // User touched the dialog's positive button
         Pedido p = CreaPedido2.pedido;
         if (p.getTotal() != 0.0) {
 
@@ -203,7 +210,7 @@ public class CreaPedido2 extends AppCompatActivity implements
             params.put(getString(R.string.key_ref_cliente_pedido), String.valueOf(MainActivity.clienteActivo.getId()));
             params.put(getString(R.string.key_num_pedido), String.valueOf(p.getNumPedido()));
             params.put(getString(R.string.key_extra_domicilio), String.valueOf(p.getExtra_domicilio()));
-            params.put(getString(R.string.key_extra_recoger), String.valueOf(p.getExtra_domicilio()));
+            params.put(getString(R.string.key_extra_recoger), String.valueOf(p.getExtra_recoger()));
             params.put(getString(R.string.key_extra_local), String.valueOf(p.getExtra_local()));
             params.put(getString(R.string.key_subtotal_pedido), String.valueOf(p.getSubtotal()));
             params.put(getString(R.string.key_impuesto_pedido), String.valueOf(p.getImpuesto()));
@@ -247,6 +254,7 @@ public class CreaPedido2 extends AppCompatActivity implements
         listaFragments.add(Sub_Ensalada.newInstance());
         listaFragments.add(Sub_Pasta.newInstance());
         listaFragments.add(Sub_Opciones_Pago.newInstance());
+        listaFragments.add(Sub_Opciones_envio.newInstance());
         fm.beginTransaction().replace(R.id.fragment2, listaFragments.get(0)).commit();
         fasesTotales = listaFragments.size();
     }
@@ -271,5 +279,10 @@ public class CreaPedido2 extends AppCompatActivity implements
         } else {
             anterior.performClick();
         }
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
     }
 }

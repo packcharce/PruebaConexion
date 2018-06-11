@@ -13,6 +13,6 @@
     <color name="color_fondo_drawer_menu">#a66565</color>
     <color name="color_fondo_drawer_items">#ffffff</color>
     <color name="color_fondo_loading_screen">#b32e1a</color>
-    <color name="fondo_generico">#ffe1e1</color>
+    <color name="fondo_generico">#ffffff</color>
 
 </resources>

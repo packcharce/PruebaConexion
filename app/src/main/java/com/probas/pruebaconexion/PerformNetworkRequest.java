@@ -9,7 +9,6 @@ import android.os.AsyncTask;
 import android.widget.Toast;
 
 import com.probas.pruebaconexion.ClasesBasicas.Bebida;
-import com.probas.pruebaconexion.ClasesBasicas.Cliente;
 import com.probas.pruebaconexion.ClasesBasicas.Ensalada;
 import com.probas.pruebaconexion.ClasesBasicas.Hamburguesa;
 import com.probas.pruebaconexion.ClasesBasicas.Ingrediente;
@@ -57,6 +56,7 @@ class PerformNetworkRequest extends AsyncTask<Void, Void, String> {
 
                     if (MainActivity.CARGADATOS)
                         cargaData(object.getJSONArray(MainActivity.context.getResources().getString(R.string.key_datos_pnreq)), tipoDato);
+                    /*
                     if (Login.LOGIN)
                         if (object.getJSONArray(MainActivity.context.getResources().getString(R.string.key_datos_pnreq)).length() != 0)
                             login(object.getJSONArray(MainActivity.context.getResources().getString(R.string.key_datos_pnreq)));
@@ -64,6 +64,7 @@ class PerformNetworkRequest extends AsyncTask<Void, Void, String> {
                             Login.LOGIN = false;
                             Toast.makeText(MainActivity.context, MainActivity.context.getResources().getString(R.string.error_login_pnreq), Toast.LENGTH_SHORT).show();
                         }
+                        */
                     if (Mis_pedidos.PEDIDOS)
                         if (object.getJSONArray(MainActivity.context.getResources().getString(R.string.key_datos_pnreq)).length() != 0) {
                             Mis_pedidos.PEDIDOS = false;
@@ -80,7 +81,12 @@ class PerformNetworkRequest extends AsyncTask<Void, Void, String> {
         }
     }
 
-    //the network operation will be performed in background
+    /**
+     * Metodo que se ejecuta en segundo plano
+     * haciendo la llamada a la bd
+     * @param voids
+     * @return
+     */
     @Override
     protected String doInBackground(Void... voids) {
 
@@ -89,13 +95,15 @@ class PerformNetworkRequest extends AsyncTask<Void, Void, String> {
             if (requestCode == MainActivity.CODE_POST_REQUEST)
                 return requestHandler.sendPostRequest(url, params);
 
-
-            if (requestCode == MainActivity.CODE_GET_REQUEST)
-                return requestHandler.sendGetRequest(url);
-
         return null;
     }
 
+    /**
+     * Metodo que carga los datos de respuesta (ingredientes, pasta...) segun el tipoDato
+     * @param datos
+     * @param tipoDato
+     * @throws JSONException
+     */
     private void cargaData(JSONArray datos, char tipoDato) throws JSONException {
         JSONObject obj;
         //traversing through all the items in the json array
@@ -164,26 +172,5 @@ class PerformNetworkRequest extends AsyncTask<Void, Void, String> {
             MainActivity.CARGADATOS = false;
 
         }
-    }
-
-    private void login(JSONArray datos) throws JSONException {
-        JSONObject obj = datos.getJSONObject(0);
-
-        MainActivity.clienteActivo = new Cliente(
-                obj.getInt(MainActivity.context.getResources().getString(R.string.key_id)),
-                obj.getString(MainActivity.context.getResources().getString(R.string.key_nombre)),
-                obj.getString(MainActivity.context.getResources().getString(R.string.key_apellido)),
-                obj.getString(MainActivity.context.getResources().getString(R.string.key_tlfno)),
-                obj.getString(MainActivity.context.getResources().getString(R.string.key_calle)),
-                obj.getString(MainActivity.context.getResources().getString(R.string.key_portal)),
-                obj.getString(MainActivity.context.getResources().getString(R.string.key_piso)),
-                obj.getString(MainActivity.context.getResources().getString(R.string.key_puerta)),
-                obj.getString(MainActivity.context.getResources().getString(R.string.key_urbanizacion)),
-                obj.getString(MainActivity.context.getResources().getString(R.string.key_cod_postal))
-        );
-        Toast.makeText(Login.context, MainActivity.context.getResources().getString(R.string.msg_login_correcto_pnreq), Toast.LENGTH_SHORT).show();
-        Login.LOGIN = false;
-        Intent i = new Intent(Login.context, Menu_principal.class);
-        Login.context.startActivity(i);
     }
 }

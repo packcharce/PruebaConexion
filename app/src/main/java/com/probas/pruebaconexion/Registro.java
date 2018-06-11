@@ -20,22 +20,24 @@ import org.json.JSONObject;
 
 import java.util.HashMap;
 
+/**
+ * Clase que registra un nuevo usuario en la bd
+ */
 public class Registro extends AppCompatActivity {
 
     private static Context context;
     private EditText
-            editTextNombre;
-    private EditText editTextApellido1;
-    private EditText editTextTlfno;
-    private EditText editTextCalle;
-    private EditText editTextPortal;
-    private EditText editTextPiso;
-    private EditText editTextPuerta;
-    private EditText editTextUrbanizacion;
-    private EditText editTextUsuario;
-    private EditText editTextContrasenia;
-    private EditText editTextCodPostal;
-    private Button buttonRegistro;
+            editTextNombre,
+            editTextApellido1,
+            editTextTlfno,
+            editTextCalle,
+            editTextPortal,
+            editTextPiso,
+            editTextPuerta,
+            editTextUrbanizacion,
+            editTextUsuario,
+            editTextContrasenia,
+            editTextCodPostal;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,7 +58,7 @@ public class Registro extends AppCompatActivity {
 
         context=getApplicationContext();
 
-        buttonRegistro = findViewById(R.id.buttonAddUpdate);
+        Button buttonRegistro = findViewById(R.id.buttonAddUpdate);
 
         buttonRegistro.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -65,9 +67,6 @@ public class Registro extends AppCompatActivity {
             }
         });
     }
-
-    private String user;
-    private String pass;
 
     private void crearCliente() {
         String nombre = editTextNombre.getText().toString();
@@ -78,12 +77,11 @@ public class Registro extends AppCompatActivity {
         String piso = editTextPiso.getText().toString();
         String puerta = editTextPuerta.getText().toString();
         String urba = editTextUrbanizacion.getText().toString();
-        user = editTextUsuario.getText().toString();
-        pass = editTextContrasenia.getText().toString();
+        String user = editTextUsuario.getText().toString();
+        String pass = editTextContrasenia.getText().toString();
         String codPostal = editTextCodPostal.getText().toString();
 
-
-        //validating the inputs
+        // Validacion de campos
         if (TextUtils.isEmpty(nombre)) {
             editTextNombre.setError(getString(R.string.error_introd_nombre_registro));
             editTextNombre.requestFocus();
@@ -131,8 +129,7 @@ public class Registro extends AppCompatActivity {
             return;
         }
 
-        //if validation passes
-
+        // Pasa la validacion
         HashMap<String, String> params = new HashMap<>();
         params.put(Registro.context.getResources().getString(R.string.key_nombre), nombre);
         params.put(Registro.context.getResources().getString(R.string.key_apellido), ap1);
@@ -151,6 +148,9 @@ public class Registro extends AppCompatActivity {
         request.execute();
     }
 
+    /**
+     * Clase privada que crea el cliente en la bd
+     */
     private class Registradora extends AsyncTask<Void, Void, String> {
 
         final String url;
